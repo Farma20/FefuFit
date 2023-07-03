@@ -1,4 +1,4 @@
-package com.example.fefufit.ui.theme
+package com.example.fefufit.Presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
