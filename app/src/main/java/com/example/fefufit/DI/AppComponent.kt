@@ -1,11 +1,14 @@
 package com.example.fefufit.DI
 
 import com.example.fefufit.FefuFitApp
+import com.example.fefufit.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [NetworkModule::class])
+@Component(modules = [NetworkModule::class, DataModule::class])
 @Singleton
 interface AppComponent {
-    fun inject(app: FefuFitApp)
+    fun inject(target: FefuFitApp)
+
+//    fun inject(target: MainActivity)
 }

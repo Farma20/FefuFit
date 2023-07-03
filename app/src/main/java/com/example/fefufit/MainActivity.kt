@@ -10,11 +10,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.fefufit.Data.Remote.Models.SingInDataModel
+import com.example.fefufit.Data.Remote.Models.SingUpDataModel
+import com.example.fefufit.Domain.Repositorys.InitializationRepository
 import com.example.fefufit.Presentation.theme.FefuFitTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.concurrent.thread
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             FefuFitTheme {
                 // A surface container using the 'background' color from the theme
@@ -28,6 +37,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
