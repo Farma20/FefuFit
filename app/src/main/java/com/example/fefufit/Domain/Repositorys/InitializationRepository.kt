@@ -1,7 +1,7 @@
 package com.example.fefufit.Domain.Repositorys
 
-import com.example.fefufit.Data.Models.InitialModels.SingInDataModel
-import com.example.fefufit.Data.Models.InitialModels.SingUpDataModel
+import com.example.fefufit.Data.Remote.Models.SingInDataModel
+import com.example.fefufit.Data.Remote.Models.SingUpDataModel
 
 interface InitializationRepository {
     suspend fun singIn(singInData: SingInDataModel)

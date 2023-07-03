@@ -1,4 +1,4 @@
-package com.example.fefufit.Data.Models.InitialModels
+package com.example.fefufit.Data.Remote.Models
 
 
 import com.google.gson.annotations.SerializedName
