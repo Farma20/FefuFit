@@ -2,6 +2,7 @@ package com.example.fefufit.DI
 
 import com.example.fefufit.Data.Remote.API.FefuFitApi
 import com.example.fefufit.FefuFitApp
+import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -11,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import javax.inject.Singleton
 
+@Module
 class NetworkModule {
 
     @Singleton
