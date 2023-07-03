@@ -10,17 +10,30 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
+    companion object{
+        private const val BASE_URL = "hostName"
+    }
+
+    @Provides
+    @Named(BASE_URL)
+    fun provideBaseUrlString():String = "https://fefufit.dvfu.ru"
+
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit{
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        @Named(BASE_URL)baseUrl:String
+    )
+    :Retrofit{
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://fefufit.dvfu.ru")
+            .baseUrl(baseUrl)
             .client(okHttpClient)
             .build()
     }
