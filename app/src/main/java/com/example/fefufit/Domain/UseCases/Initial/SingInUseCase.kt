@@ -21,25 +21,21 @@ class SingInUseCase @Inject constructor(
             val response = repository.singIn(singInData)
             emit(Resource.Success(response))
         }catch (cause:Throwable){
-            var errorText: String = ""
             when (cause) {
                 is HttpException -> {
-                    val result = JSONObject(cause.response()?.errorBody()?.string().toString()).toMap()
-                    println(result)
-
                     if (cause.code() == 400){
-                        errorText = when (result["msg"]) {
-                            "not an email" -> "Произошла ошибка при регистрации, несуществующая почта"
-                            "wrong birthdate" -> "Произошла ошибка при регистрации, некорректная дата рождения"
-                            "user already exists" -> "Произошла ошибка при регистрации, пользователь с данной почтой уже существует"
-                            else -> "Произошла ошибка при регистрации, проверьте правильность введенных данных"
-                        }
+                        val errorText =
+                            "Ошибка входа. Проверьте корректность введенных данных или зарегистрируйтесь"
+                        emit(Resource.Error(errorText))
                     }
 
                 }
-                else-> errorText = "Произошла непредвиденная ошибка. Проверьте соединение с интернетом или свяжитесь с разработчиками"
+                else -> {
+                    val errorText =
+                        "Ошибка входа. Проверьте соединение с интернетом или свяжитесь с разработчиками"
+                    emit(Resource.Error(errorText))
+                }
             }
-            emit(Resource.Error(errorText))
         }
     }
 }

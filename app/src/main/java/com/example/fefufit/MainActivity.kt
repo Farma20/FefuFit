@@ -10,7 +10,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
+import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
+import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
+import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import com.example.fefufit.Presentation.theme.FefuFitTheme
+import com.example.fefufit.Utils.Resource
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
