@@ -35,8 +35,7 @@ class MainActivity : ComponentActivity() {
             FefuFitTheme {
                 Surface {
                     //AppNavigation
-//                    MainScreens()
-                    SingInScreen()
+                    MainScreens()
                 }
             }
         }

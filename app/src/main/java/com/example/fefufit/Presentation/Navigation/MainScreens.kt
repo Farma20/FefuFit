@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreen
 import com.example.fefufit.Presentation.SplashScreen.SplashScreen
 
 @Composable
@@ -21,12 +22,7 @@ fun MainScreens() {
             SplashScreen(navController)
         }
         composable(route = MainScreensRout.SingInScreen.route){
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = Color.Red
-            ) {
-
-            }
+            SingInScreen(navController)
         }
         composable(route = MainScreensRout.SingUpScreen.route){
 

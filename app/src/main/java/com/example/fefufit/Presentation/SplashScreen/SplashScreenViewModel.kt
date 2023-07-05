@@ -13,6 +13,8 @@ class SplashScreenViewModel:ViewModel() {
     }
 
     fun nextScreen(){
-        navController!!.navigate(MainScreensRout.SingInScreen.route)
+        navController!!.navigate(MainScreensRout.SingInScreen.route){
+            popUpTo(0)
+        }
     }
 }

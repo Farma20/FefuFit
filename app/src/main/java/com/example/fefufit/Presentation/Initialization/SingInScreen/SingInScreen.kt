@@ -39,6 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.SecondaryTextApp
 import com.example.fefufit.Presentation.theme.WhiteApp
@@ -47,7 +48,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingInScreen() {
+fun SingInScreen(navController: NavController) {
     //painted system controllers
     val systemUiController = rememberSystemUiController()
     val barBackground = WhiteApp
