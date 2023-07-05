@@ -13,8 +13,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -30,6 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,7 +60,8 @@ fun SingInScreen() {
 
     Surface(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         color = WhiteApp
     ) {
         Column(
@@ -62,13 +69,13 @@ fun SingInScreen() {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(114.dp))
+            Spacer(modifier = Modifier.height(100.dp))
             Image(
                 modifier = Modifier.size(95.dp, 103.dp),
                 painter = painterResource(id = R.drawable.logoblue),
                 contentDescription = "logo",
             )
-            Spacer(modifier = Modifier.height(86.dp))
+            Spacer(modifier = Modifier.height(76.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(0.81f),
@@ -94,9 +101,80 @@ fun SingInScreen() {
                 ),
                 singleLine = true,
                 textStyle = TextStyle(fontSize = 16.sp),
-
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = BlueApp
+                )
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(14.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(0.81f),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    text = "Пароль",
+                    fontSize = 14.sp,
+                    color = SecondaryTextApp
+                )
+            }
+            Spacer(modifier = Modifier.height(6.dp))
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth(0.85f),
+                shape = RoundedCornerShape(13.dp),
+                value = "",
+                onValueChange = {
+
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email
+                ),
+                singleLine = true,
+                textStyle = TextStyle(fontSize = 16.sp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = BlueApp
+                )
+            )
+            Spacer(modifier = Modifier.height(14.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(0.85f),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Text(
+                    text = "Забыли пароль?",
+                    fontSize = 16.sp,
+                    color = BlueApp
+                )
+            }
+            Spacer(modifier = Modifier.height(36.dp))
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth(0.85f)
+                    .height(58.dp)
+                ,
+                shape = RoundedCornerShape(13.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = BlueApp
+                ),
+                onClick = {}
+            ) {
+                Text(
+                    text = "Войти",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Normal
+                )
+            }
+            Spacer(modifier = Modifier.height(60.dp))
+            Text(
+                text = "Нет аккаунта?",
+                color = SecondaryTextApp,
+                fontSize = 18.sp
+            )
+            Text(
+                text = "Зарегистрируйтесь!",
+                color = BlueApp,
+                fontSize = 18.sp
+            )
+            Spacer(modifier = Modifier.height(57.dp))
         }
     }
 }
