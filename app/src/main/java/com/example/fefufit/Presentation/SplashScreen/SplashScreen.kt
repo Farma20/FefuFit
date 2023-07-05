@@ -13,13 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.WhiteApp
 import com.example.fefufit.R
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navController: NavController) {
 
     //painted system controllers
     val systemUiController = rememberSystemUiController()
