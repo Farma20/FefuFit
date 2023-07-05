@@ -14,6 +14,8 @@ import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
+import com.example.fefufit.Presentation.SplashScreen.SplashScreen
+import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.FefuFitTheme
 import com.example.fefufit.Utils.Resource
 import kotlinx.coroutines.CoroutineScope
@@ -30,30 +32,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             FefuFitTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+                Surface() {
+                    SplashScreen()
                 }
             }
         }
-    }
-}
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FefuFitTheme {
-        Greeting("Android")
     }
 }
