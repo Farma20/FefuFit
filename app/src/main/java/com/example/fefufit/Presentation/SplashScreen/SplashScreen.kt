@@ -18,9 +18,21 @@ import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.WhiteApp
 import com.example.fefufit.R
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(
+    navController: NavController,
+    viewModel: SplashScreenViewModel = viewModel()
+) {
+
+    viewModel.getNavController(navController)
+
+    LaunchedEffect(Unit){
+        delay(2000)
+        viewModel.nextScreen()
+    }
 
     //painted system controllers
     val systemUiController = rememberSystemUiController()
@@ -39,7 +51,7 @@ fun SplashScreen(navController: NavController) {
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             Image(
