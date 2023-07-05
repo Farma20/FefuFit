@@ -14,6 +14,7 @@ import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
+import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreen
 import com.example.fefufit.Presentation.Navigation.MainScreens
 import com.example.fefufit.Presentation.SplashScreen.SplashScreen
 import com.example.fefufit.Presentation.theme.BlueApp
@@ -34,7 +35,8 @@ class MainActivity : ComponentActivity() {
             FefuFitTheme {
                 Surface {
                     //AppNavigation
-                    MainScreens()
+//                    MainScreens()
+                    SingInScreen()
                 }
             }
         }
