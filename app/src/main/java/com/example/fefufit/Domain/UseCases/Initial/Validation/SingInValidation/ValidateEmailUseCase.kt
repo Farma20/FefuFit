@@ -15,7 +15,7 @@ class ValidateEmailUseCase {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             return ValidationResult(
                 success = false,
-                errorMessage = "Некорректный почтовый адрес"
+                errorMessage = "Неккоректный почтовый адрес"
             )
         }
         return ValidationResult(

@@ -1,7 +1,9 @@
 package com.example.fefufit.Presentation.Initialization.SingInScreen
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,18 +18,24 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -48,6 +56,21 @@ fun SingInScreen(navController: NavController, viewModel: SingInScreenViewModel 
     SideEffect {
         systemUiController.setStatusBarColor(color = barBackground, darkIcons = true)
         systemUiController.setNavigationBarColor(color = barBackground)
+    }
+
+    val context = LocalContext.current
+    LaunchedEffect(key1 = context){
+        viewModel.validationEvents.collect{event ->
+            when(event){
+                is SingInScreenViewModel.ValidationEvent.Success ->{
+                    Toast.makeText(
+                        context,
+                        "Success",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
     }
 
     Surface(
@@ -72,7 +95,7 @@ fun SingInScreen(navController: NavController, viewModel: SingInScreenViewModel 
             Spacer(modifier = Modifier.height(36.dp))
             InputButton(viewModel)
             Spacer(modifier = Modifier.height(60.dp))
-            SingUpButton(viewModel)
+            SingUpButton()
             Spacer(modifier = Modifier.height(57.dp))
         }
     }
@@ -81,6 +104,9 @@ fun SingInScreen(navController: NavController, viewModel: SingInScreenViewModel 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun InputForm(viewModel: SingInScreenViewModel){
+
+    val inputDataState = viewModel.inputDataState
+
     Row(
         modifier = Modifier.fillMaxWidth(0.81f),
         horizontalArrangement = Arrangement.Start
@@ -96,10 +122,11 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         modifier = Modifier
             .fillMaxWidth(0.85f),
         shape = RoundedCornerShape(13.dp),
-        value = "",
+        value = inputDataState.email,
         onValueChange = {
-
+            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
         },
+        isError = inputDataState.emailError != null,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email
         ),
@@ -109,6 +136,18 @@ private fun InputForm(viewModel: SingInScreenViewModel){
             focusedBorderColor = BlueApp
         )
     )
+
+    if (inputDataState.emailError != null){
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.81f),
+            text = inputDataState.emailError,
+            fontSize =14.sp,
+            color = MaterialTheme.colorScheme.error,
+            textAlign = TextAlign.End
+        )
+    }
+    
     Spacer(modifier = Modifier.height(14.dp))
     Row(
         modifier = Modifier.fillMaxWidth(0.81f),
@@ -125,19 +164,30 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         modifier = Modifier
             .fillMaxWidth(0.85f),
         shape = RoundedCornerShape(13.dp),
-        value = "",
+        value = inputDataState.password,
         onValueChange = {
-
+            viewModel.inputDataEvent(SingInFormEvent.PasswordChanged(it))
         },
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Email
+            keyboardType = KeyboardType.Password
         ),
+        visualTransformation = PasswordVisualTransformation(),
         singleLine = true,
         textStyle = TextStyle(fontSize = 16.sp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = BlueApp
         )
     )
+    if (inputDataState.passwordError != null){
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.81f),
+            text = inputDataState.passwordError,
+            fontSize =14.sp,
+            color = MaterialTheme.colorScheme.error,
+            textAlign = TextAlign.End
+        )
+    }
     Spacer(modifier = Modifier.height(14.dp))
     Row(
         modifier = Modifier.fillMaxWidth(0.85f),
@@ -162,7 +212,9 @@ private fun InputButton(viewModel: SingInScreenViewModel){
         colors = ButtonDefaults.buttonColors(
             containerColor = BlueApp
         ),
-        onClick = {}
+        onClick = {
+            viewModel.inputDataEvent(SingInFormEvent.Submit)
+        }
     ) {
         Text(
             text = "Войти",
@@ -173,7 +225,7 @@ private fun InputButton(viewModel: SingInScreenViewModel){
 }
 
 @Composable
-private fun SingUpButton(viewModel: SingInScreenViewModel){
+private fun SingUpButton(){
     Text(
         text = "Нет аккаунта?",
         color = SecondaryTextApp,
