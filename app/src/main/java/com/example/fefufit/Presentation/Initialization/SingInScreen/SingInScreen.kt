@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.SecondaryTextApp
 import com.example.fefufit.Presentation.theme.WhiteApp
@@ -53,7 +54,10 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingInScreen(navController: NavController, viewModel: SingInScreenViewModel = viewModel()) {
+fun SingInScreen(navController: NavController, singInUseCase: SingInUseCase) {
+
+    val viewModel: SingInScreenViewModel = SingInScreenViewModel(singInUseCase = singInUseCase)
+
     //painted system controllers
     val systemUiController = rememberSystemUiController()
     val barBackground = WhiteApp
@@ -73,6 +77,11 @@ fun SingInScreen(navController: NavController, viewModel: SingInScreenViewModel 
                 is SingInScreenViewModel.ValidationEvent.Success ->{
                     snackBarHostState.showSnackbar(
                         message = "Success"
+                    )
+                }
+                is SingInScreenViewModel.ValidationEvent.Error ->{
+                    snackBarHostState.showSnackbar(
+                        message = viewModel.errorData
                     )
                 }
             }

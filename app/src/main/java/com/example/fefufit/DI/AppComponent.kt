@@ -1,6 +1,7 @@
 package com.example.fefufit.DI
 
 import com.example.fefufit.FefuFitApp
+import com.example.fefufit.Presentation.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -9,5 +10,5 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(target: FefuFitApp)
 
-//    fun inject(target: MainActivity)
+    fun inject(target: MainActivity)
 }

@@ -5,19 +5,26 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingInFromState
+import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingInValidation.ValidateEmailUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingInValidation.ValidatePasswordUseCase
+import com.example.fefufit.Utils.Resource
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class SingInScreenViewModel(
     private val validateEmailUseCase: ValidateEmailUseCase = ValidateEmailUseCase(),
-    private val validatePasswordUseCase: ValidatePasswordUseCase = ValidatePasswordUseCase()
+    private val validatePasswordUseCase: ValidatePasswordUseCase = ValidatePasswordUseCase(),
+    private val singInUseCase: SingInUseCase
 ):ViewModel() {
 
     var inputDataState by mutableStateOf(SingInFromState())
+    var errorData by mutableStateOf("")
 
     //a thread for sending notifications to the UI thread
     private val validationEventChannel = Channel<ValidationEvent>()
@@ -62,12 +69,29 @@ class SingInScreenViewModel(
             passwordError = null
         )
 
-        viewModelScope.launch {
-            validationEventChannel.send(ValidationEvent.Success)
-        }
+        singInData(inputDataState.email, inputDataState.password)
+    }
+
+    private fun singInData(email:String, password:String){
+        singInUseCase(SingInDataModel(email, password)).onEach { result->
+            when(result){
+                is Resource.Success->{
+                    validationEventChannel.send(ValidationEvent.Success)
+                }
+                is Resource.Error->{
+                    errorData = result.message!!
+                    validationEventChannel.send(ValidationEvent.Error)
+                }
+                is Resource.Loading->{
+
+                }
+            }
+
+        }.launchIn(viewModelScope)
     }
 
     sealed class ValidationEvent{
         object Success:ValidationEvent()
+        object Error:ValidationEvent()
     }
 }
