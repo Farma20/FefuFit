@@ -73,7 +73,7 @@ fun SingInScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(100.dp))
             Image(
                 modifier = Modifier.size(95.dp, 103.dp),
-                painter = painterResource(id = R.drawable.logoblue),
+                painter = painterResource(id = R.drawable.fefufiticonblue),
                 contentDescription = "logo",
             )
             Spacer(modifier = Modifier.height(76.dp))
