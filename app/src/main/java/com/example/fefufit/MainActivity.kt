@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
@@ -30,6 +31,9 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //installing splashScreen
+        installSplashScreen()
 
         setContent {
             FefuFitTheme {
