@@ -56,6 +56,12 @@ class SingInScreenViewModel(
             )
             return
         }
+
+        inputDataState = inputDataState.copy(
+            emailError = null,
+            passwordError = null
+        )
+
         viewModelScope.launch {
             validationEventChannel.send(ValidationEvent.Success)
         }
