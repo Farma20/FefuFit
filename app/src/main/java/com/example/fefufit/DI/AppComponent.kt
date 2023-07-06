@@ -1,7 +1,6 @@
 package com.example.fefufit.DI
 
 import com.example.fefufit.FefuFitApp
-import com.example.fefufit.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 

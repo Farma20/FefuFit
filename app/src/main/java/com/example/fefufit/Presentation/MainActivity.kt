@@ -1,4 +1,4 @@
-package com.example.fefufit
+package com.example.fefufit.Presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import com.example.fefufit.Presentation.theme.FefuFitTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel:MainActivityViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

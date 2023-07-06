@@ -1,4 +1,4 @@
-package com.example.fefufit
+package com.example.fefufit.Presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
