@@ -1,9 +1,9 @@
 package com.example.fefufit.Presentation.Initialization.SingInScreen
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,13 +20,17 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Snackbar
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -46,6 +50,8 @@ import com.example.fefufit.Presentation.theme.WhiteApp
 import com.example.fefufit.R
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SingInScreen(navController: NavController, viewModel: SingInScreenViewModel = viewModel()) {
     //painted system controllers
@@ -59,44 +65,48 @@ fun SingInScreen(navController: NavController, viewModel: SingInScreenViewModel 
     }
 
     val context = LocalContext.current
+    val snackBarHostState = remember { SnackbarHostState() }
+
     LaunchedEffect(key1 = context){
         viewModel.validationEvents.collect{event ->
             when(event){
                 is SingInScreenViewModel.ValidationEvent.Success ->{
-                    Toast.makeText(
-                        context,
-                        "Success",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    snackBarHostState.showSnackbar(
+                        message = "Success"
+                    )
                 }
             }
         }
     }
 
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        color = WhiteApp
+    Scaffold(
+        snackbarHost = {SnackbarHost(snackBarHostState)}
     ) {
-        Column(
+        Surface(
             modifier = Modifier
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            color = WhiteApp
         ) {
-            Spacer(modifier = Modifier.height(100.dp))
-            Image(
-                modifier = Modifier.size(95.dp, 103.dp),
-                painter = painterResource(id = R.drawable.fefufiticonblue),
-                contentDescription = "logo",
-            )
-            Spacer(modifier = Modifier.height(76.dp))
-            InputForm(viewModel)
-            Spacer(modifier = Modifier.height(36.dp))
-            InputButton(viewModel)
-            Spacer(modifier = Modifier.height(60.dp))
-            SingUpButton()
-            Spacer(modifier = Modifier.height(57.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Spacer(modifier = Modifier.height(100.dp))
+                Image(
+                    modifier = Modifier.size(95.dp, 103.dp),
+                    painter = painterResource(id = R.drawable.fefufiticonblue),
+                    contentDescription = "logo",
+                )
+                Spacer(modifier = Modifier.height(76.dp))
+                InputForm(viewModel)
+                Spacer(modifier = Modifier.height(36.dp))
+                InputButton(viewModel)
+                Spacer(modifier = Modifier.height(60.dp))
+                SingUpButton()
+                Spacer(modifier = Modifier.height(57.dp))
+            }
         }
     }
 }
@@ -104,7 +114,6 @@ fun SingInScreen(navController: NavController, viewModel: SingInScreenViewModel 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun InputForm(viewModel: SingInScreenViewModel){
-
     val inputDataState = viewModel.inputDataState
 
     Row(
@@ -237,3 +246,4 @@ private fun SingUpButton(){
         fontSize = 18.sp
     )
 }
+
