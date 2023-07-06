@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material3.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.fefufit.Presentation.Navigation.MainScreens
+import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
 import com.example.fefufit.Presentation.theme.FefuFitTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,8 +25,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             FefuFitTheme {
                 Surface {
-                    //AppNavigation
-                    MainScreens()
+                    //InitializationNavigation
+                    InitializationScreens()
                 }
             }
         }
