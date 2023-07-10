@@ -20,6 +20,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,6 +31,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +44,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInFormEvent
+import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
 import com.example.fefufit.Presentation.theme.BlackApp
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.RedErrorApp
@@ -61,8 +67,7 @@ fun SingUpScreen() {
     ) {scaffoldPadding->
         Surface(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(scrollState),
+                .fillMaxSize(),
             color = WhiteApp
         ){
             Column(
@@ -81,7 +86,14 @@ fun SingUpScreen() {
                     textAlign = TextAlign.Center,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                PersonalDataInputForm()
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(scrollState),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    PersonalDataInputForm()
+                }
             }
         }
     }
@@ -109,7 +121,10 @@ private fun UppBar(modifier: Modifier){
                     contentDescription = null
                 )
             }
-        }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = Color.White
+        )
     )
 }
 
@@ -349,6 +364,9 @@ fun PersonalDataInputForm() {
             focusedBorderColor = BlueApp
         )
     )
+    Spacer(modifier = Modifier.height(24.dp))
+    NextButton()
+    Spacer(modifier = Modifier.height(24.dp))
 
 //    if (inputDataState.emailError != null) {
 //        Text(
@@ -360,4 +378,27 @@ fun PersonalDataInputForm() {
 //            textAlign = TextAlign.End
 //        )
 //    }
+}
+
+@Composable
+private fun NextButton(){
+    Button(
+        modifier = Modifier
+            .fillMaxWidth(0.90f)
+            .height(58.dp)
+        ,
+        shape = RoundedCornerShape(13.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = BlueApp
+        ),
+        onClick = {
+//            viewModel.inputDataEvent(SingInFormEvent.Submit)
+        }
+    ) {
+        Text(
+            text = "Продолжить",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Normal
+        )
+    }
 }
