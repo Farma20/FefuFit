@@ -34,6 +34,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -52,11 +53,22 @@ import com.example.fefufit.Presentation.theme.RedErrorApp
 import com.example.fefufit.Presentation.theme.SecondaryTextApp
 import com.example.fefufit.Presentation.theme.WhiteApp
 import com.example.fefufit.R
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SingUpScreen() {
+
+    //painted system controllers
+    val systemUiController = rememberSystemUiController()
+    val barBackground = WhiteApp
+
+    //painted system upp & bottom panels
+    SideEffect {
+        systemUiController.setStatusBarColor(color = barBackground, darkIcons = true)
+        systemUiController.setNavigationBarColor(color = barBackground)
+    }
 
     val scrollState = rememberScrollState()
 
