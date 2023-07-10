@@ -9,6 +9,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.FefuFitApp
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreen
 import com.example.fefufit.Presentation.theme.FefuFitTheme
 import javax.inject.Inject
 
@@ -35,7 +36,8 @@ class MainActivity : ComponentActivity() {
             FefuFitTheme {
                 Surface {
                     //InitializationNavigation
-                    InitializationScreens(singInUseCase)
+//                    InitializationScreens(singInUseCase)
+                    SingUpScreen()
                 }
             }
         }
