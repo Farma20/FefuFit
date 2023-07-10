@@ -56,6 +56,14 @@ fun SingUpScreen() {
         ) {
             Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
             RegistrationPager(Modifier.fillMaxWidth())
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                text = "Личные данные",
+                fontSize = 22.sp,
+                fontWeight = FontWeight(600),
+                color = BlackApp,
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }
