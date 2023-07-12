@@ -1,6 +1,6 @@
 package com.example.fefufit.Domain.Models.ValidationModels
 
-data class SingInFromState (
+data class SingInFormState (
     val email:String = "",
     val emailError:String? = null,
     val password:String = "",
