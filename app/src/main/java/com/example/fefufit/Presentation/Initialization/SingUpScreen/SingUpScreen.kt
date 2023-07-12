@@ -1,13 +1,10 @@
 package com.example.fefufit.Presentation.Initialization.SingUpScreen
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.foundation.interaction.collectIsFocusedAsState
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -23,8 +20,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -43,6 +44,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInFormEvent
+import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
 import com.example.fefufit.Presentation.theme.BlackApp
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.RedErrorApp
@@ -60,7 +64,7 @@ import java.time.format.DateTimeFormatter
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingUpScreen() {
+fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
 
     //painted system controllers
     val systemUiController = rememberSystemUiController()
@@ -73,8 +77,23 @@ fun SingUpScreen() {
     }
 
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
+    val snackBarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(key1 = context){
+        viewModel.validationEvents.collect{event ->
+            when(event){
+                is SingUpScreenViewModel.ValidationEvent.Success ->{
+                    snackBarHostState.showSnackbar(
+                        message = "Success"
+                    )
+                }
+            }
+        }
+    }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState)},
         topBar = {
             UppBar(modifier = Modifier)
         }
@@ -106,7 +125,7 @@ fun SingUpScreen() {
                         .verticalScroll(scrollState),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    PersonalDataInputForm()
+                    PersonalDataInputForm(viewModel)
                 }
             }
         }
@@ -184,7 +203,8 @@ private fun RegistrationPager(modifier: Modifier){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersonalDataInputForm() {
+fun PersonalDataInputForm(viewModel: SingUpScreenViewModel) {
+    val inputDataState = viewModel.inputDataState
 
     //gender drop down menu variables
     var genderDropDown by remember { mutableStateOf(false) }
@@ -237,9 +257,10 @@ fun PersonalDataInputForm() {
         modifier = Modifier
             .fillMaxWidth(0.90f),
         shape = RoundedCornerShape(13.dp),
-        value = "",
+        value = inputDataState.secondName,
+        isError = inputDataState.secondNameError != null,
         onValueChange = {
-//            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
+            viewModel.inputDataEvent(SingUpFormEvent.SecondNameChanged(it))
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text
@@ -250,7 +271,20 @@ fun PersonalDataInputForm() {
             focusedBorderColor = BlueApp
         )
     )
+
+    if (inputDataState.secondNameError != null){
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.86f),
+            text = inputDataState.secondNameError,
+            fontSize =14.sp,
+            color = MaterialTheme.colorScheme.error,
+            textAlign = TextAlign.End
+        )
+    }
     Spacer(modifier = Modifier.height(14.dp))
+
+
     Row(
         modifier = Modifier.fillMaxWidth(0.86f),
         horizontalArrangement = Arrangement.Start,
@@ -270,9 +304,10 @@ fun PersonalDataInputForm() {
         modifier = Modifier
             .fillMaxWidth(0.90f),
         shape = RoundedCornerShape(13.dp),
-        value = "",
+        value = inputDataState.firstName,
+        isError = inputDataState.firstNameError != null,
         onValueChange = {
-//            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
+            viewModel.inputDataEvent(SingUpFormEvent.FirstNameChanged(it))
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text
@@ -283,7 +318,21 @@ fun PersonalDataInputForm() {
             focusedBorderColor = BlueApp
         )
     )
+
+    if (inputDataState.firstNameError != null){
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.86f),
+            text = inputDataState.firstNameError,
+            fontSize =14.sp,
+            color = MaterialTheme.colorScheme.error,
+            textAlign = TextAlign.End
+        )
+    }
     Spacer(modifier = Modifier.height(14.dp))
+
+
+
     Row(
         modifier = Modifier.fillMaxWidth(0.86f),
         horizontalArrangement = Arrangement.Start,
@@ -299,9 +348,9 @@ fun PersonalDataInputForm() {
         modifier = Modifier
             .fillMaxWidth(0.90f),
         shape = RoundedCornerShape(13.dp),
-        value = "",
+        value = inputDataState.middleName,
         onValueChange = {
-//            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
+            viewModel.inputDataEvent(SingUpFormEvent.MiddleNameChanged(it))
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text
@@ -313,6 +362,8 @@ fun PersonalDataInputForm() {
         )
     )
     Spacer(modifier = Modifier.height(14.dp))
+
+
     Row(
         modifier = Modifier.fillMaxWidth(0.86f),
         horizontalArrangement = Arrangement.Start,
@@ -351,9 +402,10 @@ fun PersonalDataInputForm() {
                 )
             },
             shape = RoundedCornerShape(13.dp),
+            isError = inputDataState.genderError != null,
             value = selectedGenderItem,
             onValueChange = {
-//            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
+
             },
             placeholder = {
                 Text(
@@ -385,6 +437,7 @@ fun PersonalDataInputForm() {
                     text = { Text(text = selectedGender) },
                     onClick = {
                         selectedGenderItem = selectedGender
+                        viewModel.inputDataEvent(SingUpFormEvent.GenderChanged(selectedGenderItem))
                         genderDropDown = false
                     },
                 )
@@ -392,7 +445,19 @@ fun PersonalDataInputForm() {
         }
     }
 
+    if (inputDataState.genderError != null){
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.86f),
+            text = inputDataState.genderError,
+            fontSize =14.sp,
+            color = MaterialTheme.colorScheme.error,
+            textAlign = TextAlign.End
+        )
+    }
     Spacer(modifier = Modifier.height(14.dp))
+
+
     Row(
         modifier = Modifier.fillMaxWidth(0.86f),
         horizontalArrangement = Arrangement.Start,
@@ -413,8 +478,8 @@ fun PersonalDataInputForm() {
             .fillMaxWidth(0.90f),
         shape = RoundedCornerShape(13.dp),
         value = if (formattedDate == dateNow)"" else formattedDate,
+        isError = inputDataState.birthdayError != null,
         onValueChange = {
-//            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text
@@ -449,6 +514,10 @@ fun PersonalDataInputForm() {
         buttons = {
             positiveButton(
                 text = "Ok",
+                onClick = {
+                    viewModel.inputDataEvent(SingUpFormEvent.BirthdayChanged(if (formattedDate == dateNow)"" else formattedDate))
+
+                },
                 textStyle = TextStyle(
                     color = BlueApp
                 )
@@ -480,7 +549,19 @@ fun PersonalDataInputForm() {
         source.tryEmit(PressInteraction.Cancel(PressInteraction.Press(Offset.Zero)))
     }
 
+    if (inputDataState.birthdayError != null){
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.86f),
+            text = inputDataState.birthdayError,
+            fontSize =14.sp,
+            color = MaterialTheme.colorScheme.error,
+            textAlign = TextAlign.End
+        )
+    }
     Spacer(modifier = Modifier.height(14.dp))
+
+
     Row(
         modifier = Modifier.fillMaxWidth(0.86f),
         horizontalArrangement = Arrangement.Start,
@@ -521,8 +602,8 @@ fun PersonalDataInputForm() {
             shape = RoundedCornerShape(13.dp),
             value = selectedStatusItem,
             onValueChange = {
-//            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
             },
+            isError = inputDataState.statusError != null,
             placeholder = {
                 Text(
                     text = "Не выбрано",
@@ -553,14 +634,26 @@ fun PersonalDataInputForm() {
                     text = { Text(text = selectStatus) },
                     onClick = {
                         selectedStatusItem = selectStatus
+                        viewModel.inputDataEvent(SingUpFormEvent.StatusChanged(selectedStatusItem))
                         statusDropDown = false
                     },
                 )
             }
         }
     }
+
+    if (inputDataState.statusError != null){
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.86f),
+            text = inputDataState.statusError,
+            fontSize =14.sp,
+            color = MaterialTheme.colorScheme.error,
+            textAlign = TextAlign.End
+        )
+    }
     Spacer(modifier = Modifier.height(24.dp))
-    NextButton()
+    NextButton(viewModel)
     Spacer(modifier = Modifier.height(24.dp))
 
 //    if (inputDataState.emailError != null) {
@@ -576,7 +669,7 @@ fun PersonalDataInputForm() {
 }
 
 @Composable
-private fun NextButton(){
+private fun NextButton(viewModel: SingUpScreenViewModel){
     Button(
         modifier = Modifier
             .fillMaxWidth(0.90f)
@@ -587,7 +680,7 @@ private fun NextButton(){
             containerColor = BlueApp
         ),
         onClick = {
-//            viewModel.inputDataEvent(SingInFormEvent.Submit)
+            viewModel.inputDataEvent(SingUpFormEvent.Submit)
         }
     ) {
         Text(

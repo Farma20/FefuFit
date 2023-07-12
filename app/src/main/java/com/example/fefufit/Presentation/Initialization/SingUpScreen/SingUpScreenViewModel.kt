@@ -108,7 +108,6 @@ class SingUpScreenViewModel(
 
     sealed class ValidationEvent{
         object Success:ValidationEvent()
-        object Error:ValidationEvent()
     }
 
 }
