@@ -1,19 +1,14 @@
 package com.example.fefufit.Presentation.Initialization.SingUpScreen
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,26 +21,19 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MenuDefaults
-import androidx.compose.material3.MenuItemColors
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -62,6 +50,12 @@ import com.example.fefufit.Presentation.theme.SecondaryTextApp
 import com.example.fefufit.Presentation.theme.WhiteApp
 import com.example.fefufit.R
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.vanpra.composematerialdialogs.MaterialDialog
+import com.vanpra.composematerialdialogs.datetime.date.DatePickerDefaults
+import com.vanpra.composematerialdialogs.datetime.date.datepicker
+import com.vanpra.composematerialdialogs.rememberMaterialDialogState
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -187,6 +181,7 @@ private fun RegistrationPager(modifier: Modifier){
     }
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonalDataInputForm() {
@@ -200,6 +195,28 @@ fun PersonalDataInputForm() {
     var statusDropDown by remember { mutableStateOf(false) }
     val listStatus = listOf("Студент", "Гость", "Сотрудник")
     var selectedStatusItem by remember { mutableStateOf("") }
+
+    //birthday datePicker variables
+    val source = remember { MutableInteractionSource() }
+    val pressedState=source.interactions.collectAsState(
+        initial = PressInteraction.Cancel(PressInteraction.Press(Offset.Zero)))
+    var pickedDate by remember { mutableStateOf(LocalDate.now()) }
+    val dateDialogState = rememberMaterialDialogState()
+    val dateNow by remember {
+        derivedStateOf {
+            DateTimeFormatter
+                .ofPattern("MMM dd yyyy")
+                .format(LocalDate.now())
+        }
+    }
+    val formattedDate by remember {
+        derivedStateOf {
+            DateTimeFormatter
+                .ofPattern("MMM dd yyyy")
+                .format(pickedDate)
+        }
+    }
+
 
     Row(
         modifier = Modifier.fillMaxWidth(0.86f),
@@ -395,7 +412,7 @@ fun PersonalDataInputForm() {
         modifier = Modifier
             .fillMaxWidth(0.90f),
         shape = RoundedCornerShape(13.dp),
-        value = "",
+        value = if (formattedDate == dateNow)"" else formattedDate,
         onValueChange = {
 //            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
         },
@@ -407,6 +424,7 @@ fun PersonalDataInputForm() {
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = BlueApp
         ),
+        interactionSource = source,
         placeholder = {
             Text(
                 text = "Не выбрано",
@@ -425,6 +443,43 @@ fun PersonalDataInputForm() {
             )
         }
     )
+
+    MaterialDialog(
+        dialogState = dateDialogState,
+        buttons = {
+            positiveButton(
+                text = "Ok",
+                textStyle = TextStyle(
+                    color = BlueApp
+                )
+            )
+            negativeButton(
+                text = "Отмена",
+                textStyle = TextStyle(
+                    color = BlueApp
+                )
+            )
+        }
+    ) {
+        datepicker(
+            initialDate = LocalDate.now(),
+            title = "Выберете дату рождения",
+            colors = DatePickerDefaults.colors(
+                headerBackgroundColor = BlueApp,
+                dateActiveBackgroundColor = BlueApp,
+                dateActiveTextColor = WhiteApp,
+            ),
+        ) {
+            pickedDate = it
+        }
+    }
+
+    if (pressedState.value is PressInteraction.Release)
+    {
+        dateDialogState.show()
+        source.tryEmit(PressInteraction.Cancel(PressInteraction.Press(Offset.Zero)))
+    }
+
     Spacer(modifier = Modifier.height(14.dp))
     Row(
         modifier = Modifier.fillMaxWidth(0.86f),
