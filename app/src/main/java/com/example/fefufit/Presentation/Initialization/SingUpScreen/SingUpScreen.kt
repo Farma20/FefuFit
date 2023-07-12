@@ -397,7 +397,15 @@ fun PersonalDataInputForm() {
         textStyle = TextStyle(fontSize = 16.sp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = BlueApp
-        )
+        ),
+        readOnly = true,
+        trailingIcon = {
+            Icon(
+                painter = painterResource(id = R.drawable.calendar_icon),
+                contentDescription = "calendar icon",
+                tint = BlueApp
+            )
+        }
     )
     Spacer(modifier = Modifier.height(14.dp))
     Row(
