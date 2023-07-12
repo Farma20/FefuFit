@@ -407,6 +407,15 @@ fun PersonalDataInputForm() {
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = BlueApp
         ),
+        placeholder = {
+            Text(
+                text = "Не выбрано",
+                fontSize = 18.sp,
+                lineHeight = 22.sp,
+                fontWeight = FontWeight(200),
+                color = BlackApp,
+            )
+        },
         readOnly = true,
         trailingIcon = {
             Icon(
