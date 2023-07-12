@@ -193,8 +193,12 @@ fun PersonalDataInputForm() {
     //gender drop down menu variables
     var genderDropDown by remember { mutableStateOf(false) }
     val listGenders = listOf("Мужчина", "Женщина")
-    var genderItems by remember { mutableStateOf(listGenders) }
     var selectedGenderItem by remember { mutableStateOf("") }
+
+    //status drop down menu variables
+    var statusDropDown by remember { mutableStateOf(false) }
+    val listStatus = listOf("Студент", "Гость", "Сотрудник")
+    var selectedStatusItem by remember { mutableStateOf("") }
 
     Row(
         modifier = Modifier.fillMaxWidth(0.86f),
@@ -348,7 +352,7 @@ fun PersonalDataInputForm() {
             expanded = genderDropDown,
             onDismissRequest = { genderDropDown = false }
         ) {
-            genderItems.forEach { selectedGender ->
+            listGenders.forEach { selectedGender ->
                 DropdownMenuItem(
                     modifier = Modifier
                         .background(WhiteApp),
@@ -411,23 +415,61 @@ fun PersonalDataInputForm() {
         )
     }
     Spacer(modifier = Modifier.height(6.dp))
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth(0.90f),
-        shape = RoundedCornerShape(13.dp),
-        value = "",
-        onValueChange = {
+    ExposedDropdownMenuBox(
+        expanded = statusDropDown,
+        onExpandedChange = {statusDropDown = !statusDropDown}
+    ) {
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(0.90f)
+                .menuAnchor(),
+            readOnly = true,
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded = statusDropDown
+                )
+            },
+            shape = RoundedCornerShape(13.dp),
+            value = selectedStatusItem,
+            onValueChange = {
 //            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text
-        ),
-        singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = BlueApp
+            },
+            placeholder = {
+                Text(
+                    text = "Не выбрано",
+                    fontSize = 18.sp,
+                    lineHeight = 22.sp,
+                    fontWeight = FontWeight(200),
+                    color = BlackApp,
+                )
+            },
+            singleLine = true,
+            textStyle = TextStyle(fontSize = 16.sp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = BlueApp,
+            )
         )
-    )
+        DropdownMenu(
+            modifier = Modifier
+                .exposedDropdownSize()
+                .background(WhiteApp),
+            offset = DpOffset(0.dp, 6.dp),
+            expanded = statusDropDown,
+            onDismissRequest = { statusDropDown = false }
+        ) {
+            listStatus.forEach { selectStatus ->
+                DropdownMenuItem(
+                    modifier = Modifier
+                        .background(WhiteApp),
+                    text = { Text(text = selectStatus) },
+                    onClick = {
+                        selectedStatusItem = selectStatus
+                        statusDropDown = false
+                    },
+                )
+            }
+        }
+    }
     Spacer(modifier = Modifier.height(24.dp))
     NextButton()
     Spacer(modifier = Modifier.height(24.dp))
