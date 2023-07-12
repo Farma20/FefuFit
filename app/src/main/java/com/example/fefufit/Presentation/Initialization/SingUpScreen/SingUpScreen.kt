@@ -45,6 +45,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -320,8 +321,16 @@ fun PersonalDataInputForm() {
                 .menuAnchor(),
             readOnly = true,
             trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(
-                    expanded = genderDropDown
+                Icon(
+                    modifier = Modifier.rotate(
+                        if (genderDropDown)
+                            180f
+                        else
+                            0f
+                    ),
+                    painter = painterResource(id = R.drawable.bottom_arrow),
+                    contentDescription = "bottomArrow",
+                    tint = BlueApp
                 )
             },
             shape = RoundedCornerShape(13.dp),
@@ -433,8 +442,16 @@ fun PersonalDataInputForm() {
                 .menuAnchor(),
             readOnly = true,
             trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(
-                    expanded = statusDropDown
+                Icon(
+                    modifier = Modifier.rotate(
+                        if (statusDropDown)
+                            180f
+                        else
+                            0f
+                    ),
+                    painter = painterResource(id = R.drawable.bottom_arrow),
+                    contentDescription = "bottomArrow",
+                    tint = BlueApp
                 )
             },
             shape = RoundedCornerShape(13.dp),
