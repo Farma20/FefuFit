@@ -99,7 +99,7 @@ fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
                         .verticalScroll(scrollState),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    PersonalDataInputForm(viewModel)
+                    SingUp(viewModel)
                 }
             }
         }

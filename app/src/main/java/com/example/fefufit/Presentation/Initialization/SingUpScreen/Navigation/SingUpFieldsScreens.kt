@@ -1,6 +1,22 @@
 package com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation
 
-sealed class SingUpFieldsScreensRoute(val route: String) {
-    object SingUpFieldsFirst:SingUpFieldsScreensRoute("singUpFieldsFirst")
-    object SingUpFieldsSecond:SingUpFieldsScreensRoute("singUpFieldsSecond")
+import androidx.compose.runtime.Composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Elements.SingUpFieldsFirst
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Elements.SingUpFieldsSecond
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
+
+@Composable
+fun SingUpFieldsScreens(viewModel: SingUpScreenViewModel) {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = SingUpFieldsScreensRoute.SingUpFieldsFirst.route){
+        composable(route = SingUpFieldsScreensRoute.SingUpFieldsFirst.route){
+            SingUpFieldsFirst(viewModel = viewModel)
+        }
+        composable(route = SingUpFieldsScreensRoute.SingUpFieldsSecond.route){
+            SingUpFieldsSecond(viewModel = viewModel)
+        }
+    }
 }

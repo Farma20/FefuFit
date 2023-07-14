@@ -56,7 +56,7 @@ import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersonalDataInputForm(viewModel: SingUpScreenViewModel) {
+fun SingUpFieldsFirst(viewModel: SingUpScreenViewModel) {
     val inputDataState = viewModel.inputDataState
 
     //gender drop down menu variables
