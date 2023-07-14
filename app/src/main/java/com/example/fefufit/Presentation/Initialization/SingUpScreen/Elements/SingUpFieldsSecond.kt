@@ -238,11 +238,11 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
 //                textAlign = TextAlign.End
 //            )
 //        }
-        Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
         Row(
             modifier = Modifier
-                .fillMaxWidth(0.90f),
+                .fillMaxWidth(0.93f),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ){
