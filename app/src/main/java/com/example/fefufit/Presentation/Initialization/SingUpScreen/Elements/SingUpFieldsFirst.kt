@@ -44,6 +44,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
 import com.example.fefufit.Presentation.theme.BlackApp
@@ -61,7 +62,9 @@ import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingUpFieldsFirst(viewModel: SingUpScreenViewModel) {
+fun SingUpFieldsFirst(
+    viewModel: SingUpScreenViewModel,
+) {
     val inputDataState = viewModel.inputDataState
     val scrollState = rememberScrollState()
 

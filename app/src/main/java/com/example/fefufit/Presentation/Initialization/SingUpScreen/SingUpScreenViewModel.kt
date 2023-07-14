@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpFormState
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateBirthdayUseCase
@@ -14,6 +15,7 @@ import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.V
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateStatusUseCase
 import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInFormEvent
 import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreensRoute
 import com.example.fefufit.Utils.Resource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
@@ -28,6 +30,14 @@ class SingUpScreenViewModel(
     private val validateBirthdayUseCase: ValidateBirthdayUseCase = ValidateBirthdayUseCase(),
     private val validateStatusUseCase: ValidateStatusUseCase = ValidateStatusUseCase()
 ): ViewModel() {
+
+    //pageStateVariables
+    var inputFieldsController: InputFieldsController? = null
+
+    fun getFieldsNavController(navController: NavController){
+        inputFieldsController = InputFieldsController(navController)
+    }
+
 
     var inputDataState by mutableStateOf(SingUpFormState())
     var errorData by mutableStateOf("")
@@ -110,4 +120,16 @@ class SingUpScreenViewModel(
         object Success:ValidationEvent()
     }
 
+
+    inner class InputFieldsController(
+        private var fieldsNavController: NavController
+    ){
+        fun goToFirstFields(){
+            fieldsNavController.navigate(SingUpFieldsScreensRoute.SingUpFieldsFirst.route)
+        }
+
+        fun goToSecondFields(){
+            fieldsNavController.navigate(SingUpFieldsScreensRoute.SingUpFieldsSecond.route)
+        }
+    }
 }
