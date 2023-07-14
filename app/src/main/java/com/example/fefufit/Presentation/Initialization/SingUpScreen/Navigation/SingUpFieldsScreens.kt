@@ -11,7 +11,7 @@ import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreen
 @Composable
 fun SingUpFieldsScreens(viewModel: SingUpScreenViewModel) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = SingUpFieldsScreensRoute.SingUpFieldsFirst.route){
+    NavHost(navController = navController, startDestination = SingUpFieldsScreensRoute.SingUpFieldsSecond.route){
         composable(route = SingUpFieldsScreensRoute.SingUpFieldsFirst.route){
             SingUpFieldsFirst(viewModel = viewModel)
         }
