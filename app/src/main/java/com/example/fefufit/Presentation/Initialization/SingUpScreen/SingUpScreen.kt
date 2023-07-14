@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.fefufit.Presentation.Initialization.SingUpScreen.Elements.PersonalDataInputForm
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreens
 import com.example.fefufit.Presentation.theme.BlackApp
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.WhiteApp
@@ -99,7 +99,7 @@ fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
                         .verticalScroll(scrollState),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    SingUp(viewModel)
+                    SingUpFieldsScreens(viewModel)
                 }
             }
         }

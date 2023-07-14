@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -91,372 +92,259 @@ fun SingUpFieldsFirst(viewModel: SingUpScreenViewModel) {
     }
 
 
-    Row(
-        modifier = Modifier.fillMaxWidth(0.86f),
-        horizontalArrangement = Arrangement.Start,
-    ) {
-        Text(
-            text = "Фамилия",
-            fontSize = 14.sp,
-            color = SecondaryTextApp
-        )
-        Text(
-            text = " *",
-            color = RedErrorApp
-        )
-    }
-    Spacer(modifier = Modifier.height(6.dp))
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth(0.90f),
-        shape = RoundedCornerShape(13.dp),
-        value = inputDataState.secondName,
-        isError = inputDataState.secondNameError != null,
-        onValueChange = {
-            viewModel.inputDataEvent(SingUpFormEvent.SecondNameChanged(it))
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text
-        ),
-        singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = BlueApp
-        )
-    )
-
-    if (inputDataState.secondNameError != null){
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(0.86f),
-            text = inputDataState.secondNameError,
-            fontSize =14.sp,
-            color = MaterialTheme.colorScheme.error,
-            textAlign = TextAlign.End
-        )
-    }
-    Spacer(modifier = Modifier.height(14.dp))
-
-
-    Row(
-        modifier = Modifier.fillMaxWidth(0.86f),
-        horizontalArrangement = Arrangement.Start,
-    ) {
-        Text(
-            text = "Имя",
-            fontSize = 14.sp,
-            color = SecondaryTextApp
-        )
-        Text(
-            text = " *",
-            color = RedErrorApp,
-        )
-    }
-    Spacer(modifier = Modifier.height(6.dp))
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth(0.90f),
-        shape = RoundedCornerShape(13.dp),
-        value = inputDataState.firstName,
-        isError = inputDataState.firstNameError != null,
-        onValueChange = {
-            viewModel.inputDataEvent(SingUpFormEvent.FirstNameChanged(it))
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text
-        ),
-        singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = BlueApp
-        )
-    )
-
-    if (inputDataState.firstNameError != null){
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(0.86f),
-            text = inputDataState.firstNameError,
-            fontSize =14.sp,
-            color = MaterialTheme.colorScheme.error,
-            textAlign = TextAlign.End
-        )
-    }
-    Spacer(modifier = Modifier.height(14.dp))
-
-
-
-    Row(
-        modifier = Modifier.fillMaxWidth(0.86f),
-        horizontalArrangement = Arrangement.Start,
-    ) {
-        Text(
-            text = "Отчество",
-            fontSize = 14.sp,
-            color = SecondaryTextApp
-        )
-    }
-    Spacer(modifier = Modifier.height(6.dp))
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth(0.90f),
-        shape = RoundedCornerShape(13.dp),
-        value = inputDataState.middleName,
-        onValueChange = {
-            viewModel.inputDataEvent(SingUpFormEvent.MiddleNameChanged(it))
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text
-        ),
-        singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = BlueApp
-        )
-    )
-    Spacer(modifier = Modifier.height(14.dp))
-
-
-    Row(
-        modifier = Modifier.fillMaxWidth(0.86f),
-        horizontalArrangement = Arrangement.Start,
-    ) {
-        Text(
-            text = "Пол",
-            fontSize = 14.sp,
-            color = SecondaryTextApp
-        )
-        Text(
-            text = " *",
-            color = RedErrorApp,
-        )
-    }
-    Spacer(modifier = Modifier.height(6.dp))
-    ExposedDropdownMenuBox(
-        expanded = genderDropDown,
-        onExpandedChange = {genderDropDown = !genderDropDown}
-    ) {
+    Column() {
+        Row(
+            modifier = Modifier.fillMaxWidth(0.86f),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            Text(
+                text = "Фамилия",
+                fontSize = 14.sp,
+                color = SecondaryTextApp
+            )
+            Text(
+                text = " *",
+                color = RedErrorApp
+            )
+        }
+        Spacer(modifier = Modifier.height(6.dp))
         OutlinedTextField(
             modifier = Modifier
-                .fillMaxWidth(0.90f)
-                .menuAnchor(),
-            readOnly = true,
-            trailingIcon = {
-                Icon(
-                    modifier = Modifier.rotate(
-                        if (genderDropDown)
-                            180f
-                        else
-                            0f
-                    ),
-                    painter = painterResource(id = R.drawable.bottom_arrow),
-                    contentDescription = "bottomArrow",
-                    tint = BlueApp
-                )
-            },
+                .fillMaxWidth(0.90f),
             shape = RoundedCornerShape(13.dp),
-            isError = inputDataState.genderError != null,
-            value = selectedGenderItem,
+            value = inputDataState.secondName,
+            isError = inputDataState.secondNameError != null,
             onValueChange = {
-
+                viewModel.inputDataEvent(SingUpFormEvent.SecondNameChanged(it))
             },
-            placeholder = {
-                Text(
-                    text = "Не выбрано",
-                    fontSize = 18.sp,
-                    lineHeight = 22.sp,
-                    fontWeight = FontWeight(200),
-                    color = BlackApp,
-                )
-            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text
+            ),
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = BlueApp,
+                focusedBorderColor = BlueApp
             )
         )
-        DropdownMenu(
-            modifier = Modifier
-                .exposedDropdownSize()
-                .background(WhiteApp),
-            offset = DpOffset(0.dp, 6.dp),
-            expanded = genderDropDown,
-            onDismissRequest = { genderDropDown = false }
-        ) {
-            listGenders.forEach { selectedGender ->
-                DropdownMenuItem(
-                    modifier = Modifier
-                        .background(WhiteApp),
-                    text = { Text(text = selectedGender) },
-                    onClick = {
-                        selectedGenderItem = selectedGender
-                        viewModel.inputDataEvent(SingUpFormEvent.GenderChanged(selectedGenderItem))
-                        genderDropDown = false
-                    },
-                )
-            }
-        }
-    }
 
-    if (inputDataState.genderError != null){
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(0.86f),
-            text = inputDataState.genderError,
-            fontSize =14.sp,
-            color = MaterialTheme.colorScheme.error,
-            textAlign = TextAlign.End
-        )
-    }
-    Spacer(modifier = Modifier.height(14.dp))
-
-
-    Row(
-        modifier = Modifier.fillMaxWidth(0.86f),
-        horizontalArrangement = Arrangement.Start,
-    ) {
-        Text(
-            text = "Дата рождения",
-            fontSize = 14.sp,
-            color = SecondaryTextApp
-        )
-        Text(
-            text = " *",
-            color = RedErrorApp,
-        )
-    }
-    Spacer(modifier = Modifier.height(6.dp))
-    OutlinedTextField(
-        modifier = Modifier
-            .fillMaxWidth(0.90f),
-        shape = RoundedCornerShape(13.dp),
-        value = if (formattedDate == dateNow)"" else formattedDate,
-        isError = inputDataState.birthdayError != null,
-        onValueChange = {
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text
-        ),
-        singleLine = true,
-        textStyle = TextStyle(fontSize = 16.sp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = BlueApp
-        ),
-        interactionSource = source,
-        placeholder = {
+        if (inputDataState.secondNameError != null){
             Text(
-                text = "Не выбрано",
-                fontSize = 18.sp,
-                lineHeight = 22.sp,
-                fontWeight = FontWeight(200),
-                color = BlackApp,
-            )
-        },
-        readOnly = true,
-        trailingIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.calendar_icon),
-                contentDescription = "calendar icon",
-                tint = BlueApp
+                modifier = Modifier
+                    .fillMaxWidth(0.86f),
+                text = inputDataState.secondNameError,
+                fontSize =14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
             )
         }
-    )
+        Spacer(modifier = Modifier.height(14.dp))
 
-    MaterialDialog(
-        dialogState = dateDialogState,
-        buttons = {
-            positiveButton(
-                text = "Ok",
-                onClick = {
-                    viewModel.inputDataEvent(SingUpFormEvent.BirthdayChanged(if (formattedDate == dateNow)"" else formattedDate))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(0.86f),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            Text(
+                text = "Имя",
+                fontSize = 14.sp,
+                color = SecondaryTextApp
+            )
+            Text(
+                text = " *",
+                color = RedErrorApp,
+            )
+        }
+        Spacer(modifier = Modifier.height(6.dp))
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(0.90f),
+            shape = RoundedCornerShape(13.dp),
+            value = inputDataState.firstName,
+            isError = inputDataState.firstNameError != null,
+            onValueChange = {
+                viewModel.inputDataEvent(SingUpFormEvent.FirstNameChanged(it))
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text
+            ),
+            singleLine = true,
+            textStyle = TextStyle(fontSize = 16.sp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = BlueApp
+            )
+        )
+
+        if (inputDataState.firstNameError != null){
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.86f),
+                text = inputDataState.firstNameError,
+                fontSize =14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
+        }
+        Spacer(modifier = Modifier.height(14.dp))
+
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(0.86f),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            Text(
+                text = "Отчество",
+                fontSize = 14.sp,
+                color = SecondaryTextApp
+            )
+        }
+        Spacer(modifier = Modifier.height(6.dp))
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(0.90f),
+            shape = RoundedCornerShape(13.dp),
+            value = inputDataState.middleName,
+            onValueChange = {
+                viewModel.inputDataEvent(SingUpFormEvent.MiddleNameChanged(it))
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text
+            ),
+            singleLine = true,
+            textStyle = TextStyle(fontSize = 16.sp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = BlueApp
+            )
+        )
+        Spacer(modifier = Modifier.height(14.dp))
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(0.86f),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            Text(
+                text = "Пол",
+                fontSize = 14.sp,
+                color = SecondaryTextApp
+            )
+            Text(
+                text = " *",
+                color = RedErrorApp,
+            )
+        }
+        Spacer(modifier = Modifier.height(6.dp))
+        ExposedDropdownMenuBox(
+            expanded = genderDropDown,
+            onExpandedChange = {genderDropDown = !genderDropDown}
+        ) {
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth(0.90f)
+                    .menuAnchor(),
+                readOnly = true,
+                trailingIcon = {
+                    Icon(
+                        modifier = Modifier.rotate(
+                            if (genderDropDown)
+                                180f
+                            else
+                                0f
+                        ),
+                        painter = painterResource(id = R.drawable.bottom_arrow),
+                        contentDescription = "bottomArrow",
+                        tint = BlueApp
+                    )
+                },
+                shape = RoundedCornerShape(13.dp),
+                isError = inputDataState.genderError != null,
+                value = selectedGenderItem,
+                onValueChange = {
 
                 },
-                textStyle = TextStyle(
-                    color = BlueApp
+                placeholder = {
+                    Text(
+                        text = "Не выбрано",
+                        fontSize = 18.sp,
+                        lineHeight = 22.sp,
+                        fontWeight = FontWeight(200),
+                        color = BlackApp,
+                    )
+                },
+                singleLine = true,
+                textStyle = TextStyle(fontSize = 16.sp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = BlueApp,
                 )
             )
-            negativeButton(
-                text = "Отмена",
-                textStyle = TextStyle(
-                    color = BlueApp
-                )
+            DropdownMenu(
+                modifier = Modifier
+                    .exposedDropdownSize()
+                    .background(WhiteApp),
+                offset = DpOffset(0.dp, 6.dp),
+                expanded = genderDropDown,
+                onDismissRequest = { genderDropDown = false }
+            ) {
+                listGenders.forEach { selectedGender ->
+                    DropdownMenuItem(
+                        modifier = Modifier
+                            .background(WhiteApp),
+                        text = { Text(text = selectedGender) },
+                        onClick = {
+                            selectedGenderItem = selectedGender
+                            viewModel.inputDataEvent(SingUpFormEvent.GenderChanged(selectedGenderItem))
+                            genderDropDown = false
+                        },
+                    )
+                }
+            }
+        }
+
+        if (inputDataState.genderError != null){
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.86f),
+                text = inputDataState.genderError,
+                fontSize =14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
             )
         }
-    ) {
-        datepicker(
-            initialDate = LocalDate.now(),
-            title = "Выберете дату рождения",
-            colors = DatePickerDefaults.colors(
-                headerBackgroundColor = BlueApp,
-                dateActiveBackgroundColor = BlueApp,
-                dateActiveTextColor = WhiteApp,
-            ),
+        Spacer(modifier = Modifier.height(14.dp))
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(0.86f),
+            horizontalArrangement = Arrangement.Start,
         ) {
-            pickedDate = it
+            Text(
+                text = "Дата рождения",
+                fontSize = 14.sp,
+                color = SecondaryTextApp
+            )
+            Text(
+                text = " *",
+                color = RedErrorApp,
+            )
         }
-    }
-
-    if (pressedState.value is PressInteraction.Release)
-    {
-        dateDialogState.show()
-        source.tryEmit(PressInteraction.Cancel(PressInteraction.Press(Offset.Zero)))
-    }
-
-    if (inputDataState.birthdayError != null){
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(0.86f),
-            text = inputDataState.birthdayError,
-            fontSize =14.sp,
-            color = MaterialTheme.colorScheme.error,
-            textAlign = TextAlign.End
-        )
-    }
-    Spacer(modifier = Modifier.height(14.dp))
-
-
-    Row(
-        modifier = Modifier.fillMaxWidth(0.86f),
-        horizontalArrangement = Arrangement.Start,
-    ) {
-        Text(
-            text = "Статус",
-            fontSize = 14.sp,
-            color = SecondaryTextApp
-        )
-        Text(
-            text = " *",
-            color = RedErrorApp,
-        )
-    }
-    Spacer(modifier = Modifier.height(6.dp))
-    ExposedDropdownMenuBox(
-        expanded = statusDropDown,
-        onExpandedChange = {statusDropDown = !statusDropDown}
-    ) {
+        Spacer(modifier = Modifier.height(6.dp))
         OutlinedTextField(
             modifier = Modifier
-                .fillMaxWidth(0.90f)
-                .menuAnchor(),
-            readOnly = true,
-            trailingIcon = {
-                Icon(
-                    modifier = Modifier.rotate(
-                        if (statusDropDown)
-                            180f
-                        else
-                            0f
-                    ),
-                    painter = painterResource(id = R.drawable.bottom_arrow),
-                    contentDescription = "bottomArrow",
-                    tint = BlueApp
-                )
-            },
+                .fillMaxWidth(0.90f),
             shape = RoundedCornerShape(13.dp),
-            value = selectedStatusItem,
+            value = if (formattedDate == dateNow)"" else formattedDate,
+            isError = inputDataState.birthdayError != null,
             onValueChange = {
             },
-            isError = inputDataState.statusError != null,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text
+            ),
+            singleLine = true,
+            textStyle = TextStyle(fontSize = 16.sp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = BlueApp
+            ),
+            interactionSource = source,
             placeholder = {
                 Text(
                     text = "Не выбрано",
@@ -466,59 +354,164 @@ fun SingUpFieldsFirst(viewModel: SingUpScreenViewModel) {
                     color = BlackApp,
                 )
             },
-            singleLine = true,
-            textStyle = TextStyle(fontSize = 16.sp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = BlueApp,
-            )
-        )
-        DropdownMenu(
-            modifier = Modifier
-                .exposedDropdownSize()
-                .background(WhiteApp),
-            offset = DpOffset(0.dp, 6.dp),
-            expanded = statusDropDown,
-            onDismissRequest = { statusDropDown = false }
-        ) {
-            listStatus.forEach { selectStatus ->
-                DropdownMenuItem(
-                    modifier = Modifier
-                        .background(WhiteApp),
-                    text = { Text(text = selectStatus) },
-                    onClick = {
-                        selectedStatusItem = selectStatus
-                        viewModel.inputDataEvent(SingUpFormEvent.StatusChanged(selectedStatusItem))
-                        statusDropDown = false
-                    },
+            readOnly = true,
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.calendar_icon),
+                    contentDescription = "calendar icon",
+                    tint = BlueApp
                 )
             }
-        }
-    }
-
-    if (inputDataState.statusError != null){
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(0.86f),
-            text = inputDataState.statusError,
-            fontSize =14.sp,
-            color = MaterialTheme.colorScheme.error,
-            textAlign = TextAlign.End
         )
-    }
-    Spacer(modifier = Modifier.height(24.dp))
-    NextButton(viewModel)
-    Spacer(modifier = Modifier.height(24.dp))
 
-//    if (inputDataState.emailError != null) {
-//        Text(
-//            modifier = Modifier
-//                .fillMaxWidth(0.81f),
-//            text = inputDataState.emailError,
-//            fontSize = 14.sp,
-//            color = MaterialTheme.colorScheme.error,
-//            textAlign = TextAlign.End
-//        )
-//    }
+        MaterialDialog(
+            dialogState = dateDialogState,
+            buttons = {
+                positiveButton(
+                    text = "Ok",
+                    onClick = {
+                        viewModel.inputDataEvent(SingUpFormEvent.BirthdayChanged(if (formattedDate == dateNow)"" else formattedDate))
+
+                    },
+                    textStyle = TextStyle(
+                        color = BlueApp
+                    )
+                )
+                negativeButton(
+                    text = "Отмена",
+                    textStyle = TextStyle(
+                        color = BlueApp
+                    )
+                )
+            }
+        ) {
+            datepicker(
+                initialDate = LocalDate.now(),
+                title = "Выберете дату рождения",
+                colors = DatePickerDefaults.colors(
+                    headerBackgroundColor = BlueApp,
+                    dateActiveBackgroundColor = BlueApp,
+                    dateActiveTextColor = WhiteApp,
+                ),
+            ) {
+                pickedDate = it
+            }
+        }
+
+        if (pressedState.value is PressInteraction.Release)
+        {
+            dateDialogState.show()
+            source.tryEmit(PressInteraction.Cancel(PressInteraction.Press(Offset.Zero)))
+        }
+
+        if (inputDataState.birthdayError != null){
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.86f),
+                text = inputDataState.birthdayError,
+                fontSize =14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
+        }
+        Spacer(modifier = Modifier.height(14.dp))
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(0.86f),
+            horizontalArrangement = Arrangement.Start,
+        ) {
+            Text(
+                text = "Статус",
+                fontSize = 14.sp,
+                color = SecondaryTextApp
+            )
+            Text(
+                text = " *",
+                color = RedErrorApp,
+            )
+        }
+        Spacer(modifier = Modifier.height(6.dp))
+        ExposedDropdownMenuBox(
+            expanded = statusDropDown,
+            onExpandedChange = {statusDropDown = !statusDropDown}
+        ) {
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth(0.90f)
+                    .menuAnchor(),
+                readOnly = true,
+                trailingIcon = {
+                    Icon(
+                        modifier = Modifier.rotate(
+                            if (statusDropDown)
+                                180f
+                            else
+                                0f
+                        ),
+                        painter = painterResource(id = R.drawable.bottom_arrow),
+                        contentDescription = "bottomArrow",
+                        tint = BlueApp
+                    )
+                },
+                shape = RoundedCornerShape(13.dp),
+                value = selectedStatusItem,
+                onValueChange = {
+                },
+                isError = inputDataState.statusError != null,
+                placeholder = {
+                    Text(
+                        text = "Не выбрано",
+                        fontSize = 18.sp,
+                        lineHeight = 22.sp,
+                        fontWeight = FontWeight(200),
+                        color = BlackApp,
+                    )
+                },
+                singleLine = true,
+                textStyle = TextStyle(fontSize = 16.sp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = BlueApp,
+                )
+            )
+            DropdownMenu(
+                modifier = Modifier
+                    .exposedDropdownSize()
+                    .background(WhiteApp),
+                offset = DpOffset(0.dp, 6.dp),
+                expanded = statusDropDown,
+                onDismissRequest = { statusDropDown = false }
+            ) {
+                listStatus.forEach { selectStatus ->
+                    DropdownMenuItem(
+                        modifier = Modifier
+                            .background(WhiteApp),
+                        text = { Text(text = selectStatus) },
+                        onClick = {
+                            selectedStatusItem = selectStatus
+                            viewModel.inputDataEvent(SingUpFormEvent.StatusChanged(selectedStatusItem))
+                            statusDropDown = false
+                        },
+                    )
+                }
+            }
+        }
+
+        if (inputDataState.statusError != null){
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.86f),
+                text = inputDataState.statusError,
+                fontSize =14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
+        }
+        Spacer(modifier = Modifier.height(24.dp))
+        NextButton(viewModel)
+        Spacer(modifier = Modifier.height(24.dp))
+
+    }
 }
 
 @Composable
