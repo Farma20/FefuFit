@@ -45,6 +45,8 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreensRoute
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
 import com.example.fefufit.Presentation.theme.BlackApp
@@ -65,6 +67,8 @@ import java.time.format.DateTimeFormatter
 fun SingUpFieldsFirst(
     viewModel: SingUpScreenViewModel,
 ) {
+    viewModel.pageState = InputFieldsStates.FirstInputFields
+
     val inputDataState = viewModel.inputDataState
     val scrollState = rememberScrollState()
 
@@ -540,7 +544,7 @@ private fun NextButton(viewModel: SingUpScreenViewModel){
         ),
         onClick = {
 //            viewModel.inputDataEvent(SingUpFormEvent.Submit)
-            viewModel.inputFieldsController.goToSecondFields()
+            viewModel.inputFieldsNavController!!.navigate(SingUpFieldsScreensRoute.SingUpFieldsSecond.route)
         }
     ) {
         Text(

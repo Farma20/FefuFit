@@ -33,10 +33,11 @@ class SingUpScreenViewModel(
 ): ViewModel() {
 
     //pageStateVariables
-    var inputFieldsController: NavController? = null
-    var inputFieldsState by mutableStateOf<InputFieldsStates>(InputFieldsStates.FirstInputFields)
+    var inputFieldsNavController: NavController? = null
+    var pageState by mutableStateOf<InputFieldsStates>(InputFieldsStates.FirstInputFields)
+//    val pageState get() = _pageState
     fun getFieldsNavController(navController: NavController){
-        inputFieldsController = navController
+        inputFieldsNavController = navController
     }
 
 
@@ -119,4 +120,14 @@ class SingUpScreenViewModel(
         object Success:ValidationEvent()
     }
 
+//    fun setPageState(){
+//        when (inputFieldsNavController!!.currentBackStackEntry!!.destination.route){
+//            SingUpFieldsScreensRoute.SingUpFieldsFirst.route ->{
+//                _pageState = InputFieldsStates.FirstInputFields
+//            }
+//            SingUpFieldsScreensRoute.SingUpFieldsFirst.route->{
+//                _pageState = InputFieldsStates.SecondInputFields
+//            }
+//        }
+//    }
 }

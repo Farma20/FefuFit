@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInFormEvent
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
 import com.example.fefufit.Presentation.theme.BlueApp
@@ -49,6 +50,7 @@ import com.example.fefufit.Presentation.theme.SecondaryTextApp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
+    viewModel.pageState = InputFieldsStates.SecondInputFields
 
     val scrollState = rememberScrollState()
 
