@@ -50,7 +50,6 @@ fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
         systemUiController.setNavigationBarColor(color = barBackground)
     }
 
-    val scrollState = rememberScrollState()
     val context = LocalContext.current
     val snackBarHostState = remember { SnackbarHostState() }
 
@@ -93,14 +92,9 @@ fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
                     textAlign = TextAlign.Center,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(scrollState),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    SingUpFieldsScreens(viewModel)
-                }
+
+                SingUpFieldsScreens(viewModel)
+
             }
         }
     }
