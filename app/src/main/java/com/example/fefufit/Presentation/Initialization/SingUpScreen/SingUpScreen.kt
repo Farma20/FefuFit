@@ -1,6 +1,7 @@
 package com.example.fefufit.Presentation.Initialization.SingUpScreen
 
 import android.annotation.SuppressLint
+import android.graphics.Paint.Style
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -55,6 +56,24 @@ fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
     val context = LocalContext.current
     val snackBarHostState = remember { SnackbarHostState() }
 
+    //page variables
+    var labelText by remember { mutableStateOf("Личные данные") }
+    var circlePagerColor by remember { mutableStateOf(Color.Transparent) }
+    var circlePagerTextColor by remember { mutableStateOf(BlueApp) }
+
+    when(viewModel.pageState){
+        InputFieldsStates.FirstInputFields -> {
+            labelText = "Личные данные"
+            circlePagerColor = Color.Transparent
+            circlePagerTextColor = BlueApp
+        }
+        InputFieldsStates.SecondInputFields -> {
+            labelText = "Учетные данные"
+            circlePagerColor = BlueApp
+            circlePagerTextColor = WhiteApp
+        }
+    }
+
     LaunchedEffect(key1 = context){
         viewModel.validationEvents.collect{event ->
             when(event){
@@ -84,13 +103,10 @@ fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
-                RegistrationPager(Modifier)
+                RegistrationPager(circlePagerColor, circlePagerTextColor)
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = when(viewModel.pageState){
-                        InputFieldsStates.FirstInputFields -> "Личные данные"
-                        InputFieldsStates.SecondInputFields -> "Учетные данные"
-                    },
+                    text = labelText,
                     fontSize = 22.sp,
                     fontWeight = FontWeight(600),
                     color = BlackApp,
@@ -135,10 +151,11 @@ private fun UppBar(modifier: Modifier){
 }
 
 @Composable
-private fun RegistrationPager(modifier: Modifier){
-    Row(
-        modifier = modifier
-    ) {
+private fun RegistrationPager(
+    circlePagerColor: Color,
+    circlePagerTextColor: Color
+){
+    Row() {
         Box(
             modifier = Modifier
                 .border(1.dp, BlueApp, CircleShape)
@@ -159,12 +176,12 @@ private fun RegistrationPager(modifier: Modifier){
             modifier = Modifier
                 .border(1.dp, BlueApp, CircleShape)
                 .size(32.dp)
-                .background(Color.Transparent, CircleShape),
+                .background(circlePagerColor, CircleShape),
             contentAlignment = Alignment.Center
         ){
             Text(
                 text = "2",
-                color = BlueApp,
+                color = circlePagerTextColor,
                 fontSize = 16.sp,
                 fontWeight = FontWeight(400),
                 lineHeight = 22.sp,
