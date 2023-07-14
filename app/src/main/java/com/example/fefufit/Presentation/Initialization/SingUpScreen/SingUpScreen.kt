@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreens
 import com.example.fefufit.Presentation.theme.BlackApp
 import com.example.fefufit.Presentation.theme.BlueApp
@@ -85,7 +86,10 @@ fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
                 RegistrationPager(Modifier)
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = "Личные данные",
+                    text = when(viewModel.inputFieldsState){
+                        InputFieldsStates.FirstInputFields -> "Личные данные"
+                        InputFieldsStates.SecondInputFields -> "Учетные данные"
+                    },
                     fontSize = 22.sp,
                     fontWeight = FontWeight(600),
                     color = BlackApp,

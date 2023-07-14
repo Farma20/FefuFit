@@ -15,6 +15,7 @@ import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.V
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateStatusUseCase
 import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInFormEvent
 import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreensRoute
 import com.example.fefufit.Utils.Resource
 import kotlinx.coroutines.channels.Channel
@@ -32,15 +33,14 @@ class SingUpScreenViewModel(
 ): ViewModel() {
 
     //pageStateVariables
-    var inputFieldsController: InputFieldsController? = null
-
+    var inputFieldsController: NavController? = null
+    var inputFieldsState by mutableStateOf<InputFieldsStates>(InputFieldsStates.FirstInputFields)
     fun getFieldsNavController(navController: NavController){
-        inputFieldsController = InputFieldsController(navController)
+        inputFieldsController = navController
     }
 
 
     var inputDataState by mutableStateOf(SingUpFormState())
-    var errorData by mutableStateOf("")
 
     //a thread for sending notifications to the UI thread
     private val validationEventChannel = Channel<SingUpScreenViewModel.ValidationEvent>()
@@ -115,21 +115,8 @@ class SingUpScreenViewModel(
         }
     }
 
-
     sealed class ValidationEvent{
         object Success:ValidationEvent()
     }
 
-
-    inner class InputFieldsController(
-        private var fieldsNavController: NavController
-    ){
-        fun goToFirstFields(){
-            fieldsNavController.navigate(SingUpFieldsScreensRoute.SingUpFieldsFirst.route)
-        }
-
-        fun goToSecondFields(){
-            fieldsNavController.navigate(SingUpFieldsScreensRoute.SingUpFieldsSecond.route)
-        }
-    }
 }

@@ -539,7 +539,8 @@ private fun NextButton(viewModel: SingUpScreenViewModel){
             containerColor = BlueApp
         ),
         onClick = {
-            viewModel.inputDataEvent(SingUpFormEvent.Submit)
+//            viewModel.inputDataEvent(SingUpFormEvent.Submit)
+            viewModel.inputFieldsController.goToSecondFields()
         }
     ) {
         Text(
