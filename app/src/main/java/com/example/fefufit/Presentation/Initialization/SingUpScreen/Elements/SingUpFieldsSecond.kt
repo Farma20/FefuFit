@@ -281,6 +281,31 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
 //                color = MaterialTheme.colors.error
 //            )
 //        }
+        Spacer(modifier = Modifier.height(40.dp))
+        RegistrationButton(viewModel = viewModel)
+        Spacer(modifier = Modifier.height(12.dp))
     }
 }
 
+@Composable
+private fun RegistrationButton(viewModel: SingUpScreenViewModel){
+    Button(
+        modifier = Modifier
+            .fillMaxWidth(0.90f)
+            .height(58.dp)
+        ,
+        shape = RoundedCornerShape(13.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = BlueApp
+        ),
+        onClick = {
+            viewModel.inputDataEvent(SingUpFormEvent.Submit)
+        }
+    ) {
+        Text(
+            text = "Зарегистрироваться",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Normal
+        )
+    }
+}
