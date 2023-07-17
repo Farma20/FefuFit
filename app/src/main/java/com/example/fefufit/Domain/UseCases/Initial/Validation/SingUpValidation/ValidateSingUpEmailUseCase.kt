@@ -3,7 +3,7 @@ package com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation
 import android.util.Patterns
 import com.example.fefufit.Domain.Models.ValidationModels.ValidationResult
 
-class ValidateEmailUseCase {
+class ValidateSingUpEmailUseCase {
     operator fun invoke(email: String): ValidationResult {
         if (email.isBlank()) {
             return ValidationResult(
