@@ -43,8 +43,10 @@ class SingUpScreenViewModel(
     private val validatePasswordUseCase: ValidateSingUpPasswordUseCase = ValidateSingUpPasswordUseCase(),
     private val validateRepeatPasswordUseCase: ValidateRepeatPasswordUseCase = ValidateRepeatPasswordUseCase(),
     private val validateTermsUseCase: ValidateTermsUseCase = ValidateTermsUseCase(),
-    private val singUpUseCase: SingUpUseCase
 ): ViewModel() {
+
+    lateinit var singUpUseCase: SingUpUseCase
+
     //pageStateVariables
     var inputFieldsNavController: NavController? = null
     var pageState by mutableStateOf<InputFieldsStates>(InputFieldsStates.FirstInputFields)
@@ -202,7 +204,7 @@ class SingUpScreenViewModel(
         )
 
         viewModelScope.launch {
-            validationEventChannel.send(ValidationEvent.SuccessSecond)
+            singUpData(inputDataState, inputSecondDataState)
         }
     }
     //_________________________________________________________
