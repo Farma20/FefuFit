@@ -16,6 +16,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -29,12 +30,14 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
-import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpSecondFormEvent
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.RedErrorApp
 import com.example.fefufit.Presentation.theme.SecondaryTextApp
@@ -44,6 +47,7 @@ import com.example.fefufit.Presentation.theme.SecondaryTextApp
 fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
     viewModel.pageState = InputFieldsStates.SecondInputFields
 
+    val inputDataState = viewModel.inputSecondDataState
     val scrollState = rememberScrollState()
 
     Column(
@@ -71,10 +75,10 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             modifier = Modifier
                 .fillMaxWidth(0.90f),
             shape = RoundedCornerShape(13.dp),
-            value = "",
-            isError = false,
+            value = inputDataState.phoneNumber,
+            isError = inputDataState.phoneNumberError != null,
             onValueChange = {
-                viewModel.inputDataEvent(SingUpFirstFormEvent.SecondNameChanged(it))
+                viewModel.inputSecondDataEvent(SingUpSecondFormEvent.PhoneNumberChanged(it))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Phone
@@ -86,16 +90,16 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             )
         )
 
-//        if (inputDataState.secondNameError != null) {
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth(0.86f),
-//                text = inputDataState.secondNameError,
-//                fontSize = 14.sp,
-//                color = MaterialTheme.colorScheme.error,
-//                textAlign = TextAlign.End
-//            )
-//        }
+        if (inputDataState.phoneNumberError != null) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.86f),
+                text = inputDataState.phoneNumberError,
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
+        }
         Spacer(modifier = Modifier.height(14.dp))
 
 
@@ -118,10 +122,10 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             modifier = Modifier
                 .fillMaxWidth(0.90f),
             shape = RoundedCornerShape(13.dp),
-            value = "",
-            isError = false,
+            value = inputDataState.email,
+            isError = inputDataState.emailError != null,
             onValueChange = {
-                viewModel.inputDataEvent(SingUpFirstFormEvent.FirstNameChanged(it))
+                viewModel.inputSecondDataEvent(SingUpSecondFormEvent.EmailChanged(it))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email
@@ -133,16 +137,16 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             )
         )
 
-//        if (inputDataState.firstNameError != null) {
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth(0.86f),
-//                text = inputDataState.firstNameError,
-//                fontSize = 14.sp,
-//                color = MaterialTheme.colorScheme.error,
-//                textAlign = TextAlign.End
-//            )
-//        }
+        if (inputDataState.emailError != null) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.86f),
+                text = inputDataState.emailError,
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
+        }
         Spacer(modifier = Modifier.height(14.dp))
         Row(
             modifier = Modifier.fillMaxWidth(0.86f),
@@ -163,9 +167,10 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             modifier = Modifier
                 .fillMaxWidth(0.90f),
             shape = RoundedCornerShape(13.dp),
-            value = "",
+            value = inputDataState.password,
+            isError = inputDataState.passwordError != null,
             onValueChange = {
-//                viewModel.inputDataEvent(SingInFormEvent.PasswordChanged(it))
+                viewModel.inputSecondDataEvent(SingUpSecondFormEvent.PasswordChanged(it))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password
@@ -177,16 +182,16 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
                 focusedBorderColor = BlueApp
             )
         )
-//        if (inputDataState.passwordError != null){
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth(0.81f),
-//                text = inputDataState.passwordError,
-//                fontSize =14.sp,
-//                color = MaterialTheme.colorScheme.error,
-//                textAlign = TextAlign.End
-//            )
-//        }
+        if (inputDataState.passwordError != null){
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.81f),
+                text = inputDataState.passwordError,
+                fontSize =14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
+        }
         Spacer(modifier = Modifier.height(14.dp))
 
         Row(
@@ -208,9 +213,10 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             modifier = Modifier
                 .fillMaxWidth(0.90f),
             shape = RoundedCornerShape(13.dp),
-            value = "",
+            value = inputDataState.repeatPassword,
+            isError = inputDataState.repeatPasswordError != null,
             onValueChange = {
-//                viewModel.inputDataEvent(SingInFormEvent.PasswordChanged(it))
+                viewModel.inputSecondDataEvent(SingUpSecondFormEvent.RepeatPasswordChanged(it))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password
@@ -222,16 +228,16 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
                 focusedBorderColor = BlueApp
             )
         )
-//        if (inputDataState.passwordError != null){
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth(0.81f),
-//                text = inputDataState.passwordError,
-//                fontSize =14.sp,
-//                color = MaterialTheme.colorScheme.error,
-//                textAlign = TextAlign.End
-//            )
-//        }
+        if (inputDataState.repeatPasswordError != null){
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.81f),
+                text = inputDataState.repeatPasswordError,
+                fontSize =14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
+        }
         Spacer(modifier = Modifier.height(6.dp))
 
         Row(
@@ -245,9 +251,9 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
                     uncheckedColor = BlueApp,
                     checkedColor = BlueApp
                 ),
-                checked = false,
+                checked = inputDataState.terms,
                 onCheckedChange = {
-//                    viewModel.onEvent(RegistrationFormEvent.TermsChanged(!state.terms))
+                    viewModel.inputSecondDataEvent(SingUpSecondFormEvent.TermsChanged(it))
                 },
             )
 
@@ -266,15 +272,16 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
                 )
             }
         }
-//        if(state.termsError != null){
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(start = 18.dp),
-//                text = state.termsError!!,
-//                color = MaterialTheme.colors.error
-//            )
-//        }
+        if(inputDataState.termsError != null){
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.81f),
+                text = inputDataState.termsError,
+                fontSize =14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
+        }
         Spacer(modifier = Modifier.height(40.dp))
         RegistrationButton(viewModel = viewModel)
         Spacer(modifier = Modifier.height(12.dp))
@@ -293,7 +300,7 @@ private fun RegistrationButton(viewModel: SingUpScreenViewModel){
             containerColor = BlueApp
         ),
         onClick = {
-            viewModel.inputDataEvent(SingUpFirstFormEvent.Submit)
+            viewModel.inputSecondDataEvent(SingUpSecondFormEvent.Submit)
         }
     ) {
         Text(

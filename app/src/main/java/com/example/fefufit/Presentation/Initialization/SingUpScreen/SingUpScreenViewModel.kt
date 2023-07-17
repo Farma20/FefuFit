@@ -49,7 +49,7 @@ class SingUpScreenViewModel(
     var inputDataState by mutableStateOf(SingUpFirstFormState())
 
     //a thread for sending notifications to the UI thread
-    private val validationEventChannel = Channel<ValidationFirstEvent>()
+    private val validationEventChannel = Channel<ValidationEvent>()
     val validationFirstEvents = validationEventChannel.receiveAsFlow()
 
     //listener ui input events
@@ -117,21 +117,16 @@ class SingUpScreenViewModel(
         )
 
         viewModelScope.launch {
-            validationEventChannel.send(SingUpScreenViewModel.ValidationFirstEvent.Success)
+            validationEventChannel.send(ValidationEvent.SuccessFirst)
         }
     }
 
-    sealed class ValidationFirstEvent{
-        object Success:ValidationFirstEvent()
-    }
     //_________________________________________________________
 
 
     //second registration page validation
     var inputSecondDataState by mutableStateOf(SingUpSecondFormState())
 
-    private val validationSecondEventChannel = Channel<ValidationSecondEvent>()
-    val validationSecondEvents = validationSecondEventChannel.receiveAsFlow()
 
     fun inputSecondDataEvent(event:SingUpSecondFormEvent){
         when(event){
@@ -187,21 +182,25 @@ class SingUpScreenViewModel(
             return
         }
 
-        inputDataState = inputDataState.copy(
-            firstNameError = null,
-            secondNameError = null,
-            genderError = null,
-            birthdayError = null,
-            statusError = null
+        println("_______yes__________")
+
+        inputSecondDataState = inputSecondDataState.copy(
+            phoneNumberError = null,
+            emailError = null,
+            passwordError = null,
+            repeatPasswordError = null,
+            termsError = null
         )
 
         viewModelScope.launch {
-            validationSecondEventChannel.send(ValidationSecondEvent.Success)
+            validationEventChannel.send(ValidationEvent.SuccessSecond)
         }
     }
-
-    sealed class ValidationSecondEvent{
-        object Success:ValidationSecondEvent()
-    }
     //_________________________________________________________
+
+
+    sealed class ValidationEvent{
+        object SuccessFirst:ValidationEvent()
+        object SuccessSecond:ValidationEvent()
+    }
 }
