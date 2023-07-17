@@ -6,8 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
+import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpFirstFormState
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpSecondFormState
+import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateBirthdayUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateFirstNameUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateGenderUseCase
@@ -18,10 +21,14 @@ import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.V
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateSingUpPasswordUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateStatusUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateTermsUseCase
+import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpSecondFormEvent
+import com.example.fefufit.Utils.Resource
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -36,6 +43,7 @@ class SingUpScreenViewModel(
     private val validatePasswordUseCase: ValidateSingUpPasswordUseCase = ValidateSingUpPasswordUseCase(),
     private val validateRepeatPasswordUseCase: ValidateRepeatPasswordUseCase = ValidateRepeatPasswordUseCase(),
     private val validateTermsUseCase: ValidateTermsUseCase = ValidateTermsUseCase(),
+    private val singUpUseCase: SingUpUseCase
 ): ViewModel() {
     //pageStateVariables
     var inputFieldsNavController: NavController? = null
@@ -47,6 +55,7 @@ class SingUpScreenViewModel(
 
     //first registration page validation
     var inputDataState by mutableStateOf(SingUpFirstFormState())
+    var errorData by mutableStateOf("")
 
     //a thread for sending notifications to the UI thread
     private val validationEventChannel = Channel<ValidationEvent>()
@@ -198,9 +207,40 @@ class SingUpScreenViewModel(
     }
     //_________________________________________________________
 
+    private fun singUpData(
+        inputDataState:SingUpFirstFormState,
+        inputSecondDataState: SingUpSecondFormState
+    ){
+        singUpUseCase(SingUpDataModel(
+            birthdate = inputDataState.birthday,
+            email = inputSecondDataState.email,
+            firstName = inputDataState.firstName,
+            gender = inputDataState.gender,
+            password = inputSecondDataState.password,
+            phoneNumber = inputSecondDataState.phoneNumber,
+            secondName = inputDataState.secondName,
+            status = inputDataState.status,
+            thirdName = inputDataState.middleName
+        )).onEach { result->
+            when(result){
+                is Resource.Success->{
+                    validationEventChannel.send(ValidationEvent.SuccessSecond)
+                }
+                is Resource.Error->{
+                    errorData = result.message!!
+                    validationEventChannel.send(ValidationEvent.Error)
+                }
+                is Resource.Loading->{
+
+                }
+            }
+
+        }.launchIn(viewModelScope)
+    }
 
     sealed class ValidationEvent{
         object SuccessFirst:ValidationEvent()
         object SuccessSecond:ValidationEvent()
+        object Error:ValidationEvent()
     }
 }

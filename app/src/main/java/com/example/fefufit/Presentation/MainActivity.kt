@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.material3.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
+import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import com.example.fefufit.FefuFitApp
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreen
@@ -19,6 +20,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var singInUseCase: SingInUseCase
+
+    @Inject
+    lateinit var singUpUseCase: SingUpUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +41,7 @@ class MainActivity : ComponentActivity() {
                 Surface {
                     //InitializationNavigation
 //                    InitializationScreens(singInUseCase)
-                    SingUpScreen()
+                    SingUpScreen(singUpUseCase)
                 }
             }
         }

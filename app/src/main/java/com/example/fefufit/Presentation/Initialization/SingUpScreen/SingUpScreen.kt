@@ -29,6 +29,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
+import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreens
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreensRoute
@@ -41,7 +43,9 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
+fun SingUpScreen(singUpUseCase:SingUpUseCase) {
+
+    val viewModel: SingUpScreenViewModel = SingUpScreenViewModel(singUpUseCase = singUpUseCase)
 
     //painted system controllers
     val systemUiController = rememberSystemUiController()
