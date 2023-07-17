@@ -75,9 +75,9 @@ fun SingUpScreen(viewModel: SingUpScreenViewModel = viewModel()) {
     }
 
     LaunchedEffect(key1 = context){
-        viewModel.validationEvents.collect{event ->
+        viewModel.validationFirstEvents.collect{event ->
             when(event){
-                is SingUpScreenViewModel.ValidationEvent.Success ->{
+                is SingUpScreenViewModel.ValidationFirstEvent.Success ->{
                     snackBarHostState.showSnackbar(
                         message = "Success"
                     )

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpFirstFormState
+import com.example.fefufit.Domain.Models.ValidationModels.SingUpSecondFormState
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateBirthdayUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateFirstNameUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateGenderUseCase
@@ -19,6 +20,7 @@ import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.V
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateTermsUseCase
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpSecondFormEvent
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -35,21 +37,20 @@ class SingUpScreenViewModel(
     private val validateRepeatPasswordUseCase: ValidateRepeatPasswordUseCase = ValidateRepeatPasswordUseCase(),
     private val validateTermsUseCase: ValidateTermsUseCase = ValidateTermsUseCase(),
 ): ViewModel() {
-
     //pageStateVariables
     var inputFieldsNavController: NavController? = null
     var pageState by mutableStateOf<InputFieldsStates>(InputFieldsStates.FirstInputFields)
-//    val pageState get() = _pageState
+
     fun getFieldsNavController(navController: NavController){
         inputFieldsNavController = navController
     }
 
-
+    //first registration page validation
     var inputDataState by mutableStateOf(SingUpFirstFormState())
 
     //a thread for sending notifications to the UI thread
-    private val validationEventChannel = Channel<SingUpScreenViewModel.ValidationEvent>()
-    val validationEvents = validationEventChannel.receiveAsFlow()
+    private val validationEventChannel = Channel<ValidationFirstEvent>()
+    val validationFirstEvents = validationEventChannel.receiveAsFlow()
 
     //listener ui input events
     fun inputDataEvent(event: SingUpFirstFormEvent){
@@ -116,22 +117,88 @@ class SingUpScreenViewModel(
         )
 
         viewModelScope.launch {
-            validationEventChannel.send(SingUpScreenViewModel.ValidationEvent.Success)
+            validationEventChannel.send(SingUpScreenViewModel.ValidationFirstEvent.Success)
         }
     }
 
-    sealed class ValidationEvent{
-        object Success:ValidationEvent()
+    sealed class ValidationFirstEvent{
+        object Success:ValidationFirstEvent()
+    }
+    //_________________________________________________________
+
+
+    //second registration page validation
+    var inputSecondDataState by mutableStateOf(SingUpSecondFormState())
+
+    private val validationSecondEventChannel = Channel<ValidationSecondEvent>()
+    val validationSecondEvents = validationSecondEventChannel.receiveAsFlow()
+
+    fun inputSecondDataEvent(event:SingUpSecondFormEvent){
+        when(event){
+            is SingUpSecondFormEvent.PhoneNumberChanged ->{
+                inputSecondDataState = inputSecondDataState.copy(phoneNumber = event.phoneNumber)
+            }
+            is SingUpSecondFormEvent.EmailChanged->{
+                inputSecondDataState = inputSecondDataState.copy(email = event.email)
+            }
+            is SingUpSecondFormEvent.PasswordChanged->{
+                inputSecondDataState = inputSecondDataState.copy(password = event.password)
+            }
+            is SingUpSecondFormEvent.RepeatPasswordChanged ->{
+                inputSecondDataState = inputSecondDataState.copy(repeatPassword = event.repeatPassword)
+            }
+            is SingUpSecondFormEvent.TermsChanged ->{
+                inputSecondDataState = inputSecondDataState.copy(terms = event.terms)
+            }
+            is SingUpSecondFormEvent.Submit ->{
+                submitSecondInputData()
+            }
+        }
     }
 
-//    fun setPageState(){
-//        when (inputFieldsNavController!!.currentBackStackEntry!!.destination.route){
-//            SingUpFieldsScreensRoute.SingUpFieldsFirst.route ->{
-//                _pageState = InputFieldsStates.FirstInputFields
-//            }
-//            SingUpFieldsScreensRoute.SingUpFieldsFirst.route->{
-//                _pageState = InputFieldsStates.SecondInputFields
-//            }
-//        }
-//    }
+    private fun submitSecondInputData() {
+        val firstNameResult = validateFirstNameUseCase(inputDataState.firstName)
+        val secondNameResult = validateSecondNameUseCase(inputDataState.secondName)
+        val genderResult = validateGenderUseCase(inputDataState.gender)
+        val birthdayResult = validateBirthdayUseCase(inputDataState.birthday)
+        val statusResult = validateStatusUseCase(inputDataState.status)
+
+
+        //find validate errors
+        val hasError = listOf(
+            firstNameResult,
+            secondNameResult,
+            genderResult,
+            birthdayResult,
+            statusResult
+        ).any{ !it.success}
+
+        if (hasError){
+            inputDataState = inputDataState.copy(
+                firstNameError = firstNameResult.errorMessage,
+                secondNameError = secondNameResult.errorMessage,
+                genderError = genderResult.errorMessage,
+                birthdayError = birthdayResult.errorMessage,
+                statusError = statusResult.errorMessage,
+            )
+            return
+        }
+
+        inputDataState = inputDataState.copy(
+            firstNameError = null,
+            secondNameError = null,
+            genderError = null,
+            birthdayError = null,
+            statusError = null
+        )
+
+        viewModelScope.launch {
+            validationEventChannel.send(SingUpScreenViewModel.ValidationFirstEvent.Success)
+        }
+    }
+
+    sealed class ValidationSecondEvent{
+        object Success:ValidationSecondEvent()
+    }
+    //_________________________________________________________
 }
