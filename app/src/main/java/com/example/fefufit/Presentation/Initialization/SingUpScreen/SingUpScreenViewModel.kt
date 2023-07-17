@@ -10,8 +10,13 @@ import com.example.fefufit.Domain.Models.ValidationModels.SingUpFirstFormState
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateBirthdayUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateFirstNameUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateGenderUseCase
+import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidatePhoneNumberUseCase
+import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateRepeatPasswordUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateSecondNameUseCase
+import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateSingUpEmailUseCase
+import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateSingUpPasswordUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateStatusUseCase
+import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateTermsUseCase
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import kotlinx.coroutines.channels.Channel
@@ -23,7 +28,12 @@ class SingUpScreenViewModel(
     private val validateFirstNameUseCase: ValidateFirstNameUseCase = ValidateFirstNameUseCase(),
     private val validateGenderUseCase: ValidateGenderUseCase = ValidateGenderUseCase(),
     private val validateBirthdayUseCase: ValidateBirthdayUseCase = ValidateBirthdayUseCase(),
-    private val validateStatusUseCase: ValidateStatusUseCase = ValidateStatusUseCase()
+    private val validateStatusUseCase: ValidateStatusUseCase = ValidateStatusUseCase(),
+    private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase = ValidatePhoneNumberUseCase(),
+    private val validateEmailUseCase: ValidateSingUpEmailUseCase = ValidateSingUpEmailUseCase(),
+    private val validatePasswordUseCase: ValidateSingUpPasswordUseCase = ValidateSingUpPasswordUseCase(),
+    private val validateRepeatPasswordUseCase: ValidateRepeatPasswordUseCase = ValidateRepeatPasswordUseCase(),
+    private val validateTermsUseCase: ValidateTermsUseCase = ValidateTermsUseCase(),
 ): ViewModel() {
 
     //pageStateVariables
