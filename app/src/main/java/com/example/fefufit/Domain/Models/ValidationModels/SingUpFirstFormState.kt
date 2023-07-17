@@ -1,6 +1,6 @@
 package com.example.fefufit.Domain.Models.ValidationModels
 
-data class SingUpFormState(
+data class SingUpFirstFormState(
     val secondName:String = "",
     val secondNameError:String? = null,
     val firstName:String = "",

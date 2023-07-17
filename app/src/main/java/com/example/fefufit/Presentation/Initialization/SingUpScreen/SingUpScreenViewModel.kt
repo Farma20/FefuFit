@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.fefufit.Domain.Models.ValidationModels.SingUpFormState
+import com.example.fefufit.Domain.Models.ValidationModels.SingUpFirstFormState
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateBirthdayUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateFirstNameUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateGenderUseCase
@@ -35,7 +35,7 @@ class SingUpScreenViewModel(
     }
 
 
-    var inputDataState by mutableStateOf(SingUpFormState())
+    var inputDataState by mutableStateOf(SingUpFirstFormState())
 
     //a thread for sending notifications to the UI thread
     private val validationEventChannel = Channel<SingUpScreenViewModel.ValidationEvent>()
