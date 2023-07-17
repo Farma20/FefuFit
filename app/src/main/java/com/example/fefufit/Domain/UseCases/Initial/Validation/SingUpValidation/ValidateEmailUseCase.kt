@@ -3,18 +3,18 @@ package com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation
 import android.util.Patterns
 import com.example.fefufit.Domain.Models.ValidationModels.ValidationResult
 
-class ValidatePhoneNumberUseCase {
-    operator fun invoke(phoneNumber: String): ValidationResult {
-        if (phoneNumber.isBlank()) {
+class ValidateEmailUseCase {
+    operator fun invoke(email: String): ValidationResult {
+        if (email.isBlank()) {
             return ValidationResult(
                 success = false,
                 errorMessage = "Поле не должно быть пустым"
             )
         }
-        if(!(phoneNumber.length == 12 && phoneNumber[0] == '+')&&(phoneNumber.length != 11)){
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             return ValidationResult(
                 success = false,
-                errorMessage = "Номер телефона должен состоять из 11 символов, не учитывая символ '+'"
+                errorMessage = "Неверная электронная почта"
             )
         }
         return ValidationResult(
