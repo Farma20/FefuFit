@@ -157,29 +157,32 @@ class SingUpScreenViewModel(
     }
 
     private fun submitSecondInputData() {
-        val firstNameResult = validateFirstNameUseCase(inputDataState.firstName)
-        val secondNameResult = validateSecondNameUseCase(inputDataState.secondName)
-        val genderResult = validateGenderUseCase(inputDataState.gender)
-        val birthdayResult = validateBirthdayUseCase(inputDataState.birthday)
-        val statusResult = validateStatusUseCase(inputDataState.status)
+        val phoneNumberResult = validatePhoneNumberUseCase(inputSecondDataState.phoneNumber)
+        val emailResult = validateEmailUseCase(inputSecondDataState.email)
+        val passwordResult = validatePasswordUseCase(inputSecondDataState.password)
+        val repeatPassword = validateRepeatPasswordUseCase(
+            inputSecondDataState.password,
+            inputSecondDataState.repeatPassword
+        )
+        val termsResult = validateTermsUseCase(inputSecondDataState.terms)
 
 
         //find validate errors
         val hasError = listOf(
-            firstNameResult,
-            secondNameResult,
-            genderResult,
-            birthdayResult,
-            statusResult
+            phoneNumberResult,
+            emailResult,
+            passwordResult,
+            repeatPassword,
+            termsResult
         ).any{ !it.success}
 
         if (hasError){
-            inputDataState = inputDataState.copy(
-                firstNameError = firstNameResult.errorMessage,
-                secondNameError = secondNameResult.errorMessage,
-                genderError = genderResult.errorMessage,
-                birthdayError = birthdayResult.errorMessage,
-                statusError = statusResult.errorMessage,
+            inputSecondDataState = inputSecondDataState.copy(
+                phoneNumberError = phoneNumberResult.errorMessage,
+                emailError = emailResult.errorMessage,
+                passwordError = passwordResult.errorMessage,
+                repeatPasswordError = repeatPassword.errorMessage,
+                termsError = termsResult.errorMessage,
             )
             return
         }
@@ -193,7 +196,7 @@ class SingUpScreenViewModel(
         )
 
         viewModelScope.launch {
-            validationEventChannel.send(SingUpScreenViewModel.ValidationFirstEvent.Success)
+            validationSecondEventChannel.send(ValidationSecondEvent.Success)
         }
     }
 
