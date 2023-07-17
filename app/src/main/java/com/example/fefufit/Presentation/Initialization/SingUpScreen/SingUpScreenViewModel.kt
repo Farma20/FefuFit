@@ -6,21 +6,15 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpFormState
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateBirthdayUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateFirstNameUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateGenderUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateSecondNameUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateStatusUseCase
-import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInFormEvent
-import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
-import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreensRoute
-import com.example.fefufit.Utils.Resource
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -48,27 +42,27 @@ class SingUpScreenViewModel(
     val validationEvents = validationEventChannel.receiveAsFlow()
 
     //listener ui input events
-    fun inputDataEvent(event: SingUpFormEvent){
+    fun inputDataEvent(event: SingUpFirstFormEvent){
         when(event){
-            is SingUpFormEvent.SecondNameChanged ->{
+            is SingUpFirstFormEvent.SecondNameChanged ->{
                 inputDataState = inputDataState.copy(secondName = event.secondName)
             }
-            is SingUpFormEvent.FirstNameChanged->{
+            is SingUpFirstFormEvent.FirstNameChanged->{
                 inputDataState = inputDataState.copy(firstName = event.firstName)
             }
-            is SingUpFormEvent.MiddleNameChanged->{
+            is SingUpFirstFormEvent.MiddleNameChanged->{
                 inputDataState = inputDataState.copy(middleName = event.middleName)
             }
-            is SingUpFormEvent.GenderChanged ->{
+            is SingUpFirstFormEvent.GenderChanged ->{
                 inputDataState = inputDataState.copy(gender = event.gender)
             }
-            is SingUpFormEvent.BirthdayChanged ->{
+            is SingUpFirstFormEvent.BirthdayChanged ->{
                 inputDataState = inputDataState.copy(birthday = event.birthday)
             }
-            is SingUpFormEvent.StatusChanged ->{
+            is SingUpFirstFormEvent.StatusChanged ->{
                 inputDataState = inputDataState.copy(status = event.status)
             }
-            is SingUpFormEvent.Submit ->{
+            is SingUpFirstFormEvent.Submit ->{
                 submitInputData()
             }
         }

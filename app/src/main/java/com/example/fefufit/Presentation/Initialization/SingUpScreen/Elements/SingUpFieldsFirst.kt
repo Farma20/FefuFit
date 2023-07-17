@@ -44,10 +44,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreensRoute
-import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpFormEvent
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
 import com.example.fefufit.Presentation.theme.BlackApp
 import com.example.fefufit.Presentation.theme.BlueApp
@@ -132,7 +131,7 @@ fun SingUpFieldsFirst(
             value = inputDataState.secondName,
             isError = inputDataState.secondNameError != null,
             onValueChange = {
-                viewModel.inputDataEvent(SingUpFormEvent.SecondNameChanged(it))
+                viewModel.inputDataEvent(SingUpFirstFormEvent.SecondNameChanged(it))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text
@@ -179,7 +178,7 @@ fun SingUpFieldsFirst(
             value = inputDataState.firstName,
             isError = inputDataState.firstNameError != null,
             onValueChange = {
-                viewModel.inputDataEvent(SingUpFormEvent.FirstNameChanged(it))
+                viewModel.inputDataEvent(SingUpFirstFormEvent.FirstNameChanged(it))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text
@@ -222,7 +221,7 @@ fun SingUpFieldsFirst(
             shape = RoundedCornerShape(13.dp),
             value = inputDataState.middleName,
             onValueChange = {
-                viewModel.inputDataEvent(SingUpFormEvent.MiddleNameChanged(it))
+                viewModel.inputDataEvent(SingUpFirstFormEvent.MiddleNameChanged(it))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text
@@ -309,7 +308,7 @@ fun SingUpFieldsFirst(
                         text = { Text(text = selectedGender) },
                         onClick = {
                             selectedGenderItem = selectedGender
-                            viewModel.inputDataEvent(SingUpFormEvent.GenderChanged(selectedGenderItem))
+                            viewModel.inputDataEvent(SingUpFirstFormEvent.GenderChanged(selectedGenderItem))
                             genderDropDown = false
                         },
                     )
@@ -387,7 +386,7 @@ fun SingUpFieldsFirst(
                 positiveButton(
                     text = "Ok",
                     onClick = {
-                        viewModel.inputDataEvent(SingUpFormEvent.BirthdayChanged(if (formattedDate == dateNow)"" else formattedDate))
+                        viewModel.inputDataEvent(SingUpFirstFormEvent.BirthdayChanged(if (formattedDate == dateNow)"" else formattedDate))
 
                     },
                     textStyle = TextStyle(
@@ -506,7 +505,7 @@ fun SingUpFieldsFirst(
                         text = { Text(text = selectStatus) },
                         onClick = {
                             selectedStatusItem = selectStatus
-                            viewModel.inputDataEvent(SingUpFormEvent.StatusChanged(selectedStatusItem))
+                            viewModel.inputDataEvent(SingUpFirstFormEvent.StatusChanged(selectedStatusItem))
                             statusDropDown = false
                         },
                     )
