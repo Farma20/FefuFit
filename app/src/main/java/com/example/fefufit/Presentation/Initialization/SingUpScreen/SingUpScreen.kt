@@ -89,6 +89,11 @@ fun SingUpScreen(singUpUseCase:SingUpUseCase) {
                         message = "Success"
                     )
                 }
+                is SingUpScreenViewModel.ValidationEvent.Error ->{
+                    snackBarHostState.showSnackbar(
+                        message = viewModel.errorData
+                    )
+                }
             }
         }
     }
