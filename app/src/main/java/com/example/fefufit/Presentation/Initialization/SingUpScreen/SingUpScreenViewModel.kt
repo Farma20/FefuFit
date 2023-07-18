@@ -6,11 +6,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpFirstFormState
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpSecondFormState
-import com.example.fefufit.Domain.UseCases.Common.BirthdayDateToServerDateUseCase
 import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateBirthdayUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateFirstNameUseCase
@@ -22,7 +20,6 @@ import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.V
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateSingUpPasswordUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateStatusUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateTermsUseCase
-import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpSecondFormEvent

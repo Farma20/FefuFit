@@ -307,7 +307,8 @@ fun SingUpFieldsFirst(
                         text = { Text(text = selectedGender) },
                         onClick = {
                             selectedGenderItem = selectedGender
-                            viewModel.inputDataEvent(SingUpFirstFormEvent.GenderChanged(selectedGenderItem))
+                            val shortGenderItem = if (selectedGenderItem == "Мужчина")"m" else "f"
+                            viewModel.inputDataEvent(SingUpFirstFormEvent.GenderChanged(shortGenderItem))
                             genderDropDown = false
                         },
                     )
@@ -503,7 +504,12 @@ fun SingUpFieldsFirst(
                         text = { Text(text = selectStatus) },
                         onClick = {
                             selectedStatusItem = selectStatus
-                            viewModel.inputDataEvent(SingUpFirstFormEvent.StatusChanged(selectedStatusItem))
+                            val shortStatus = when(selectedStatusItem){
+                                "Студент"-> "student"
+                                "Гость"-> "guest"
+                                else -> "employee"
+                            }
+                            viewModel.inputDataEvent(SingUpFirstFormEvent.StatusChanged(shortStatus))
                             statusDropDown = false
                         },
                     )
