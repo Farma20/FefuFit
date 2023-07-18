@@ -3,6 +3,9 @@ package com.example.fefufit.Presentation.Initialization.SingInScreen
 import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +28,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,6 +37,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -45,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
+import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreensRoute
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.SecondaryTextApp
 import com.example.fefufit.Presentation.theme.WhiteApp
@@ -110,10 +116,10 @@ fun SingInScreen(navController: NavController, singInUseCase: SingInUseCase) {
                 )
                 Spacer(modifier = Modifier.height(76.dp))
                 InputForm(viewModel)
-                Spacer(modifier = Modifier.height(36.dp))
+                Spacer(modifier = Modifier.height(24.dp))
                 InputButton(viewModel)
-                Spacer(modifier = Modifier.height(60.dp))
-                SingUpButton()
+                Spacer(modifier = Modifier.height(50.dp))
+                SingUpButton(navController)
                 Spacer(modifier = Modifier.height(57.dp))
             }
         }
@@ -206,16 +212,20 @@ private fun InputForm(viewModel: SingInScreenViewModel){
             textAlign = TextAlign.End
         )
     }
-    Spacer(modifier = Modifier.height(14.dp))
+    Spacer(modifier = Modifier.height(4.dp))
     Row(
         modifier = Modifier.fillMaxWidth(0.85f),
         horizontalArrangement = Arrangement.End
     ) {
-        Text(
-            text = "Забыли пароль?",
-            fontSize = 16.sp,
-            color = BlueApp
-        )
+        TextButton(
+            onClick = {}
+        ) {
+            Text(
+                text = "Забыли пароль?",
+                fontSize = 16.sp,
+                color = BlueApp
+            )
+        }
     }
 }
 
@@ -243,16 +253,20 @@ private fun InputButton(viewModel: SingInScreenViewModel){
 }
 
 @Composable
-private fun SingUpButton(){
+private fun SingUpButton(navController:NavController){
     Text(
         text = "Нет аккаунта?",
         color = SecondaryTextApp,
-        fontSize = 18.sp
+        fontSize = 18.sp,
     )
-    Text(
-        text = "Зарегистрируйтесь!",
-        color = BlueApp,
-        fontSize = 18.sp
-    )
+    TextButton(
+        onClick = {navController.navigate(InitializationScreensRoute.SingUpScreen.route)}
+    ){
+        Text(
+            text = "Зарегистрируйтесь!",
+            color = BlueApp,
+            fontSize = 18.sp
+        )
+    }
 }
 

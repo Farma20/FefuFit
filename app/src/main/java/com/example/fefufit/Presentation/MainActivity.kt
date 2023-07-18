@@ -40,8 +40,7 @@ class MainActivity : ComponentActivity() {
             FefuFitTheme {
                 Surface {
                     //InitializationNavigation
-//                    InitializationScreens(singInUseCase)
-                    SingUpScreen(singUpUseCase)
+                    InitializationScreens(singInUseCase, singUpUseCase)
                 }
             }
         }
