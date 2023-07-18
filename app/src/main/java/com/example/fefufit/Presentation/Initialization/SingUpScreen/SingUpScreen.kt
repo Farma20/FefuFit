@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
@@ -43,7 +44,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingUpScreen(singUpUseCase:SingUpUseCase) {
+fun SingUpScreen(navController: NavController,singUpUseCase:SingUpUseCase) {
 
     val viewModel: SingUpScreenViewModel = viewModel<SingUpScreenViewModel>().apply {
         this.singUpUseCase = singUpUseCase
@@ -103,7 +104,7 @@ fun SingUpScreen(singUpUseCase:SingUpUseCase) {
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackBarHostState)},
         topBar = {
-            UppBar(modifier = Modifier)
+            UppBar(modifier = Modifier, navController)
         }
     ) {scaffoldPadding->
         Surface(
@@ -137,7 +138,7 @@ fun SingUpScreen(singUpUseCase:SingUpUseCase) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun UppBar(modifier: Modifier){
+private fun UppBar(modifier: Modifier, navController: NavController){
     CenterAlignedTopAppBar(
         modifier = modifier,
         title = {
@@ -149,7 +150,7 @@ private fun UppBar(modifier: Modifier){
             )
         },
         navigationIcon = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {navController.navigateUp()}) {
                 Icon(
                     modifier = Modifier.fillMaxWidth(),
                     painter = painterResource(id = R.drawable.back_arrow),

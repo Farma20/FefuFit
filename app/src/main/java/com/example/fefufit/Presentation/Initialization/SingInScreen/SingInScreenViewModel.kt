@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingInFormState
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
+import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingInValidation.ValidateEmailUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingInValidation.ValidatePasswordUseCase
 import com.example.fefufit.Utils.Resource
@@ -19,11 +20,12 @@ import kotlinx.coroutines.flow.receiveAsFlow
 class SingInScreenViewModel(
     private val validateEmailUseCase: ValidateEmailUseCase = ValidateEmailUseCase(),
     private val validatePasswordUseCase: ValidatePasswordUseCase = ValidatePasswordUseCase(),
-    private val singInUseCase: SingInUseCase
 ):ViewModel() {
 
     var inputDataState by mutableStateOf(SingInFormState())
     var errorData by mutableStateOf("")
+
+    lateinit var singInUseCase: SingInUseCase
 
     //a thread for sending notifications to the UI thread
     private val validationEventChannel = Channel<ValidationEvent>()

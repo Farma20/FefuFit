@@ -62,7 +62,8 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun SingInScreen(navController: NavController, singInUseCase: SingInUseCase) {
 
-    val viewModel: SingInScreenViewModel = SingInScreenViewModel(singInUseCase = singInUseCase)
+    val viewModel: SingInScreenViewModel = viewModel()
+    viewModel.singInUseCase = singInUseCase
 
     //painted system controllers
     val systemUiController = rememberSystemUiController()

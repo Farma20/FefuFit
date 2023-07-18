@@ -17,7 +17,7 @@ fun InitializationScreens(singInUseCase: SingInUseCase, singUpUseCase: SingUpUse
             SingInScreen(navController, singInUseCase)
         }
         composable(route = InitializationScreensRoute.SingUpScreen.route){
-            SingUpScreen(singUpUseCase = singUpUseCase)
+            SingUpScreen(navController, singUpUseCase)
         }
     }
 }
