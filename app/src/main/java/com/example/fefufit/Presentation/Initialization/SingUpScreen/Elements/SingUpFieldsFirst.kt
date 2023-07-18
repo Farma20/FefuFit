@@ -273,7 +273,11 @@ fun SingUpFieldsFirst(
                 },
                 shape = RoundedCornerShape(13.dp),
                 isError = inputDataState.genderError != null,
-                value = selectedGenderItem,
+                value = when (inputDataState.gender) {
+                    "m" -> "Мужчина"
+                    "f" -> "Женщина"
+                    else -> ""
+                },
                 onValueChange = {
 
                 },
@@ -348,7 +352,7 @@ fun SingUpFieldsFirst(
             modifier = Modifier
                 .fillMaxWidth(0.90f),
             shape = RoundedCornerShape(13.dp),
-            value = if (formattedDate == dateNow)"" else formattedDate,
+            value = inputDataState.birthday,
             isError = inputDataState.birthdayError != null,
             onValueChange = {
             },
