@@ -45,9 +45,8 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
-import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreensRoute
-import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import com.example.fefufit.Presentation.theme.BlackApp
 import com.example.fefufit.Presentation.theme.BlueApp
 import com.example.fefufit.Presentation.theme.RedErrorApp
@@ -90,14 +89,14 @@ fun SingUpFieldsFirst(
     val dateNow by remember {
         derivedStateOf {
             DateTimeFormatter
-                .ofPattern("MMM dd yyyy")
+                .ofPattern("dd.MM.yyyy")
                 .format(LocalDate.now())
         }
     }
     val formattedDate by remember {
         derivedStateOf {
             DateTimeFormatter
-                .ofPattern("MMM dd yyyy")
+                .ofPattern("dd.MM.yyyy")
                 .format(pickedDate)
         }
     }
@@ -387,7 +386,6 @@ fun SingUpFieldsFirst(
                     text = "Ok",
                     onClick = {
                         viewModel.inputDataEvent(SingUpFirstFormEvent.BirthdayChanged(if (formattedDate == dateNow)"" else formattedDate))
-
                     },
                     textStyle = TextStyle(
                         color = BlueApp

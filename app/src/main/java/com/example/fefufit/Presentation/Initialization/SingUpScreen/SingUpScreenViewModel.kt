@@ -10,6 +10,7 @@ import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpFirstFormState
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpSecondFormState
+import com.example.fefufit.Domain.UseCases.Common.BirthdayDateToServerDateUseCase
 import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateBirthdayUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation.ValidateFirstNameUseCase
@@ -213,6 +214,7 @@ class SingUpScreenViewModel(
         inputDataState:SingUpFirstFormState,
         inputSecondDataState: SingUpSecondFormState
     ){
+        println(inputDataState.birthday)
         singUpUseCase(SingUpDataModel(
             birthdate = inputDataState.birthday,
             email = inputSecondDataState.email,
