@@ -470,7 +470,12 @@ fun SingUpFieldsFirst(
                     )
                 },
                 shape = RoundedCornerShape(13.dp),
-                value = selectedStatusItem,
+                value = when(inputDataState.status){
+                            "student"->"Студент"
+                            "guest"->"Гость"
+                            "employee"->"Сотрудник"
+                            else->""
+                       },
                 onValueChange = {
                 },
                 isError = inputDataState.statusError != null,
