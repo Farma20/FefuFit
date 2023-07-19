@@ -12,8 +12,10 @@ import com.example.fefufit.FefuFitApp
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreen
 import com.example.fefufit.Presentation.theme.FefuFitTheme
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
