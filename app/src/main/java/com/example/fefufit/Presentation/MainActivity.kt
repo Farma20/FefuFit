@@ -8,9 +8,7 @@ import androidx.compose.material3.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
-import com.example.fefufit.FefuFitApp
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
-import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreen
 import com.example.fefufit.Presentation.theme.FefuFitTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,9 +26,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        (application as FefuFitApp).appComponent.inject(this)
-
         //installing splashScreen
         installSplashScreen().apply {
             setKeepVisibleCondition{
