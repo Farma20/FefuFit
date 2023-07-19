@@ -12,6 +12,7 @@ import org.json.JSONObject
 import retrofit2.HttpException
 import javax.inject.Inject
 
+
 class SingInUseCase @Inject constructor(
     private val repository: InitializationRepository
 ) {

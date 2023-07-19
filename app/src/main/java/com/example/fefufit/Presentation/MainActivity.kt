@@ -19,9 +19,6 @@ class MainActivity : ComponentActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
 
     @Inject
-    lateinit var singInUseCase: SingInUseCase
-
-    @Inject
     lateinit var singUpUseCase: SingUpUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +34,7 @@ class MainActivity : ComponentActivity() {
             FefuFitTheme {
                 Surface {
                     //InitializationNavigation
-                    InitializationScreens(singInUseCase, singUpUseCase)
+                    InitializationScreens(singUpUseCase)
                 }
             }
         }

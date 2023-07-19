@@ -47,6 +47,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
@@ -60,10 +61,9 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingInScreen(navController: NavController, singInUseCase: SingInUseCase) {
+fun SingInScreen(navController: NavController) {
 
-    val viewModel: SingInScreenViewModel = viewModel()
-    viewModel.singInUseCase = singInUseCase
+    val viewModel = hiltViewModel<SingInScreenViewModel>()
 
     //painted system controllers
     val systemUiController = rememberSystemUiController()

@@ -10,11 +10,11 @@ import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreen
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreen
 
 @Composable
-fun InitializationScreens(singInUseCase: SingInUseCase, singUpUseCase: SingUpUseCase) {
+fun InitializationScreens(singUpUseCase: SingUpUseCase) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = InitializationScreensRoute.SingInScreen.route){
         composable(route = InitializationScreensRoute.SingInScreen.route){
-            SingInScreen(navController, singInUseCase)
+            SingInScreen(navController)
         }
         composable(route = InitializationScreensRoute.SingUpScreen.route){
             SingUpScreen(navController, singUpUseCase)
