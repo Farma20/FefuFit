@@ -1,4 +1,4 @@
-package com.example.fefufit.DI
+package com.example.fefufit.DI_Dagger2
 
 import com.example.fefufit.Data.Remote.API.FefuFitApi
 import com.example.fefufit.Data.Remote.Repositorys.FefuInitialRepository

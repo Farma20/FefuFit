@@ -1,4 +1,4 @@
-package com.example.fefufit.DI
+package com.example.fefufit.DI_Dagger2
 
 import com.example.fefufit.FefuFitApp
 import com.example.fefufit.Presentation.MainActivity

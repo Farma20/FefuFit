@@ -1,51 +1,41 @@
-package com.example.fefufit.DI
+package com.example.fefufit.Di
 
 import com.example.fefufit.Data.Remote.API.FefuFitApi
-import com.example.fefufit.FefuFitApp
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
-
-    companion object{
-        private const val BASE_URL = "hostName"
-    }
+@InstallIn(SingletonComponent::class)
+class AppModule {
 
     @Provides
-    @Named(BASE_URL)
-    fun provideBaseUrlString():String = "https://fefufit.dvfu.ru"
-
     @Singleton
-    @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        @Named(BASE_URL)baseUrl:String
-    )
-    :Retrofit{
+    ): Retrofit{
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
+            .baseUrl("https://fefufit.dvfu.ru")
             .client(okHttpClient)
             .build()
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideApi(retrofit: Retrofit): FefuFitApi{
         return retrofit.create(FefuFitApi::class.java)
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideOkHttpClient(interceptors: ArrayList<Interceptor>):OkHttpClient{
         val clientBuilder = OkHttpClient.Builder()
             .followRedirects(false)
@@ -55,8 +45,8 @@ class NetworkModule {
         return clientBuilder.build()
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideInterceptors():ArrayList<Interceptor>{
         val interceptors = arrayListOf<Interceptor>()
         val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -65,4 +55,5 @@ class NetworkModule {
         interceptors.add(loggingInterceptor)
         return interceptors
     }
+
 }

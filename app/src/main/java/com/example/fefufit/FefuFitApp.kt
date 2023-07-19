@@ -1,8 +1,8 @@
 package com.example.fefufit
 
 import android.app.Application
-import com.example.fefufit.DI.AppComponent
-import com.example.fefufit.DI.DaggerAppComponent
+import com.example.fefufit.DI_Dagger2.AppComponent
+import com.example.fefufit.DI_Dagger2.DaggerAppComponent
 
 class FefuFitApp:Application() {
     companion object {
