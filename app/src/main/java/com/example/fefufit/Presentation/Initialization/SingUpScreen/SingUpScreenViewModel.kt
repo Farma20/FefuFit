@@ -34,20 +34,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SingUpScreenViewModel @Inject constructor(
-    private var singUpUseCase: SingUpUseCase
+    private var singUpUseCase: SingUpUseCase,
+    private val validateSecondNameUseCase: ValidateSecondNameUseCase,
+    private val validateFirstNameUseCase: ValidateFirstNameUseCase,
+    private val validateGenderUseCase: ValidateGenderUseCase,
+    private val validateBirthdayUseCase: ValidateBirthdayUseCase,
+    private val validateStatusUseCase: ValidateStatusUseCase,
+    private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase,
+    private val validateEmailUseCase: ValidateSingUpEmailUseCase,
+    private val validatePasswordUseCase: ValidateSingUpPasswordUseCase,
+    private val validateRepeatPasswordUseCase: ValidateRepeatPasswordUseCase,
+    private val validateTermsUseCase: ValidateTermsUseCase,
 ): ViewModel() {
-
-    private val validateSecondNameUseCase: ValidateSecondNameUseCase = ValidateSecondNameUseCase()
-    private val validateFirstNameUseCase: ValidateFirstNameUseCase = ValidateFirstNameUseCase()
-    private val validateGenderUseCase: ValidateGenderUseCase = ValidateGenderUseCase()
-    private val validateBirthdayUseCase: ValidateBirthdayUseCase = ValidateBirthdayUseCase()
-    private val validateStatusUseCase: ValidateStatusUseCase = ValidateStatusUseCase()
-    private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase = ValidatePhoneNumberUseCase()
-    private val validateEmailUseCase: ValidateSingUpEmailUseCase = ValidateSingUpEmailUseCase()
-    private val validatePasswordUseCase: ValidateSingUpPasswordUseCase = ValidateSingUpPasswordUseCase()
-    private val validateRepeatPasswordUseCase: ValidateRepeatPasswordUseCase = ValidateRepeatPasswordUseCase()
-    private val validateTermsUseCase: ValidateTermsUseCase = ValidateTermsUseCase()
-
     //pageStateVariables
     var inputFieldsNavController: NavController? = null
     var pageState by mutableStateOf<InputFieldsStates>(InputFieldsStates.FirstInputFields)
