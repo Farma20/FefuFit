@@ -24,26 +24,29 @@ import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.I
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpSecondFormEvent
 import com.example.fefufit.Utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SingUpScreenViewModel(
-    private val validateSecondNameUseCase: ValidateSecondNameUseCase = ValidateSecondNameUseCase(),
-    private val validateFirstNameUseCase: ValidateFirstNameUseCase = ValidateFirstNameUseCase(),
-    private val validateGenderUseCase: ValidateGenderUseCase = ValidateGenderUseCase(),
-    private val validateBirthdayUseCase: ValidateBirthdayUseCase = ValidateBirthdayUseCase(),
-    private val validateStatusUseCase: ValidateStatusUseCase = ValidateStatusUseCase(),
-    private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase = ValidatePhoneNumberUseCase(),
-    private val validateEmailUseCase: ValidateSingUpEmailUseCase = ValidateSingUpEmailUseCase(),
-    private val validatePasswordUseCase: ValidateSingUpPasswordUseCase = ValidateSingUpPasswordUseCase(),
-    private val validateRepeatPasswordUseCase: ValidateRepeatPasswordUseCase = ValidateRepeatPasswordUseCase(),
-    private val validateTermsUseCase: ValidateTermsUseCase = ValidateTermsUseCase(),
+@HiltViewModel
+class SingUpScreenViewModel @Inject constructor(
+    private var singUpUseCase: SingUpUseCase
 ): ViewModel() {
 
-    lateinit var singUpUseCase: SingUpUseCase
+    private val validateSecondNameUseCase: ValidateSecondNameUseCase = ValidateSecondNameUseCase()
+    private val validateFirstNameUseCase: ValidateFirstNameUseCase = ValidateFirstNameUseCase()
+    private val validateGenderUseCase: ValidateGenderUseCase = ValidateGenderUseCase()
+    private val validateBirthdayUseCase: ValidateBirthdayUseCase = ValidateBirthdayUseCase()
+    private val validateStatusUseCase: ValidateStatusUseCase = ValidateStatusUseCase()
+    private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase = ValidatePhoneNumberUseCase()
+    private val validateEmailUseCase: ValidateSingUpEmailUseCase = ValidateSingUpEmailUseCase()
+    private val validatePasswordUseCase: ValidateSingUpPasswordUseCase = ValidateSingUpPasswordUseCase()
+    private val validateRepeatPasswordUseCase: ValidateRepeatPasswordUseCase = ValidateRepeatPasswordUseCase()
+    private val validateTermsUseCase: ValidateTermsUseCase = ValidateTermsUseCase()
 
     //pageStateVariables
     var inputFieldsNavController: NavController? = null

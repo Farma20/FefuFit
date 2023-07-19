@@ -18,9 +18,6 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
 
-    @Inject
-    lateinit var singUpUseCase: SingUpUseCase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //installing splashScreen
@@ -34,7 +31,7 @@ class MainActivity : ComponentActivity() {
             FefuFitTheme {
                 Surface {
                     //InitializationNavigation
-                    InitializationScreens(singUpUseCase)
+                    InitializationScreens()
                 }
             }
         }
