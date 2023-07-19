@@ -2,6 +2,7 @@ package com.example.fefufit.Di
 
 import com.example.fefufit.Domain.Repositorys.InitializationRepository
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
+import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +17,11 @@ object UseCaseModule {
     @ViewModelScoped
     fun provideSingInUseCase(repository: InitializationRepository):SingInUseCase{
         return SingInUseCase(repository)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideSingUpUseCase(repository: InitializationRepository): SingUpUseCase {
+        return SingUpUseCase(repository)
     }
 }

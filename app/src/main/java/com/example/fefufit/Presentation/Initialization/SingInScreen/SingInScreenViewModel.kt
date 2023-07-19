@@ -20,10 +20,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SingInScreenViewModel @Inject constructor(
-    private val singInUseCase: SingInUseCase
+    private val singInUseCase: SingInUseCase,
+    private val validateEmailUseCase: ValidateEmailUseCase,
+    private val validatePasswordUseCase: ValidatePasswordUseCase
 ):ViewModel() {
-    private val validateEmailUseCase: ValidateEmailUseCase = ValidateEmailUseCase()
-    private val validatePasswordUseCase: ValidatePasswordUseCase = ValidatePasswordUseCase()
+
 
     var inputDataState by mutableStateOf(SingInFormState())
     var errorData by mutableStateOf("")

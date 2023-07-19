@@ -1,8 +1,9 @@
 package com.example.fefufit.Domain.UseCases.Initial.Validation.SingUpValidation
 
 import com.example.fefufit.Domain.Models.ValidationModels.ValidationResult
+import javax.inject.Inject
 
-class ValidateSingUpPasswordUseCase {
+class ValidateSingUpPasswordUseCase @Inject constructor() {
     operator fun invoke(password: String): ValidationResult {
         if (password.isBlank()) {
             return ValidationResult(
