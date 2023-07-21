@@ -134,7 +134,9 @@ fun SingUpFieldsFirst(
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
+                cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                textColor = FefuFitTheme.color.textColor.mainTextColor
             )
         )
 
@@ -181,7 +183,9 @@ fun SingUpFieldsFirst(
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
+                cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                textColor = FefuFitTheme.color.textColor.mainTextColor
             )
         )
 
@@ -224,7 +228,9 @@ fun SingUpFieldsFirst(
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
+                cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                textColor = FefuFitTheme.color.textColor.mainTextColor
             )
         )
         Spacer(modifier = Modifier.height(14.dp))
@@ -283,12 +289,15 @@ fun SingUpFieldsFirst(
                         fontSize = 18.sp,
                         lineHeight = 22.sp,
                         fontWeight = FontWeight(200),
+                        color = FefuFitTheme.color.textColor.mainTextColor
                     )
                 },
                 singleLine = true,
                 textStyle = TextStyle(fontSize = 16.sp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
+                    cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
                     focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                    textColor = FefuFitTheme.color.textColor.mainTextColor
                 )
             )
             DropdownMenu(
@@ -303,7 +312,12 @@ fun SingUpFieldsFirst(
                     DropdownMenuItem(
                         modifier = Modifier
                             .background(FefuFitTheme.color.mainAppColors.appCardColor),
-                        text = { Text(text = selectedGender) },
+                        text = {
+                            Text(
+                                text = selectedGender,
+                                color = FefuFitTheme.color.textColor.mainTextColor
+                            )
+                        },
                         onClick = {
                             selectedGenderItem = selectedGender
                             val shortGenderItem = if (selectedGenderItem == "Мужчина")"m" else "f"
@@ -357,7 +371,9 @@ fun SingUpFieldsFirst(
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
+                cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                textColor = FefuFitTheme.color.textColor.mainTextColor
             ),
             interactionSource = source,
             placeholder = {
@@ -366,6 +382,7 @@ fun SingUpFieldsFirst(
                     fontSize = 18.sp,
                     lineHeight = 22.sp,
                     fontWeight = FontWeight(200),
+                    color = FefuFitTheme.color.textColor.mainTextColor
                 )
             },
             readOnly = true,
@@ -489,7 +506,9 @@ fun SingUpFieldsFirst(
                 singleLine = true,
                 textStyle = TextStyle(fontSize = 16.sp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
+                    cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
                     focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                    textColor = FefuFitTheme.color.textColor.mainTextColor
                 )
             )
             DropdownMenu(
@@ -504,7 +523,12 @@ fun SingUpFieldsFirst(
                     DropdownMenuItem(
                         modifier = Modifier
                             .background(FefuFitTheme.color.mainAppColors.appCardColor),
-                        text = { Text(text = selectStatus) },
+                        text = {
+                                    Text(
+                                        text = selectStatus,
+                                        color = FefuFitTheme.color.textColor.mainTextColor
+                                    )
+                               },
                         onClick = {
                             selectedStatusItem = selectStatus
                             val shortStatus = when(selectedStatusItem){

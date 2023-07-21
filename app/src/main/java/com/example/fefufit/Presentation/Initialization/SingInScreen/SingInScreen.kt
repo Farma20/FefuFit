@@ -140,7 +140,9 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         singleLine = true,
         textStyle = TextStyle(fontSize = 16.sp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
+            focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+            textColor = FefuFitTheme.color.textColor.mainTextColor,
+            cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor
         )
     )
 
@@ -182,7 +184,9 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         singleLine = true,
         textStyle = TextStyle(fontSize = 16.sp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
+            focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+            cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+            textColor = FefuFitTheme.color.textColor.mainTextColor
         )
     )
     if (inputDataState.passwordError != null){

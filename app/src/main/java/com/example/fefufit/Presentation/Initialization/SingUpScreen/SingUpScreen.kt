@@ -40,23 +40,13 @@ fun SingUpScreen(navController: NavController) {
 
     val viewModel = hiltViewModel<SingUpScreenViewModel>()
 
-//    //painted system controllers
-//    val systemUiController = rememberSystemUiController()
-//    val barBackground = FefuFitTheme.color.mainAppColors.appBackgroundColor
-//
-//    //painted system upp & bottom panels
-//    SideEffect {
-//        systemUiController.setStatusBarColor(color = barBackground, darkIcons = true)
-//        systemUiController.setNavigationBarColor(color = barBackground)
-//    }
-
     val context = LocalContext.current
     val snackBarHostState = remember { SnackbarHostState() }
 
     //page variables
     var labelText by remember { mutableStateOf("Личные данные") }
     var circlePagerColor by remember { mutableStateOf(Color.Transparent) }
-    val background = FefuFitTheme.color.elementsColor.elementColor
+    val background = FefuFitTheme.color.elementsColor.onElementsColor
     var circlePagerTextColor by remember {
         mutableStateOf(background)
     }
@@ -70,7 +60,7 @@ fun SingUpScreen(navController: NavController) {
         InputFieldsStates.SecondInputFields -> {
             labelText = "Учетные данные"
             circlePagerColor = FefuFitTheme.color.elementsColor.elementColor
-            circlePagerTextColor = FefuFitTheme.color.textColor.secondaryTextColor
+            circlePagerTextColor = FefuFitTheme.color.elementsColor.onElementsColor
         }
     }
 
@@ -153,7 +143,7 @@ private fun UppBar(modifier: Modifier, navController: NavController){
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color.White
+            containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor
         )
     )
 }
@@ -173,7 +163,7 @@ private fun RegistrationPager(
         ){
             Text(
                 text = "1",
-                color = Color.White,
+                color = FefuFitTheme.color.elementsColor.onElementsColor,
                 fontSize = 16.sp,
                 fontWeight = FontWeight(400),
                 lineHeight = 22.sp,
