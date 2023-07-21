@@ -1,6 +1,7 @@
 package com.example.fefufit.Presentation
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -30,9 +31,14 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        //SOFT_INPUT_KEYBOARD
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
         setContent {
 
-            FefuFitTheme(isSystemInDarkTheme()) {
+            val isDarkTheme = isSystemInDarkTheme()
+
+            FefuFitTheme(isDarkTheme) {
 
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
@@ -40,7 +46,7 @@ class MainActivity : ComponentActivity() {
 
                 //painted system upp & bottom panels
                 SideEffect {
-                    systemUiController.setStatusBarColor(color = barBackground, darkIcons = true)
+                    systemUiController.setStatusBarColor(color = barBackground, darkIcons = !isDarkTheme)
                     systemUiController.setNavigationBarColor(color = barBackground)
                 }
 
