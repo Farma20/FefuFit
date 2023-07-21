@@ -22,10 +22,8 @@ import javax.inject.Inject
 class SingInScreenViewModel @Inject constructor(
     private val singInUseCase: SingInUseCase,
     private val validateEmailUseCase: ValidateEmailUseCase,
-    private val validatePasswordUseCase: ValidatePasswordUseCase
+    private val validatePasswordUseCase: ValidatePasswordUseCase,
 ):ViewModel() {
-
-
     var inputDataState by mutableStateOf(SingInFormState())
     var errorData by mutableStateOf("")
 
