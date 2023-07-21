@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -28,10 +29,10 @@ class MainActivity : ComponentActivity() {
                 viewModel.isLoading.value
             }
         }
-        setContent {
-            val blackTheme by remember {mutableStateOf(true)}
 
-            FefuFitTheme(blackTheme) {
+        setContent {
+
+            FefuFitTheme(isSystemInDarkTheme()) {
 
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
