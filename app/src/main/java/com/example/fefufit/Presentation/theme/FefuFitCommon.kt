@@ -1,5 +1,7 @@
 package com.example.fefufit.Presentation.theme
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 class FefuFitColors{
@@ -23,4 +25,14 @@ class FefuFitColors{
     data class ElementsColor(
         val elementColor:Color
     )
+}
+
+object FefuFitTheme{
+    val color:FefuFitColors
+    @Composable
+    get() = LocalFefuFitColors.current
+
+    val LocalFefuFitColors = staticCompositionLocalOf<FefuFitColors> {
+        error("No colors provide")
+    }
 }
