@@ -1,11 +1,7 @@
 package com.example.fefufit.Presentation.Initialization.SingInScreen
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,12 +28,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -48,15 +41,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreensRoute
-import com.example.fefufit.Presentation.theme.BlueApp
-import com.example.fefufit.Presentation.theme.SecondaryTextApp
-import com.example.fefufit.Presentation.theme.WhiteApp
+import com.example.fefufit.Presentation.theme.FefuFitTheme
 import com.example.fefufit.R
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,15 +53,6 @@ fun SingInScreen(navController: NavController) {
 
     val viewModel = hiltViewModel<SingInScreenViewModel>()
 
-    //painted system controllers
-    val systemUiController = rememberSystemUiController()
-    val barBackground = WhiteApp
-
-    //painted system upp & bottom panels
-    SideEffect {
-        systemUiController.setStatusBarColor(color = barBackground, darkIcons = true)
-        systemUiController.setNavigationBarColor(color = barBackground)
-    }
 
     val context = LocalContext.current
     val snackBarHostState = remember { SnackbarHostState() }
@@ -95,6 +74,7 @@ fun SingInScreen(navController: NavController) {
         }
     }
 
+
     Scaffold(
         snackbarHost = {SnackbarHost(snackBarHostState)}
     ) {
@@ -102,7 +82,7 @@ fun SingInScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            color = WhiteApp
+            color = FefuFitTheme.color.mainAppColors.appBackgroundColor
         ) {
             Column(
                 modifier = Modifier
@@ -139,7 +119,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         Text(
             text = "E-mail или телефон",
             fontSize = 14.sp,
-            color = SecondaryTextApp
+            color = FefuFitTheme.color.textColor.mainTextColor
         )
     }
     Spacer(modifier = Modifier.height(6.dp))
@@ -158,7 +138,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         singleLine = true,
         textStyle = TextStyle(fontSize = 16.sp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = BlueApp
+            focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
         )
     )
 
@@ -181,7 +161,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         Text(
             text = "Пароль",
             fontSize = 14.sp,
-            color = SecondaryTextApp
+            color = FefuFitTheme.color.textColor.mainTextColor
         )
     }
     Spacer(modifier = Modifier.height(6.dp))
@@ -200,7 +180,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         singleLine = true,
         textStyle = TextStyle(fontSize = 16.sp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = BlueApp
+            focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
         )
     )
     if (inputDataState.passwordError != null){
@@ -224,7 +204,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
             Text(
                 text = "Забыли пароль?",
                 fontSize = 16.sp,
-                color = BlueApp
+                color = FefuFitTheme.color.textColor.secondaryTextColor
             )
         }
     }
@@ -239,7 +219,7 @@ private fun InputButton(viewModel: SingInScreenViewModel){
         ,
         shape = RoundedCornerShape(13.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = BlueApp
+            containerColor = FefuFitTheme.color.mainAppColors.appBlueColor
         ),
         onClick = {
             viewModel.inputDataEvent(SingInFormEvent.Submit)
@@ -257,7 +237,7 @@ private fun InputButton(viewModel: SingInScreenViewModel){
 private fun SingUpButton(navController:NavController){
     Text(
         text = "Нет аккаунта?",
-        color = SecondaryTextApp,
+        color = FefuFitTheme.color.textColor.tertiaryTextColor,
         fontSize = 18.sp,
     )
     TextButton(
@@ -265,7 +245,7 @@ private fun SingUpButton(navController:NavController){
     ){
         Text(
             text = "Зарегистрируйтесь!",
-            color = BlueApp,
+            color = FefuFitTheme.color.textColor.secondaryTextColor,
             fontSize = 18.sp
         )
     }

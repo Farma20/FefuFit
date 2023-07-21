@@ -5,13 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
-import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
 import com.example.fefufit.Presentation.theme.FefuFitTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -26,9 +27,19 @@ class MainActivity : ComponentActivity() {
                 viewModel.isLoading.value
             }
         }
-
+        val blackTheme by mutableStateOf(false)
         setContent {
-            FefuFitTheme {
+            //painted system controllers
+            val systemUiController = rememberSystemUiController()
+            val barBackground = FefuFitTheme.color.mainAppColors.appBackgroundColor
+
+            //painted system upp & bottom panels
+            SideEffect {
+                systemUiController.setStatusBarColor(color = barBackground, darkIcons = true)
+                systemUiController.setNavigationBarColor(color = barBackground)
+            }
+
+            FefuFitTheme(blackTheme) {
                 Surface {
                     //InitializationNavigation
                     InitializationScreens()

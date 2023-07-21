@@ -47,11 +47,7 @@ import androidx.compose.ui.unit.sp
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Validation.SingUpFirstFormEvent
-import com.example.fefufit.Presentation.theme.BlackApp
-import com.example.fefufit.Presentation.theme.BlueApp
-import com.example.fefufit.Presentation.theme.RedErrorApp
-import com.example.fefufit.Presentation.theme.SecondaryTextApp
-import com.example.fefufit.Presentation.theme.WhiteApp
+import com.example.fefufit.Presentation.theme.FefuFitTheme
 import com.example.fefufit.R
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.DatePickerDefaults
@@ -115,11 +111,11 @@ fun SingUpFieldsFirst(
             Text(
                 text = "Фамилия",
                 fontSize = 14.sp,
-                color = SecondaryTextApp
+                color = FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color = RedErrorApp
+                color =  FefuFitTheme.color.mainAppColors.errorColor
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -138,7 +134,7 @@ fun SingUpFieldsFirst(
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = BlueApp
+                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
             )
         )
 
@@ -162,11 +158,11 @@ fun SingUpFieldsFirst(
             Text(
                 text = "Имя",
                 fontSize = 14.sp,
-                color = SecondaryTextApp
+                color = FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color = RedErrorApp,
+                color = FefuFitTheme.color.mainAppColors.errorColor,
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -185,7 +181,7 @@ fun SingUpFieldsFirst(
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = BlueApp
+                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
             )
         )
 
@@ -210,7 +206,7 @@ fun SingUpFieldsFirst(
             Text(
                 text = "Отчество",
                 fontSize = 14.sp,
-                color = SecondaryTextApp
+                color = FefuFitTheme.color.textColor.mainTextColor
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -228,7 +224,7 @@ fun SingUpFieldsFirst(
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = BlueApp
+                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
             )
         )
         Spacer(modifier = Modifier.height(14.dp))
@@ -241,11 +237,11 @@ fun SingUpFieldsFirst(
             Text(
                 text = "Пол",
                 fontSize = 14.sp,
-                color = SecondaryTextApp
+                color = FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color = RedErrorApp,
+                color = FefuFitTheme.color.mainAppColors.errorColor,
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -268,7 +264,7 @@ fun SingUpFieldsFirst(
                         ),
                         painter = painterResource(id = R.drawable.bottom_arrow),
                         contentDescription = "bottomArrow",
-                        tint = BlueApp
+                        tint = FefuFitTheme.color.elementsColor.elementColor
                     )
                 },
                 shape = RoundedCornerShape(13.dp),
@@ -287,19 +283,18 @@ fun SingUpFieldsFirst(
                         fontSize = 18.sp,
                         lineHeight = 22.sp,
                         fontWeight = FontWeight(200),
-                        color = BlackApp,
                     )
                 },
                 singleLine = true,
                 textStyle = TextStyle(fontSize = 16.sp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = BlueApp,
+                    focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
                 )
             )
             DropdownMenu(
                 modifier = Modifier
                     .exposedDropdownSize()
-                    .background(WhiteApp),
+                    .background(FefuFitTheme.color.mainAppColors.appCardColor),
                 offset = DpOffset(0.dp, 6.dp),
                 expanded = genderDropDown,
                 onDismissRequest = { genderDropDown = false }
@@ -307,7 +302,7 @@ fun SingUpFieldsFirst(
                 listGenders.forEach { selectedGender ->
                     DropdownMenuItem(
                         modifier = Modifier
-                            .background(WhiteApp),
+                            .background(FefuFitTheme.color.mainAppColors.appCardColor),
                         text = { Text(text = selectedGender) },
                         onClick = {
                             selectedGenderItem = selectedGender
@@ -340,11 +335,11 @@ fun SingUpFieldsFirst(
             Text(
                 text = "Дата рождения",
                 fontSize = 14.sp,
-                color = SecondaryTextApp
+                color = FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color = RedErrorApp,
+                color = FefuFitTheme.color.mainAppColors.errorColor,
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -362,7 +357,7 @@ fun SingUpFieldsFirst(
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = BlueApp
+                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor
             ),
             interactionSource = source,
             placeholder = {
@@ -371,7 +366,6 @@ fun SingUpFieldsFirst(
                     fontSize = 18.sp,
                     lineHeight = 22.sp,
                     fontWeight = FontWeight(200),
-                    color = BlackApp,
                 )
             },
             readOnly = true,
@@ -379,7 +373,7 @@ fun SingUpFieldsFirst(
                 Icon(
                     painter = painterResource(id = R.drawable.calendar_icon),
                     contentDescription = "calendar icon",
-                    tint = BlueApp
+                    tint = FefuFitTheme.color.elementsColor.elementColor
                 )
             }
         )
@@ -393,13 +387,13 @@ fun SingUpFieldsFirst(
                         viewModel.inputDataEvent(SingUpFirstFormEvent.BirthdayChanged(if (formattedDate == dateNow)"" else formattedDate))
                     },
                     textStyle = TextStyle(
-                        color = BlueApp
+                        color = FefuFitTheme.color.textColor.secondaryTextColor
                     )
                 )
                 negativeButton(
                     text = "Отмена",
                     textStyle = TextStyle(
-                        color = BlueApp
+                        color = FefuFitTheme.color.textColor.secondaryTextColor
                     )
                 )
             }
@@ -408,9 +402,9 @@ fun SingUpFieldsFirst(
                 initialDate = LocalDate.now(),
                 title = "Выберете дату рождения",
                 colors = DatePickerDefaults.colors(
-                    headerBackgroundColor = BlueApp,
-                    dateActiveBackgroundColor = BlueApp,
-                    dateActiveTextColor = WhiteApp,
+                    headerBackgroundColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+                    dateActiveBackgroundColor = FefuFitTheme.color.elementsColor.elementColor,
+                    dateActiveTextColor = FefuFitTheme.color.textColor.mainTextColor,
                 ),
             ) {
                 pickedDate = it
@@ -443,11 +437,11 @@ fun SingUpFieldsFirst(
             Text(
                 text = "Статус",
                 fontSize = 14.sp,
-                color = SecondaryTextApp
+                color = FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color = RedErrorApp,
+                color = FefuFitTheme.color.mainAppColors.errorColor,
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -470,7 +464,7 @@ fun SingUpFieldsFirst(
                         ),
                         painter = painterResource(id = R.drawable.bottom_arrow),
                         contentDescription = "bottomArrow",
-                        tint = BlueApp
+                        tint = FefuFitTheme.color.elementsColor.elementColor
                     )
                 },
                 shape = RoundedCornerShape(13.dp),
@@ -489,19 +483,19 @@ fun SingUpFieldsFirst(
                         fontSize = 18.sp,
                         lineHeight = 22.sp,
                         fontWeight = FontWeight(200),
-                        color = BlackApp,
+                        color = FefuFitTheme.color.textColor.mainTextColor,
                     )
                 },
                 singleLine = true,
                 textStyle = TextStyle(fontSize = 16.sp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = BlueApp,
+                    focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
                 )
             )
             DropdownMenu(
                 modifier = Modifier
                     .exposedDropdownSize()
-                    .background(WhiteApp),
+                    .background(FefuFitTheme.color.mainAppColors.appCardColor),
                 offset = DpOffset(0.dp, 6.dp),
                 expanded = statusDropDown,
                 onDismissRequest = { statusDropDown = false }
@@ -509,7 +503,7 @@ fun SingUpFieldsFirst(
                 listStatus.forEach { selectStatus ->
                     DropdownMenuItem(
                         modifier = Modifier
-                            .background(WhiteApp),
+                            .background(FefuFitTheme.color.mainAppColors.appCardColor),
                         text = { Text(text = selectStatus) },
                         onClick = {
                             selectedStatusItem = selectStatus
@@ -552,7 +546,7 @@ private fun NextButton(viewModel: SingUpScreenViewModel){
         ,
         shape = RoundedCornerShape(13.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = BlueApp
+            containerColor = FefuFitTheme.color.mainAppColors.appBlueColor
         ),
         onClick = {
             viewModel.inputDataEvent(SingUpFirstFormEvent.Submit)
