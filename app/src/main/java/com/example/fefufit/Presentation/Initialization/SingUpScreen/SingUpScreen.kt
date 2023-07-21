@@ -1,13 +1,10 @@
 package com.example.fefufit.Presentation.Initialization.SingUpScreen
 
 import android.annotation.SuppressLint
-import android.graphics.Paint.Style
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,18 +26,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
-import com.example.fefufit.Presentation.Initialization.SingInScreen.SingInScreenViewModel
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.InputFieldsStates
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreens
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Navigation.SingUpFieldsScreensRoute
-import com.example.fefufit.Presentation.theme.BlackApp
-import com.example.fefufit.Presentation.theme.BlueApp
-import com.example.fefufit.Presentation.theme.WhiteApp
+import com.example.fefufit.Presentation.theme.FefuFitTheme
 import com.example.fefufit.R
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,15 +40,15 @@ fun SingUpScreen(navController: NavController) {
 
     val viewModel = hiltViewModel<SingUpScreenViewModel>()
 
-    //painted system controllers
-    val systemUiController = rememberSystemUiController()
-    val barBackground = WhiteApp
-
-    //painted system upp & bottom panels
-    SideEffect {
-        systemUiController.setStatusBarColor(color = barBackground, darkIcons = true)
-        systemUiController.setNavigationBarColor(color = barBackground)
-    }
+//    //painted system controllers
+//    val systemUiController = rememberSystemUiController()
+//    val barBackground = FefuFitTheme.color.mainAppColors.appBackgroundColor
+//
+//    //painted system upp & bottom panels
+//    SideEffect {
+//        systemUiController.setStatusBarColor(color = barBackground, darkIcons = true)
+//        systemUiController.setNavigationBarColor(color = barBackground)
+//    }
 
     val context = LocalContext.current
     val snackBarHostState = remember { SnackbarHostState() }
@@ -65,18 +56,21 @@ fun SingUpScreen(navController: NavController) {
     //page variables
     var labelText by remember { mutableStateOf("Личные данные") }
     var circlePagerColor by remember { mutableStateOf(Color.Transparent) }
-    var circlePagerTextColor by remember { mutableStateOf(BlueApp) }
+    val background = FefuFitTheme.color.elementsColor.elementColor
+    var circlePagerTextColor by remember {
+        mutableStateOf(background)
+    }
 
     when(viewModel.pageState){
         InputFieldsStates.FirstInputFields -> {
             labelText = "Личные данные"
             circlePagerColor = Color.Transparent
-            circlePagerTextColor = BlueApp
+            circlePagerTextColor = FefuFitTheme.color.textColor.mainTextColor
         }
         InputFieldsStates.SecondInputFields -> {
             labelText = "Учетные данные"
-            circlePagerColor = BlueApp
-            circlePagerTextColor = WhiteApp
+            circlePagerColor = FefuFitTheme.color.elementsColor.elementColor
+            circlePagerTextColor = FefuFitTheme.color.textColor.secondaryTextColor
         }
     }
 
@@ -109,7 +103,7 @@ fun SingUpScreen(navController: NavController) {
         Surface(
             modifier = Modifier
                 .fillMaxSize(),
-            color = WhiteApp
+            color = FefuFitTheme.color.mainAppColors.appBackgroundColor
         ){
             Column(
                 modifier = Modifier
@@ -123,7 +117,7 @@ fun SingUpScreen(navController: NavController) {
                     text = labelText,
                     fontSize = 22.sp,
                     fontWeight = FontWeight(600),
-                    color = BlackApp,
+                    color = FefuFitTheme.color.textColor.mainTextColor,
                     textAlign = TextAlign.Center,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -145,7 +139,7 @@ private fun UppBar(modifier: Modifier, navController: NavController){
                 text = "Регистрация",
                 fontSize = 22.sp,
                 fontWeight = FontWeight(400),
-                color = BlackApp
+                color = FefuFitTheme.color.textColor.mainTextColor
             )
         },
         navigationIcon = {
@@ -153,7 +147,7 @@ private fun UppBar(modifier: Modifier, navController: NavController){
                 Icon(
                     modifier = Modifier.fillMaxWidth(),
                     painter = painterResource(id = R.drawable.back_arrow),
-                    tint = BlueApp,
+                    tint = FefuFitTheme.color.elementsColor.elementColor,
                     contentDescription = null
                 )
             }
@@ -172,9 +166,9 @@ private fun RegistrationPager(
     Row() {
         Box(
             modifier = Modifier
-                .border(1.dp, BlueApp, CircleShape)
+                .border(1.dp, FefuFitTheme.color.elementsColor.elementColor, CircleShape)
                 .size(32.dp)
-                .background(BlueApp, CircleShape),
+                .background(FefuFitTheme.color.elementsColor.elementColor, CircleShape),
             contentAlignment = Alignment.Center
         ){
             Text(
@@ -188,7 +182,7 @@ private fun RegistrationPager(
         Spacer(modifier = Modifier.width(10.dp))
         Box(
             modifier = Modifier
-                .border(1.dp, BlueApp, CircleShape)
+                .border(1.dp, FefuFitTheme.color.elementsColor.elementColor, CircleShape)
                 .size(32.dp)
                 .background(circlePagerColor, CircleShape),
             contentAlignment = Alignment.Center
