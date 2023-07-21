@@ -15,11 +15,13 @@ val whiteThemeAppPalette = FefuFitColors().apply {
         mainTextColor = Color(0xFF252525),
         secondaryTextColor = Color(0xFF4343F4),
         tertiaryTextColor = Color(0xFF252525),
+        setTextColor = Color(0xFF252525)
     )
 
     this.elementsColor = FefuFitColors.ElementsColor(
         elementColor = Color(0xFF4343F4),
-        onElementsColor = Color(0xFFFFFFFF)
+        onElementsColor = Color(0xFFFFFFFF),
+        setColor = Color(0xFF4343F4)
     )
 }
 
@@ -36,10 +38,12 @@ val blackThemeAppPalette = FefuFitColors().apply {
         mainTextColor = Color(0xFFFFFFFF),
         secondaryTextColor = Color(0xFFFFFFFF),
         tertiaryTextColor = Color(0xFFF1F1F1),
+        setTextColor = Color(0xFF252525)
     )
 
     this.elementsColor = FefuFitColors.ElementsColor(
         elementColor = Color(0xFFFFFFFF),
-        onElementsColor = Color(0xFF252525)
+        onElementsColor = Color(0xFF252525),
+        setColor = Color(0xFF252525)
     )
 }

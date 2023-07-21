@@ -404,13 +404,13 @@ fun SingUpFieldsFirst(
                         viewModel.inputDataEvent(SingUpFirstFormEvent.BirthdayChanged(if (formattedDate == dateNow)"" else formattedDate))
                     },
                     textStyle = TextStyle(
-                        color = FefuFitTheme.color.textColor.secondaryTextColor
+                        color = FefuFitTheme.color.textColor.setTextColor
                     )
                 )
                 negativeButton(
                     text = "Отмена",
                     textStyle = TextStyle(
-                        color = FefuFitTheme.color.textColor.secondaryTextColor
+                        color = FefuFitTheme.color.textColor.setTextColor
                     )
                 )
             }
@@ -419,9 +419,9 @@ fun SingUpFieldsFirst(
                 initialDate = LocalDate.now(),
                 title = "Выберете дату рождения",
                 colors = DatePickerDefaults.colors(
-                    headerBackgroundColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                    dateActiveBackgroundColor = FefuFitTheme.color.elementsColor.elementColor,
-                    dateActiveTextColor = FefuFitTheme.color.textColor.mainTextColor,
+                    headerBackgroundColor = FefuFitTheme.color.elementsColor.setColor,
+                    dateActiveBackgroundColor = FefuFitTheme.color.elementsColor.onElementsColor,
+                    dateActiveTextColor = FefuFitTheme.color.elementsColor.elementColor,
                 ),
             ) {
                 pickedDate = it

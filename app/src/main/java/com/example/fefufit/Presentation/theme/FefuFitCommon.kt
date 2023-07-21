@@ -22,11 +22,13 @@ class FefuFitColors{
         val mainTextColor:Color,
         val secondaryTextColor:Color,
         val tertiaryTextColor: Color,
+        val setTextColor: Color
     )
 
     data class ElementsColor(
         val elementColor:Color,
-        val onElementsColor: Color
+        val onElementsColor: Color,
+        val setColor:Color
     )
 }
 
