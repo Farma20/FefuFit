@@ -7,6 +7,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.Elements.SingUpFieldsFirst
+import com.example.fefufit.Presentation.Initialization.SingUpScreen.Elements.SingUpFieldsSecond
 import com.example.fefufit.Presentation.Initialization.SingUpScreen.SingUpScreenViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -62,7 +63,7 @@ fun SingUpFieldsScreens(viewModel: SingUpScreenViewModel) {
                 )
             },
         ){
-//            SingUpFieldsSecond(viewModel = viewModel)
+            SingUpFieldsSecond(viewModel = viewModel)
         }
     }
 }

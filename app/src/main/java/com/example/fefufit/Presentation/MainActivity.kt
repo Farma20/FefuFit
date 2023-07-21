@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         setContent {
-            val blackTheme by remember {mutableStateOf(false)}
+            val blackTheme by remember {mutableStateOf(true)}
 
             FefuFitTheme(blackTheme) {
 

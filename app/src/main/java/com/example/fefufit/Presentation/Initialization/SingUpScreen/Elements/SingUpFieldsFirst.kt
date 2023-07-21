@@ -420,8 +420,8 @@ fun SingUpFieldsFirst(
                 title = "Выберете дату рождения",
                 colors = DatePickerDefaults.colors(
                     headerBackgroundColor = FefuFitTheme.color.elementsColor.setColor,
-                    dateActiveBackgroundColor = FefuFitTheme.color.elementsColor.onElementsColor,
-                    dateActiveTextColor = FefuFitTheme.color.elementsColor.elementColor,
+                    dateActiveBackgroundColor = FefuFitTheme.color.elementsColor.setColor,
+                    dateActiveTextColor = FefuFitTheme.color.mainAppColors.appBottomNavColor,
                 ),
             ) {
                 pickedDate = it
