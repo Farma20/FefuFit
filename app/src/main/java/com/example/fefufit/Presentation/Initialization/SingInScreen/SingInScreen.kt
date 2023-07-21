@@ -17,6 +17,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -90,10 +91,11 @@ fun SingInScreen(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.height(100.dp))
-                Image(
+                Icon(
                     modifier = Modifier.size(95.dp, 103.dp),
                     painter = painterResource(id = R.drawable.fefufiticonblue),
                     contentDescription = "logo",
+                    tint = FefuFitTheme.color.elementsColor.elementColor
                 )
                 Spacer(modifier = Modifier.height(76.dp))
                 InputForm(viewModel)

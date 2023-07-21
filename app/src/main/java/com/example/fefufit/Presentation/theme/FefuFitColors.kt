@@ -14,7 +14,7 @@ val whiteThemeAppPalette = FefuFitColors().apply {
     this.textColor = FefuFitColors.TextColor(
         mainTextColor = Color(0xFF252525),
         secondaryTextColor = Color(0xFF4343F4),
-        tertiaryTextColor = Color(0xFFF1F1F1),
+        tertiaryTextColor = Color(0xFF252525),
     )
 
     this.elementsColor = FefuFitColors.ElementsColor(
