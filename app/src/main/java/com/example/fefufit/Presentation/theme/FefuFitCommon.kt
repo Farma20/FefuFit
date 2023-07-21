@@ -15,6 +15,7 @@ class FefuFitColors{
         val appBottomNavColor:Color,
         val appCardColor:Color,
         val appBlueColor:Color,
+        val errorColor: Color
     )
 
     data class TextColor(
