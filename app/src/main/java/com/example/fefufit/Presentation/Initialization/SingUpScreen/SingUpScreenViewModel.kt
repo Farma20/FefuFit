@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
+import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingUpDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpFirstFormState
 import com.example.fefufit.Domain.Models.ValidationModels.SingUpSecondFormState
 import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase

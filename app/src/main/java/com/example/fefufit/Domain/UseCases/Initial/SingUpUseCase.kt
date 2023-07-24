@@ -1,8 +1,6 @@
 package com.example.fefufit.Domain.UseCases.Initial
 
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInSuccessResponse
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
+import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingUpDataModel
 import com.example.fefufit.Domain.Repositorys.InitializationRepository
 import com.example.fefufit.Utils.Resource
 import com.example.fefufit.Utils.toMap

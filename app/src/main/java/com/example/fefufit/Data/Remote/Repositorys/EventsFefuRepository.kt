@@ -2,7 +2,7 @@ package com.example.fefufit.Data.Remote.Repositorys
 
 import com.example.fefufit.Data.Internal.DataStore.DataStoreManager
 import com.example.fefufit.Data.Remote.API.FefuFitApi
-import com.example.fefufit.Data.Remote.Models.EventsData.UserBookingDataModel
+import com.example.fefufit.Data.Remote.Models.EventsDataModels.UserBookingDataModel
 import com.example.fefufit.Domain.Repositorys.EventsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

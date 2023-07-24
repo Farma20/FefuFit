@@ -1,4 +1,4 @@
-package com.example.fefufit.Data.Remote.Models.EventsData
+package com.example.fefufit.Data.Remote.Models.EventsDataModels
 
 
 import com.google.gson.annotations.SerializedName

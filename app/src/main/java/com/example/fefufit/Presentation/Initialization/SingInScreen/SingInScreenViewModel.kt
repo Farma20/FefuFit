@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
+import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingInDataModel
 import com.example.fefufit.Domain.Models.ValidationModels.SingInFormState
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.Domain.UseCases.Initial.Validation.SingInValidation.ValidateEmailUseCase

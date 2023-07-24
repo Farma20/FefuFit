@@ -1,9 +1,10 @@
 package com.example.fefufit.Data.Remote.API
 
-import com.example.fefufit.Data.Remote.Models.EventsData.UserBookingDataModel
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInSuccessResponse
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
+import com.example.fefufit.Data.Remote.Models.EventsDataModels.UserBookingDataModel
+import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingInDataModel
+import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingInSuccessResponse
+import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingUpDataModel
+import com.example.fefufit.Data.Remote.Models.ServicesDataModels.UserServicesDataModel
 import com.example.fefufit.Data.Remote.Models.UserDataModels.UserInfoDataModel
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -25,4 +26,9 @@ interface FefuFitApi {
     //events api
     @POST("/api/timetable/booking/user/view_all")
     suspend fun getUserBookings(@Body token: Map<String, String>):UserBookingDataModel
+
+
+    //service api
+    @POST("/api/plan/view_next")
+    suspend fun getActiveUserPlans(@Body token: Map<String, String>): UserServicesDataModel
 }

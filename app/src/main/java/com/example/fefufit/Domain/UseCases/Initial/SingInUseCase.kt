@@ -2,15 +2,12 @@ package com.example.fefufit.Domain.UseCases.Initial
 
 import com.example.fefufit.Data.Internal.DataStore.DataStoreManager
 import com.example.fefufit.Data.Internal.DataStore.Entities.UserMetaData
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
-import com.example.fefufit.Data.Remote.Models.InitialModels.SingInSuccessResponse
+import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingInDataModel
+import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingInSuccessResponse
 import com.example.fefufit.Domain.Repositorys.InitializationRepository
 import com.example.fefufit.Utils.Resource
-import com.example.fefufit.Utils.toMap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import okio.IOException
-import org.json.JSONObject
 import retrofit2.HttpException
 import javax.inject.Inject
 
