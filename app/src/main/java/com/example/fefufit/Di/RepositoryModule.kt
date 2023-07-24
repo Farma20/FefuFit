@@ -2,9 +2,11 @@ package com.example.fefufit.Di
 
 import com.example.fefufit.Data.Remote.Repositorys.EventsFefuRepository
 import com.example.fefufit.Data.Remote.Repositorys.InitialFefuRepository
+import com.example.fefufit.Data.Remote.Repositorys.ServicesFefuRepository
 import com.example.fefufit.Data.Remote.Repositorys.UserDataFefuRepository
 import com.example.fefufit.Domain.Repositorys.EventsRepository
 import com.example.fefufit.Domain.Repositorys.InitializationRepository
+import com.example.fefufit.Domain.Repositorys.ServicesRepository
 import com.example.fefufit.Domain.Repositorys.UserDataRepository
 import dagger.Binds
 import dagger.Module
@@ -33,4 +35,10 @@ abstract class RepositoryModule {
     abstract fun bindEventsDataRepository(
         eventsDataRepository: EventsFefuRepository
     ):EventsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindServicesDataRepository(
+        servicesDataRepository: ServicesFefuRepository
+    ):ServicesRepository
 }

@@ -22,6 +22,7 @@ import com.example.fefufit.Data.Internal.DataStore.Entities.AppInternalData
 import com.example.fefufit.Data.Internal.DataStore.Entities.UserMetaData
 import com.example.fefufit.Data.Internal.DataStore.Serializer.AppInternalSerializer
 import com.example.fefufit.Domain.Repositorys.EventsRepository
+import com.example.fefufit.Domain.Repositorys.ServicesRepository
 import com.example.fefufit.Domain.Repositorys.UserDataRepository
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
 import com.example.fefufit.Presentation.theme.FefuFitTheme
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
     lateinit var dataStoreManager: DataStoreManager
 
     @Inject
-    lateinit var userDataRepository: EventsRepository
+    lateinit var userDataRepository: ServicesRepository
 
     @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +71,7 @@ class MainActivity : ComponentActivity() {
 //                }
                 if (appInternalData.userMetaData.userToken != null){
                     scope.launch {
-                        val result = userDataRepository.getAllUserBookings()
+                        val result = userDataRepository.getUserServices()
                         println(result)
                     }
                 }
