@@ -3,6 +3,7 @@ package com.example.fefufit.Data.Remote.API
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInSuccessResponse
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
+import com.example.fefufit.Data.Remote.Models.UserDataModels.UserInfoDataModel
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -13,4 +14,9 @@ interface FefuFitApi {
 
     @POST("/api/auth/signup")
     suspend fun singUp(@Body singUpData: SingUpDataModel):Map<String, String>
+
+    //userData api
+    @POST("/api/user/user/view_self")
+    suspend fun getUserData(@Body token: Map<String, String>):UserInfoDataModel
+
 }
