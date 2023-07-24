@@ -21,6 +21,7 @@ import com.example.fefufit.Data.Internal.DataStore.DataStoreManager
 import com.example.fefufit.Data.Internal.DataStore.Entities.AppInternalData
 import com.example.fefufit.Data.Internal.DataStore.Entities.UserMetaData
 import com.example.fefufit.Data.Internal.DataStore.Serializer.AppInternalSerializer
+import com.example.fefufit.Domain.Repositorys.UserDataRepository
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
 import com.example.fefufit.Presentation.theme.FefuFitTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -35,6 +36,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var dataStoreManager: DataStoreManager
+
+    @Inject
+    lateinit var userDataRepository: UserDataRepository
 
     @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +64,15 @@ class MainActivity : ComponentActivity() {
 
                 println("-----------------------------"+appInternalData.userMetaData)
 
-
+//                scope.launch {
+//                    dataStoreManager.setUserMetaData(UserMetaData(null, null))
+//                }
+                if (appInternalData.userMetaData.userToken != null){
+                    scope.launch {
+                        val result = userDataRepository.getUserData()
+                        println(result)
+                    }
+                }
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
                 val barBackground = FefuFitTheme.color.mainAppColors.appBackgroundColor
