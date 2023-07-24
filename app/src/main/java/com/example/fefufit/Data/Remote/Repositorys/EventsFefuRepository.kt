@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
+
 class EventsFefuRepository @Inject constructor(
     private val api: FefuFitApi,
     private val dataStoreManager: DataStoreManager
@@ -23,7 +24,7 @@ class EventsFefuRepository @Inject constructor(
     }
 
     override suspend fun getAllUserBookings(): UserBookingDataModel {
-        return api.
+        return api.getUserBookings(mapOf("token" to userToken!!))
     }
 
 }

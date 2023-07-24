@@ -23,6 +23,6 @@ interface FefuFitApi {
 
 
     //events api
-    @POST("")
+    @POST("/api/timetable/booking/user/view_all")
     suspend fun getUserBookings(@Body token: Map<String, String>):UserBookingDataModel
 }
