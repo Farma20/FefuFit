@@ -1,5 +1,6 @@
 package com.example.fefufit.Data.Remote.API
 
+import com.example.fefufit.Data.Remote.Models.EventsData.UserBookingDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInSuccessResponse
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
@@ -15,8 +16,13 @@ interface FefuFitApi {
     @POST("/api/auth/signup")
     suspend fun singUp(@Body singUpData: SingUpDataModel):Map<String, String>
 
+
     //userData api
     @POST("/api/user/user/view_self")
     suspend fun getUserData(@Body token: Map<String, String>):UserInfoDataModel
 
+
+    //events api
+    @POST("")
+    suspend fun getUserBookings(@Body token: Map<String, String>):UserBookingDataModel
 }
