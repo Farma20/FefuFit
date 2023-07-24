@@ -6,9 +6,11 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
+import javax.inject.Singleton
 
+@Singleton
 @Suppress("BlockingMethodInNonBlockingContext")
-object AppInternalSerializer: Serializer<AppInternalData> {
+class AppInternalSerializer: Serializer<AppInternalData> {
     override val defaultValue: AppInternalData
         get() = AppInternalData()
 
