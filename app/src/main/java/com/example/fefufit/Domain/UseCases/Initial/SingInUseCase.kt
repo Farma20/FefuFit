@@ -1,5 +1,7 @@
 package com.example.fefufit.Domain.UseCases.Initial
 
+import com.example.fefufit.Data.Internal.DataStore.DataStoreManager
+import com.example.fefufit.Data.Internal.DataStore.Entities.UserMetaData
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialModels.SingInSuccessResponse
 import com.example.fefufit.Domain.Repositorys.InitializationRepository
@@ -14,12 +16,19 @@ import javax.inject.Inject
 
 
 class SingInUseCase @Inject constructor(
-    private val repository: InitializationRepository
+    private val repository: InitializationRepository,
+    private val dataStoreManager:DataStoreManager,
 ) {
     operator fun invoke(singInData: SingInDataModel): Flow<Resource<SingInSuccessResponse>> = flow {
         try {
             emit(Resource.Loading())
             val response = repository.singIn(singInData)
+            dataStoreManager.setUserMetaData(
+                UserMetaData(
+                    userToken = response.initialUserDataModel.token,
+                    userQrToken = response.initialUserDataModel.qrToken
+                )
+            )
             emit(Resource.Success(response))
         }catch (cause:Throwable){
             when (cause) {

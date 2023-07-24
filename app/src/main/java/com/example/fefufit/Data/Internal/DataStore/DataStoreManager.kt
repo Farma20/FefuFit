@@ -14,8 +14,8 @@ import javax.inject.Singleton
 
 
 class DataStoreManager(
-    appContext:Context,
-    serializer: Serializer<AppInternalData>
+    private val appContext:Context,
+    private val serializer: Serializer<AppInternalData>
 ) {
     private val Context.dataStore by dataStore("app-internal.json", serializer)
     private val appInternalDataStore = appContext.dataStore
