@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.datastore.dataStore
+import com.example.fefufit.Data.Internal.DataStore.DataStoreManager
 import com.example.fefufit.Data.Internal.DataStore.Entities.AppInternalData
 import com.example.fefufit.Data.Internal.DataStore.Entities.UserMetaData
 import com.example.fefufit.Data.Internal.DataStore.Serializer.AppInternalSerializer
@@ -25,8 +26,7 @@ import com.example.fefufit.Presentation.theme.FefuFitTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
-val Context.dataStore by dataStore("app-settings.json", AppInternalSerializer)
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -50,23 +50,6 @@ class MainActivity : ComponentActivity() {
             val isDarkTheme = isSystemInDarkTheme()
             FefuFitTheme(isDarkTheme) {
 
-                val appInternalData = dataStore.data.collectAsState(
-                    initial = AppInternalData()
-                ).value
-                val scope = rememberCoroutineScope()
-
-                println("-----------------------------"+appInternalData.userMetaData)
-
-//                scope.launch {
-//                    setUserMetaData(
-//                        UserMetaData(
-//                            "биба",
-//                            "boba"
-//                        )
-//                    )
-//                    println("-----------------------------"+appInternalData.userMetaData)
-//                }
-
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
                 val barBackground = FefuFitTheme.color.mainAppColors.appBackgroundColor
@@ -85,9 +68,5 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private suspend fun setUserMetaData(userMetaData: UserMetaData){
-        dataStore.updateData {
-            it.copy(userMetaData = userMetaData)
-        }
-    }
+
 }
