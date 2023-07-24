@@ -1,6 +1,6 @@
 package com.example.fefufit.Di
 
-import com.example.fefufit.Data.Remote.Repositorys.FefuInitialRepository
+import com.example.fefufit.Data.Remote.Repositorys.InitialFefuRepository
 import com.example.fefufit.Domain.Repositorys.InitializationRepository
 import dagger.Binds
 import dagger.Module
@@ -15,6 +15,6 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindInitialRepository(
-        initialRepository: FefuInitialRepository
+        initialRepository: InitialFefuRepository
     ):InitializationRepository
 }

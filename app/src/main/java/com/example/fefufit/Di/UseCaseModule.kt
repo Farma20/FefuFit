@@ -1,5 +1,6 @@
 package com.example.fefufit.Di
 
+import com.example.fefufit.Data.Internal.DataStore.DataStoreManager
 import com.example.fefufit.Domain.Repositorys.InitializationRepository
 import com.example.fefufit.Domain.UseCases.Initial.SingInUseCase
 import com.example.fefufit.Domain.UseCases.Initial.SingUpUseCase
@@ -15,8 +16,11 @@ object UseCaseModule {
 
     @Provides
     @ViewModelScoped
-    fun provideSingInUseCase(repository: InitializationRepository):SingInUseCase{
-        return SingInUseCase(repository)
+    fun provideSingInUseCase(
+        repository: InitializationRepository,
+        dataStoreManager:DataStoreManager
+    ):SingInUseCase{
+        return SingInUseCase(repository, dataStoreManager)
     }
 
     @Provides

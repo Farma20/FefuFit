@@ -7,7 +7,7 @@ import com.example.fefufit.Data.Remote.Models.InitialModels.SingUpDataModel
 import com.example.fefufit.Domain.Repositorys.InitializationRepository
 import javax.inject.Inject
 
-class FefuInitialRepository @Inject constructor(private val fefuFitApi: FefuFitApi):InitializationRepository {
+class InitialFefuRepository @Inject constructor(private val fefuFitApi: FefuFitApi):InitializationRepository {
     override suspend fun singIn(singInData: SingInDataModel): SingInSuccessResponse {
             return fefuFitApi.singIn(singInData)
     }

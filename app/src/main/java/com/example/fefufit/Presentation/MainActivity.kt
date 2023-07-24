@@ -33,6 +33,9 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
 
+    @Inject
+    lateinit var dataStoreManager: DataStoreManager
+
     @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             val isDarkTheme = isSystemInDarkTheme()
             FefuFitTheme(isDarkTheme) {
+
+                val appInternalData = dataStoreManager.data.collectAsState(
+                    initial = AppInternalData()
+                ).value
+                val scope = rememberCoroutineScope()
+
+                println("-----------------------------"+appInternalData.userMetaData)
+
 
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
@@ -67,4 +78,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
