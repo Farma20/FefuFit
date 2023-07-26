@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 val whiteThemeAppPalette = FefuFitColors().apply {
     this.mainAppColors = FefuFitColors.MainAppColors(
-        appBackgroundColor = Color(0xFFFFFFFF),
+        appBackgroundColor = Color(0xFFF7F7F7),
         appBottomNavColor = Color(0xFFDFDFDF),
         appBlueColor = Color(0xFF4343F4),
         appCardColor = Color(0xFFFFFFFF),

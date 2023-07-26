@@ -16,6 +16,7 @@ import com.example.fefufit.data.internal.data_store.DataStoreManager
 import com.example.fefufit.data.internal.data_store.entities.AppInternalData
 import com.example.fefufit.domain.use_cases.main.user_use_cases.UserActiveServiceUseCase
 import com.example.fefufit.presentation.initialization.navigation.InitializationScreens
+import com.example.fefufit.presentation.main_menu.MainMenuScreen
 import com.example.fefufit.presentation.theme.FefuFitTheme
 import com.example.fefufit.utils.Resource
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -85,8 +86,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Surface {
-                    //InitializationNavigation
                     InitializationScreens()
+//                    MainMenuScreen()
                 }
             }
         }
