@@ -24,6 +24,7 @@ import com.example.fefufit.Data.Internal.DataStore.Serializer.AppInternalSeriali
 import com.example.fefufit.Domain.Repositorys.EventsRepository
 import com.example.fefufit.Domain.Repositorys.ServicesRepository
 import com.example.fefufit.Domain.Repositorys.UserDataRepository
+import com.example.fefufit.Domain.UseCases.Main.UsersUseCases.UserNearBookingUseCase
 import com.example.fefufit.Domain.UseCases.Main.UsersUseCases.UserShortDataUseCase
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
 import com.example.fefufit.Presentation.theme.FefuFitTheme
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
     lateinit var dataStoreManager: DataStoreManager
 
     @Inject
-    lateinit var userUseCase:UserShortDataUseCase
+    lateinit var bookingUseCase:UserNearBookingUseCase
 
     @SuppressLint("CoroutineCreationDuringComposition", "FlowOperatorInvokedInComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +71,7 @@ class MainActivity : ComponentActivity() {
 //                    dataStoreManager.setUserMetaData(UserMetaData())
 //                }
 
-                userUseCase().onEach {
+                bookingUseCase().onEach {
                     when(it){
                         is Resource.Loading ->{
                             println("loading")
