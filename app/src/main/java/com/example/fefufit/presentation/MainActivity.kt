@@ -86,8 +86,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Surface {
-                    InitializationScreens()
-//                    MainMenuScreen()
+//                    InitializationScreens()
+                    MainMenuScreen()
                 }
             }
         }
