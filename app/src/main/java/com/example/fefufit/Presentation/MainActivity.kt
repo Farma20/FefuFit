@@ -24,10 +24,14 @@ import com.example.fefufit.Data.Internal.DataStore.Serializer.AppInternalSeriali
 import com.example.fefufit.Domain.Repositorys.EventsRepository
 import com.example.fefufit.Domain.Repositorys.ServicesRepository
 import com.example.fefufit.Domain.Repositorys.UserDataRepository
+import com.example.fefufit.Domain.UseCases.Main.UsersUseCases.UserShortDataUseCase
 import com.example.fefufit.Presentation.Initialization.Navigation.InitializationScreens
 import com.example.fefufit.Presentation.theme.FefuFitTheme
+import com.example.fefufit.Utils.Resource
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,9 +44,9 @@ class MainActivity : ComponentActivity() {
     lateinit var dataStoreManager: DataStoreManager
 
     @Inject
-    lateinit var userDataRepository: ServicesRepository
+    lateinit var userUseCase:UserShortDataUseCase
 
-    @SuppressLint("CoroutineCreationDuringComposition")
+    @SuppressLint("CoroutineCreationDuringComposition", "FlowOperatorInvokedInComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //installing splashScreen
@@ -56,25 +60,31 @@ class MainActivity : ComponentActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         setContent {
+            val userToken = dataStoreManager.data.collectAsState(initial = AppInternalData())
+
             val isDarkTheme = isSystemInDarkTheme()
             FefuFitTheme(isDarkTheme) {
-
-                val appInternalData = dataStoreManager.data.collectAsState(
-                    initial = AppInternalData()
-                ).value
                 val scope = rememberCoroutineScope()
 
-                println("-----------------------------"+appInternalData.userMetaData)
-
 //                scope.launch {
-//                    dataStoreManager.setUserMetaData(UserMetaData(null, null))
+//                    dataStoreManager.setUserMetaData(UserMetaData())
 //                }
-                if (appInternalData.userMetaData.userToken != null){
-                    scope.launch {
-                        val result = userDataRepository.getUserServices()
-                        println(result)
+
+                userUseCase().onEach {
+                    when(it){
+                        is Resource.Loading ->{
+                            println("loading")
+                        }
+                        is Resource.Success ->{
+                            println(it.data)
+                        }
+                        is Resource.Error ->{
+                            println(it.message)
+                        }
                     }
-                }
+                }.launchIn(scope)
+
+
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
                 val barBackground = FefuFitTheme.color.mainAppColors.appBackgroundColor

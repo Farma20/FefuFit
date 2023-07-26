@@ -4,8 +4,11 @@ import com.example.fefufit.Data.Remote.Models.UserDataModels.UserShortDataModel
 import com.example.fefufit.Data.Remote.Models.UserDataModels.toShort
 import com.example.fefufit.Domain.Repositorys.UserDataRepository
 import com.example.fefufit.Utils.Resource
+import com.example.fefufit.Utils.toMap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.json.JSONObject
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class UserShortDataUseCase @Inject constructor(
@@ -17,9 +20,18 @@ class UserShortDataUseCase @Inject constructor(
             val userData = repository.getUserData()
             emit(Resource.Success(userData.toShort()))
         }
-        catch (e:Exception){
-            val errorText = "Ошибка, данные не были получены"
-            emit(Resource.Error(errorText))
+        catch (cause:Throwable){
+            when (cause) {
+                is HttpException -> {
+                    val result = JSONObject(cause.response()?.errorBody()?.string().toString()).toMap()
+                    emit(Resource.Error(result["detail"].toString()))
+                }
+                is NullPointerException -> {
+                    val errorText = "User token is null"
+                    emit(Resource.Error(errorText))
+                }
+                else -> emit(Resource.Error("Unknown error"))
         }
+    }
     }
 }

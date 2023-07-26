@@ -24,7 +24,7 @@ class UserDataFefuRepository @Inject constructor(
     }
 
     override suspend fun getUserData(): UserDataModel {
-        return api.getUserData(mapOf("token" to userToken!!))
+        return api.getUserData(mapOf("token" to userToken!!+"1"))
     }
 
     override suspend fun editUserData(): Map<String, String> {
