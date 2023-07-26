@@ -1,4 +1,4 @@
-package com.example.fefufit.Domain.Models.UserModels
+package com.example.fefufit.Data.Remote.Models.UserDataModels
 
 data class UserShortDataModel(
     val firstName: String,

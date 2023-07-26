@@ -5,7 +5,7 @@ import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingInDataModel
 import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingInSuccessResponse
 import com.example.fefufit.Data.Remote.Models.InitialDataModels.SingUpDataModel
 import com.example.fefufit.Data.Remote.Models.ServicesDataModels.UserServicesDataModel
-import com.example.fefufit.Data.Remote.Models.UserDataModels.UserInfoDataModel
+import com.example.fefufit.Data.Remote.Models.UserDataModels.UserDataModel
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -20,7 +20,7 @@ interface FefuFitApi {
 
     //userData api
     @POST("/api/user/user/view_self")
-    suspend fun getUserData(@Body token: Map<String, String>):UserInfoDataModel
+    suspend fun getUserData(@Body token: Map<String, String>):UserDataModel
 
 
     //events api

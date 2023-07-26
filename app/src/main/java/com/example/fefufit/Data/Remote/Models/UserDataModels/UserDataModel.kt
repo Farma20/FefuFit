@@ -3,7 +3,7 @@ package com.example.fefufit.Data.Remote.Models.UserDataModels
 
 import com.google.gson.annotations.SerializedName
 
-data class UserInfoDataModel(
+data class UserDataModel(
     @SerializedName("birthdate")
     val birthdate: String,
     @SerializedName("email")
@@ -23,7 +23,15 @@ data class UserInfoDataModel(
     @SerializedName("telegram_id")
     val telegramId: Any,
     @SerializedName("third_name")
-    val thirdName: String,
+    val middleName: String,
     @SerializedName("type")
     val type: String
 )
+
+fun UserDataModel.toShort():UserShortDataModel{
+    return UserShortDataModel(
+        firstName = firstName,
+        secondName = secondName,
+        middleName = middleName
+    )
+}

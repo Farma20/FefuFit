@@ -2,7 +2,7 @@ package com.example.fefufit.Data.Remote.Repositorys
 
 import com.example.fefufit.Data.Internal.DataStore.DataStoreManager
 import com.example.fefufit.Data.Remote.API.FefuFitApi
-import com.example.fefufit.Data.Remote.Models.UserDataModels.UserInfoDataModel
+import com.example.fefufit.Data.Remote.Models.UserDataModels.UserDataModel
 import com.example.fefufit.Domain.Repositorys.UserDataRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ class UserDataFefuRepository @Inject constructor(
         }.launchIn(CoroutineScope(Dispatchers.IO))
     }
 
-    override suspend fun getUserData(): UserInfoDataModel {
+    override suspend fun getUserData(): UserDataModel {
         return api.getUserData(mapOf("token" to userToken!!))
     }
 
