@@ -1,0 +1,16 @@
+package com.example.fefufit.domain.models.validation_models
+
+data class SingUpFirstFormState(
+    val secondName:String = "",
+    val secondNameError:String? = null,
+    val firstName:String = "",
+    val firstNameError:String? = null,
+    val middleName:String = "",
+    val middleNameError:String? = null,
+    val gender:String = "",
+    val genderError:String? = null,
+    val birthday:String = "",
+    val birthdayError:String? = null,
+    val status:String = "",
+    val statusError:String? = null
+)
