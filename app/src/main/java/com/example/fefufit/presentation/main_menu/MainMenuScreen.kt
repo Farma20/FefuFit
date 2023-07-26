@@ -2,6 +2,7 @@ package com.example.fefufit.presentation.main_menu
 
 import android.annotation.SuppressLint
 import android.widget.ImageButton
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -13,8 +14,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -47,6 +51,50 @@ fun MainMenuScreen() {
         ) {
             Spacer(modifier = Modifier.height(26.dp))
             MainMenuUppBar()
+            Spacer(modifier = Modifier.height(26.dp))
+            QrCard()
+        }
+    }
+}
+
+@Composable
+fun QrCard() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(14.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Column(
+            ) {
+                Text(
+                    text = "Ваш пропуск на зянятие",
+                    color = FefuFitTheme.color.textColor.whiteTextColor,
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight(500),
+                )
+                Spacer(modifier = Modifier.height(7.dp))
+                Text(
+                    text = "Покажите QR-код\n" +
+                            "администратору",
+                    color = FefuFitTheme.color.textColor.whiteTextColor,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(300),
+                )
+            }
+            Spacer(modifier = Modifier.width(30.dp))
+            Image(
+                painter = painterResource(id = R.drawable.fake_qr),
+                contentDescription = "qr"
+            )
         }
     }
 }
@@ -96,3 +144,5 @@ private fun MainMenuUppBar() {
         }
     }
 }
+
+
