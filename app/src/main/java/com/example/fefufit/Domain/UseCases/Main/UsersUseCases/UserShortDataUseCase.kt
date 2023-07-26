@@ -1,4 +1,9 @@
 package com.example.fefufit.Domain.UseCases.Main.UsersUseCases
 
-class UserShortDataUseCase {
+import com.example.fefufit.Domain.Repositorys.UserDataRepository
+
+class UserShortDataUseCase(
+    private val repository: UserDataRepository
+) {
+
 }
