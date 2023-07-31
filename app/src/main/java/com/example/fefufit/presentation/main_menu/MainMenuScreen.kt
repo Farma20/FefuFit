@@ -10,6 +10,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,11 +20,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
@@ -114,8 +118,128 @@ private fun ActiveServicesSpace() {
 }
 
 @Composable
-fun ActiveServicesCard() {
+fun ServiceCircle(number: Int, visited: Boolean){
+    val backgroundColor =
+        if (visited)
+            FefuFitTheme.color.elementsColor.elementColor
+        else
+            Color.Transparent
 
+    Box(
+        modifier = Modifier
+            .border(1.dp, FefuFitTheme.color.elementsColor.elementColor, CircleShape)
+            .size(32.dp)
+            .background(backgroundColor, CircleShape),
+        contentAlignment = Alignment.Center
+    ){
+        if(visited){
+            Icon(
+                painter = painterResource(id = R.drawable.check_mark),
+                contentDescription = "check_mark",
+                tint = FefuFitTheme.color.elementsColor.onElementsColor
+            )
+        }else{
+            Text(
+                text = "$number",
+                color = FefuFitTheme.color.elementsColor.elementColor,
+                fontSize = 16.sp,
+                fontWeight = FontWeight(400),
+                lineHeight = 22.sp,
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun ActiveServicesCard() {
+    Card(
+        modifier = Modifier,
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = FefuFitTheme.color.mainAppColors.appCardColor
+        )
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min),
+            contentAlignment = Alignment.CenterEnd
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize(),
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(0.85f)
+                        .padding(15.dp)
+                ) {
+                    Text(
+                        text = "Посещение бассейна",
+                        fontSize = 17.sp,
+                        fontWeight = FontWeight(500),
+                        color = FefuFitTheme.color.textColor.mainTextColor,
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.geo_pos_icon),
+                            contentDescription = "geo_icon",
+                            tint = FefuFitTheme.color.textColor.mainTextColor
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Корпус S, зал аэробики",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight(300),
+                            color = FefuFitTheme.color.textColor.mainTextColor,
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(20.dp))
+                    FlowRow(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        horizontalArrangement = Arrangement.Start,
+                    ) {
+                        for (i in 1..16){
+                            val visit = i in 1..4
+                            ServiceCircle(i, visit)
+                            Spacer(modifier = Modifier.width(2.dp).height(34.dp))
+                        }
+                    }
+                }
+            }
+            Row() {
+                DashedLine()
+                TextButton(
+                    enabled = false,
+                    modifier = Modifier
+                        .rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
+                        .fillMaxWidth(),
+                    shape = RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 0.dp,
+                        bottomEnd = 16.dp,
+                        bottomStart = 16.dp
+                    ),
+                    onClick = {}
+                ) {
+                    Text(
+                        modifier = Modifier,
+                        text = "до 25.07.2023",
+                        maxLines = 1,
+                        textAlign = TextAlign.Center,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight(300),
+                        color = FefuFitTheme.color.textColor.secondaryTextColor,
+                    )
+                }
+            }
+        }
+    }
 }
 
 @Composable
