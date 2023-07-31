@@ -20,7 +20,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -29,6 +33,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,16 +41,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.layout.IntrinsicMeasurable
+import androidx.compose.ui.layout.IntrinsicMeasureScope
+import androidx.compose.ui.layout.LayoutModifier
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fefufit.R
@@ -56,10 +72,11 @@ import com.example.fefufit.presentation.theme.FefuFitTheme
 @Composable
 fun MainMenuScreen() {
     Scaffold(
-        containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor
+        containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor,
     ) {
         Column(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 18.dp)
         ) {
             Spacer(modifier = Modifier.height(26.dp))
@@ -128,76 +145,147 @@ private fun DashedLine(){
     }
 }
 
+//Vertical modifier
+fun Modifier.rotateVertically(rotation: VerticalRotation) = then(
+    object : LayoutModifier {
+        override fun MeasureScope.measure(measurable: Measurable, constraints: Constraints): MeasureResult {
+            val placeable = measurable.measure(constraints)
+            return layout(placeable.height, placeable.width) {
+                placeable.place(
+                    x = -(placeable.width / 2 - placeable.height / 2),
+                    y = -(placeable.height / 2 - placeable.width / 2)
+                )
+            }
+        }
+
+        override fun IntrinsicMeasureScope.minIntrinsicHeight(measurable: IntrinsicMeasurable, width: Int): Int {
+            return measurable.maxIntrinsicWidth(width)
+        }
+
+        override fun IntrinsicMeasureScope.maxIntrinsicHeight(measurable: IntrinsicMeasurable, width: Int): Int {
+            return measurable.maxIntrinsicWidth(width)
+        }
+
+        override fun IntrinsicMeasureScope.minIntrinsicWidth(measurable: IntrinsicMeasurable, height: Int): Int {
+            return measurable.minIntrinsicHeight(height)
+        }
+
+        override fun IntrinsicMeasureScope.maxIntrinsicWidth(measurable: IntrinsicMeasurable, height: Int): Int {
+            return measurable.maxIntrinsicHeight(height)
+        }
+    })
+    .then(rotate(rotation.value))
+
+enum class VerticalRotation(val value: Float) {
+    CLOCKWISE(90f), COUNTER_CLOCKWISE(270f)
+}
+
+
 
 @Composable
 fun NearEventCard() {
     Card(
         modifier = Modifier,
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = FefuFitTheme.color.mainAppColors.appCardColor
         )
     ) {
-        Row(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(IntrinsicSize.Min),
+                .height(IntrinsicSize.Max),
+            contentAlignment = Alignment.CenterEnd
         ) {
-            Column(
+            Row(
                 modifier = Modifier
-                    .padding(15.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = "Детская секция по фехтованию",
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight(500),
-                    color = FefuFitTheme.color.textColor.mainTextColor,
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = "Сегодня, 14:00 - 16:00",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight(500),
-                    color = FefuFitTheme.color.textColor.secondaryTextColor,
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier
+                        .width(280.dp)
+                        .padding(15.dp)
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.geo_pos_icon),
-                        contentDescription = "geo_icon",
-                        tint = FefuFitTheme.color.textColor.mainTextColor
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "Корпус S, зал аэробики",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight(300),
+                        text = "Занятие по боксу",
+                        fontSize = 17.sp,
+                        fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.mainTextColor,
                     )
-                }
-                Spacer(modifier = Modifier.height(12.dp))
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.person_icon),
-                        contentDescription = "geo_icon",
-                        tint = FefuFitTheme.color.textColor.mainTextColor
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = "Кердун Юлия Олеговна",
-                        fontSize = 12.sp,
+                        text = "Сегодня, 14:00 - 16:00",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(500),
+                        color = FefuFitTheme.color.textColor.secondaryTextColor,
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.geo_pos_icon),
+                            contentDescription = "geo_icon",
+                            tint = FefuFitTheme.color.textColor.mainTextColor
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Корпус S, зал аэробики",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight(300),
+                            color = FefuFitTheme.color.textColor.mainTextColor,
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.person_icon),
+                            contentDescription = "geo_icon",
+                            tint = FefuFitTheme.color.textColor.mainTextColor
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Кердун Юлия Олеговна",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight(300),
+                            color = FefuFitTheme.color.textColor.mainTextColor,
+                        )
+                    }
+                }
+
+            }
+            Row() {
+                DashedLine()
+                TextButton(
+                    modifier = Modifier
+                        .rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
+                        .fillMaxWidth(),
+                    shape = RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 0.dp,
+                        bottomEnd = 16.dp,
+                        bottomStart = 16.dp
+                    ),
+                    onClick = {}
+                ) {
+                    Text(
+                        modifier = Modifier,
+                        text = "отменить",
+                        maxLines = 1,
+                        textAlign = TextAlign.Center,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight(300),
                         color = FefuFitTheme.color.textColor.mainTextColor,
                     )
                 }
             }
-            DashedLine()
         }
     }
 }
+
 
 @Composable
 private fun QrCard() {
