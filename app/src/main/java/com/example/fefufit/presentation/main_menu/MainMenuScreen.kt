@@ -85,8 +85,37 @@ fun MainMenuScreen() {
             QrCard()
             Spacer(modifier = Modifier.height(18.dp))
             NearEventSpace()
+            Spacer(modifier = Modifier.height(18.dp))
+            ActiveServicesSpace()
         }
     }
+}
+
+@Composable
+private fun ActiveServicesSpace() {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Действующие абонементы",
+                fontSize = 22.sp,
+                fontWeight = FontWeight(400),
+                color = FefuFitTheme.color.textColor.mainTextColor,
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        ActiveServicesCard()
+    }
+}
+
+@Composable
+fun ActiveServicesCard() {
+
 }
 
 @Composable
