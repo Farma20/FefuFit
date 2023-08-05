@@ -28,6 +28,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -56,7 +57,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.fefufit.R
+import com.example.fefufit.presentation.main_menu.models.UserDataState
 import com.example.fefufit.presentation.theme.FefuFitTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -70,8 +73,13 @@ import com.google.accompanist.pager.rememberPagerState
     ExperimentalPagerApi::class
 )
 @Composable
-fun MainMenuScreen() {
+fun MainMenuScreen(
+    viewModel:MainMenuViewModel = hiltViewModel()
+) {
+    //data states
+    val userDataState = viewModel.userDataState.value
 
+    //pages variables
     val pagerState = rememberPagerState()
 
     Scaffold(
@@ -83,7 +91,7 @@ fun MainMenuScreen() {
                 .fillMaxWidth()
         ) {
             Spacer(modifier = Modifier.height(26.dp))
-            MainMenuUppBar()
+            MainMenuUppBar(userDataState)
             Spacer(modifier = Modifier.height(26.dp))
             QrCard()
             Spacer(modifier = Modifier.height(18.dp))
@@ -505,7 +513,9 @@ private fun QrCard() {
 }
 
 @Composable
-private fun MainMenuUppBar() {
+private fun MainMenuUppBar(
+    userDataState: UserDataState
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -513,18 +523,32 @@ private fun MainMenuUppBar() {
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-       Text(
-           modifier = Modifier.fillMaxWidth(0.7f),
-           text = buildAnnotatedString {
-               append("Время тренировки, ")
-               withStyle(style = SpanStyle(fontWeight = FontWeight(300))) {
-                   append("Александр!")
-               }
-           },
-           fontSize = 22.sp,
-           fontWeight = FontWeight(500),
-           color  = FefuFitTheme.color.textColor.mainTextColor,
-       )
+       if (!userDataState.isLoading){
+           Text(
+               modifier = Modifier.fillMaxWidth(0.7f),
+               text = buildAnnotatedString {
+                   append("Время тренировки, ")
+                   withStyle(style = SpanStyle(fontWeight = FontWeight(300))) {
+                       if (userDataState.data != null){
+                           append("${userDataState.data.firstName}!")
+                       }
+                       else{
+                           append("Ошибка!")
+                       }
+                   }
+               },
+               fontSize = 22.sp,
+               fontWeight = FontWeight(500),
+               color  = FefuFitTheme.color.textColor.mainTextColor,
+           )
+       }
+       else{
+            Row(
+                modifier = Modifier.fillMaxWidth(0.7f)
+            ) {
+                CircularProgressIndicator()
+            }
+       }
         Row(
             modifier = Modifier,
             horizontalArrangement = Arrangement.SpaceEvenly
