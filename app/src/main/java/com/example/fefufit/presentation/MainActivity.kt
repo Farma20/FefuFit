@@ -61,19 +61,19 @@ class MainActivity : ComponentActivity() {
 //                    dataStoreManager.setUserMetaData(UserMetaData())
 //                }
 
-                bookingUseCase().onEach {
-                    when(it){
-                        is Resource.Loading ->{
-                            println("loading")
-                        }
-                        is Resource.Success ->{
-                            println(it.data)
-                        }
-                        is Resource.Error ->{
-                            println(it.message)
-                        }
-                    }
-                }.launchIn(scope)
+//                bookingUseCase().onEach {
+//                    when(it){
+//                        is Resource.Loading ->{
+//                            println("loading")
+//                        }
+//                        is Resource.Success ->{
+//                            println(it.data)
+//                        }
+//                        is Resource.Error ->{
+//                            println(it.message)
+//                        }
+//                    }
+//                }.launchIn(scope)
 
 
                 //painted system controllers
@@ -88,7 +88,7 @@ class MainActivity : ComponentActivity() {
 
                 Surface {
 //                    InitializationScreens()
-//                    MainMenuScreen()
+                    MainMenuScreen()
                 }
             }
         }

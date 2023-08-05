@@ -544,9 +544,12 @@ private fun MainMenuUppBar(
        }
        else{
             Row(
-                modifier = Modifier.fillMaxWidth(0.7f)
+                modifier = Modifier.fillMaxWidth(0.7f),
+                horizontalArrangement = Arrangement.Center
             ) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                    color = FefuFitTheme.color.elementsColor.elementColor
+                )
             }
        }
         Row(
