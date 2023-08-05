@@ -2,6 +2,7 @@ package com.example.fefufit.presentation.main_menu
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -21,8 +22,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -60,10 +59,16 @@ import androidx.compose.ui.unit.sp
 import com.example.fefufit.R
 import com.example.fefufit.presentation.theme.FefuFitTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.rememberPagerState
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalPagerApi::class)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalPagerApi::class
+)
 @Composable
 fun MainMenuScreen() {
 
@@ -75,7 +80,7 @@ fun MainMenuScreen() {
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 18.dp)
+                .fillMaxWidth()
         ) {
             Spacer(modifier = Modifier.height(26.dp))
             MainMenuUppBar()
@@ -89,13 +94,16 @@ fun MainMenuScreen() {
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun ActiveServicesSpace(pagerState: PagerState) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 18.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -118,7 +126,10 @@ private fun ActiveServicesSpace(pagerState: PagerState) {
                 ActiveServicesCard()
             }
             Spacer(modifier = Modifier.height(16.dp))
-            HorizontalPagerIndicator(pagerState = pagerState)
+            HorizontalPagerIndicator(
+                pagerState = pagerState,
+                activeColor = FefuFitTheme.color.elementsColor.elementColor
+            )
         }
     }
 }
@@ -160,7 +171,7 @@ fun ServiceCircle(number: Int, visited: Boolean){
 @Composable
 fun ActiveServicesCard() {
     Card(
-        modifier = Modifier,
+        modifier = Modifier.padding(horizontal = 18.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = FefuFitTheme.color.mainAppColors.appCardColor
@@ -210,7 +221,7 @@ fun ActiveServicesCard() {
                             .fillMaxSize(),
                         horizontalArrangement = Arrangement.Start,
                     ) {
-                        for (i in 1..16){
+                        for (i in 1..12){
                             val visit = i in 1..4
                             ServiceCircle(i, visit)
                             Spacer(modifier = Modifier
@@ -253,7 +264,9 @@ fun ActiveServicesCard() {
 @Composable
 fun NearEventSpace() {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 18.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -452,7 +465,8 @@ fun NearEventCard() {
 private fun QrCard() {
     Card(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(horizontal = 18.dp),
         colors = CardDefaults.cardColors(
             containerColor = FefuFitTheme.color.mainAppColors.appBlueColor,
         ),
@@ -494,7 +508,8 @@ private fun QrCard() {
 private fun MainMenuUppBar() {
     Row(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(horizontal = 18.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
