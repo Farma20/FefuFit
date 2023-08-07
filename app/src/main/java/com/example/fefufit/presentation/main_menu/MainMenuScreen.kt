@@ -59,6 +59,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.fefufit.R
+import com.example.fefufit.data.remote.models.events_data_models.UserBookingDataModelItem
+import com.example.fefufit.presentation.main_menu.models.NearBookingDataState
 import com.example.fefufit.presentation.main_menu.models.UserDataState
 import com.example.fefufit.presentation.theme.FefuFitTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -78,6 +80,7 @@ fun MainMenuScreen(
 ) {
     //data states
     val userDataState = viewModel.userDataState.value
+    val nearBookingState = viewModel.nearBookingState.value
 
     //pages variables
     val pagerState = rememberPagerState()
@@ -95,7 +98,7 @@ fun MainMenuScreen(
             Spacer(modifier = Modifier.height(26.dp))
             QrCard()
             Spacer(modifier = Modifier.height(18.dp))
-            NearEventSpace()
+            NearEventSpace(nearBookingState)
             Spacer(modifier = Modifier.height(18.dp))
             ActiveServicesSpace(pagerState)
         }
@@ -270,7 +273,7 @@ fun ActiveServicesCard() {
 }
 
 @Composable
-fun NearEventSpace() {
+fun NearEventSpace(nearBookingState: NearBookingDataState) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -307,7 +310,32 @@ fun NearEventSpace() {
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
-        NearEventCard()
+        if (nearBookingState.isLoading)
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator(
+                    color = FefuFitTheme.color.elementsColor.elementColor
+                )
+            }
+        else if (nearBookingState.error != null)
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = nearBookingState.error
+                )
+            }
+        else if (nearBookingState.data == null){
+            Text(
+                text = "Ближайших занятий нет"
+            )
+        }
+        else{
+            NearEventCard(nearBookingState.data)
+        }
     }
 }
 
@@ -365,7 +393,7 @@ enum class VerticalRotation(val value: Float) {
 
 
 @Composable
-fun NearEventCard() {
+fun NearEventCard(nearBookingData:UserBookingDataModelItem) {
     Card(
         modifier = Modifier,
         shape = RoundedCornerShape(16.dp),
@@ -390,7 +418,7 @@ fun NearEventCard() {
                         .padding(15.dp)
                 ) {
                     Text(
-                        text = "Занятие по боксу",
+                        text = nearBookingData.eventName,
                         fontSize = 17.sp,
                         fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.mainTextColor,
@@ -413,7 +441,7 @@ fun NearEventCard() {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Корпус S, зал аэробики",
+                            text = nearBookingData.buildingName,
                             fontSize = 12.sp,
                             fontWeight = FontWeight(300),
                             color = FefuFitTheme.color.textColor.mainTextColor,
@@ -430,7 +458,7 @@ fun NearEventCard() {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Кердун Юлия Олеговна",
+                            text = nearBookingData.coachName,
                             fontSize = 12.sp,
                             fontWeight = FontWeight(300),
                             color = FefuFitTheme.color.textColor.mainTextColor,
