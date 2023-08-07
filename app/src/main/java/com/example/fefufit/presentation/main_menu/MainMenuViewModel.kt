@@ -8,6 +8,7 @@ import com.example.fefufit.data.remote.models.user_data_models.UserShortDataMode
 import com.example.fefufit.domain.use_cases.main.user_use_cases.UserActiveServiceUseCase
 import com.example.fefufit.domain.use_cases.main.user_use_cases.UserNearBookingUseCase
 import com.example.fefufit.domain.use_cases.main.user_use_cases.UserShortDataUseCase
+import com.example.fefufit.presentation.main_menu.models.ActiveServicesState
 import com.example.fefufit.presentation.main_menu.models.NearBookingDataState
 import com.example.fefufit.presentation.main_menu.models.UserDataState
 import com.example.fefufit.utils.Resource
@@ -30,9 +31,29 @@ class MainMenuViewModel @Inject constructor(
     private var _nearBookingState = mutableStateOf(NearBookingDataState())
     val nearBookingState:State<NearBookingDataState> = _nearBookingState
 
+    private var _activeServicesState = mutableStateOf(ActiveServicesState())
+    val activeServicesState:State<ActiveServicesState> = _activeServicesState
+
     init {
         getUserData()
         getNearBooking()
+        getActiveServices()
+    }
+
+    private fun getActiveServices() {
+        userActiveServiceUseCase().onEach { result ->
+            when(result){
+                is Resource.Success ->{
+                    _activeServicesState.value = ActiveServicesState(data = result.data)
+                }
+                is Resource.Error ->{
+                    _activeServicesState.value = ActiveServicesState(error = result.message)
+                }
+                is Resource.Loading ->{
+                    _activeServicesState.value = ActiveServicesState(isLoading = true)
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
     private fun getNearBooking() {
