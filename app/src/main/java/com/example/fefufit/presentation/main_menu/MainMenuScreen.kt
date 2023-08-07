@@ -2,7 +2,6 @@ package com.example.fefufit.presentation.main_menu
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -60,6 +59,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.fefufit.R
 import com.example.fefufit.data.remote.models.events_data_models.UserBookingDataModelItem
+import com.example.fefufit.data.remote.models.services_data_models.UserServicesDataModelItem
+import com.example.fefufit.presentation.main_menu.models.ActiveServicesState
 import com.example.fefufit.presentation.main_menu.models.NearBookingDataState
 import com.example.fefufit.presentation.main_menu.models.UserDataState
 import com.example.fefufit.presentation.theme.FefuFitTheme
@@ -81,6 +82,7 @@ fun MainMenuScreen(
     //data states
     val userDataState = viewModel.userDataState.value
     val nearBookingState = viewModel.nearBookingState.value
+    val activeUserServicesState = viewModel.activeServicesState.value
 
     //pages variables
     val pagerState = rememberPagerState()
@@ -100,14 +102,20 @@ fun MainMenuScreen(
             Spacer(modifier = Modifier.height(18.dp))
             NearEventSpace(nearBookingState)
             Spacer(modifier = Modifier.height(18.dp))
-            ActiveServicesSpace(pagerState)
+            ActiveServicesSpace(
+                pagerState,
+                activeUserServicesState,
+            )
         }
     }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-private fun ActiveServicesSpace(pagerState: PagerState) {
+private fun ActiveServicesSpace(
+    pagerState: PagerState,
+    activeUserServicesState: ActiveServicesState
+) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -126,22 +134,48 @@ private fun ActiveServicesSpace(pagerState: PagerState) {
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            HorizontalPager(
+        if (activeUserServicesState.isLoading)
+            Column(
                 modifier = Modifier.fillMaxWidth(),
-                count = 4,
-                state = pagerState
-            ) {id->
-                ActiveServicesCard()
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator(
+                    color = FefuFitTheme.color.elementsColor.elementColor
+                )
             }
-            Spacer(modifier = Modifier.height(16.dp))
-            HorizontalPagerIndicator(
-                pagerState = pagerState,
-                activeColor = FefuFitTheme.color.elementsColor.elementColor
+        else if (activeUserServicesState.error != null)
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = activeUserServicesState.error
+                )
+            }
+        else if (activeUserServicesState.data == null){
+            Text(
+                text = "Ближайших занятий нет"
             )
         }
+        else{
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                HorizontalPager(
+                    modifier = Modifier.fillMaxWidth(),
+                    count = activeUserServicesState.data.size,
+                    state = pagerState
+                ) {id->
+                    ActiveServicesCard(activeUserServicesState.data[id])
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalPagerIndicator(
+                    pagerState = pagerState,
+                    activeColor = FefuFitTheme.color.elementsColor.elementColor
+                )
+            }
+        }
+
     }
 }
 
@@ -180,7 +214,7 @@ fun ServiceCircle(number: Int, visited: Boolean){
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun ActiveServicesCard() {
+fun ActiveServicesCard(data: UserServicesDataModelItem) {
     Card(
         modifier = Modifier.padding(horizontal = 18.dp),
         shape = RoundedCornerShape(16.dp),
@@ -204,7 +238,7 @@ fun ActiveServicesCard() {
                         .padding(15.dp)
                 ) {
                     Text(
-                        text = "Посещение бассейна",
+                        text = data.serviceName,
                         fontSize = 17.sp,
                         fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.mainTextColor,
@@ -232,8 +266,8 @@ fun ActiveServicesCard() {
                             .fillMaxSize(),
                         horizontalArrangement = Arrangement.Start,
                     ) {
-                        for (i in 1..12){
-                            val visit = i in 1..4
+                        for (i in 1..data.planCapacity){
+                            val visit = i <= data.eventsDone
                             ServiceCircle(i, visit)
                             Spacer(modifier = Modifier
                                 .width(2.dp)
