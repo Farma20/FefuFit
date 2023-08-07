@@ -44,4 +44,5 @@ class MainMenuViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+
 }
