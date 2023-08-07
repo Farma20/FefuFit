@@ -5,5 +5,5 @@ import com.example.fefufit.data.remote.models.user_data_models.UserShortDataMode
 data class UserDataState(
     val isLoading: Boolean = false,
     val data: UserShortDataModel? = null,
-    val isError: String? = null
+    val error: String? = null
 )
