@@ -154,7 +154,7 @@ private fun ActiveServicesSpace(
             }
         else if (activeUserServicesState.data == null){
             Text(
-                text = "Ближайших занятий нет"
+                text = "Активных абонементов нет"
             )
         }
         else{
@@ -263,7 +263,7 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                     Spacer(modifier = Modifier.height(20.dp))
                     FlowRow(
                         modifier = Modifier
-                            .fillMaxSize(),
+                            .fillMaxWidth(),
                         horizontalArrangement = Arrangement.Start,
                     ) {
                         for (i in 1..data.planCapacity){
