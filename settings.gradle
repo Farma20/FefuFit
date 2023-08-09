@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "FefuFit"
 include ':app'
-include ':initialmodule'
+include ':initial'
 include ':core'

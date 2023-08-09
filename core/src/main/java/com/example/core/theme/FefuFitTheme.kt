@@ -1,8 +1,8 @@
-package com.example.fefufit.presentation.theme
+package com.example.core.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import com.example.fefufit.presentation.theme.FefuFitTheme.LocalFefuFitColors
+import com.example.core.theme.FefuFitTheme.LocalFefuFitColors
 
 @Composable
 fun FefuFitTheme(

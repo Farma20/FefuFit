@@ -17,7 +17,7 @@ import com.example.fefufit.data.internal.data_store.entities.AppInternalData
 import com.example.fefufit.domain.use_cases.main.user_use_cases.UserActiveServiceUseCase
 import com.example.fefufit.presentation.initialization.navigation.InitializationScreens
 import com.example.fefufit.presentation.main_menu.MainMenuScreen
-import com.example.fefufit.presentation.theme.FefuFitTheme
+import com.example.core.theme.FefuFitTheme
 import com.example.fefufit.utils.Resource
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
             val userToken = dataStoreManager.data.collectAsState(initial = AppInternalData())
 
             val isDarkTheme = isSystemInDarkTheme()
-            FefuFitTheme(isDarkTheme) {
+            com.example.core.theme.FefuFitTheme(isDarkTheme) {
                 val scope = rememberCoroutineScope()
 
 //                scope.launch {
@@ -78,11 +78,15 @@ class MainActivity : ComponentActivity() {
 
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
-                val barBackground = FefuFitTheme.color.mainAppColors.appBackgroundColor
+                val barBackground =
+                    com.example.core.theme.FefuFitTheme.color.mainAppColors.appBackgroundColor
 
                 //painted system upp & bottom panels
                 SideEffect {
-                    systemUiController.setStatusBarColor(color = barBackground, darkIcons = !isDarkTheme)
+                    systemUiController.setStatusBarColor(
+                        color = barBackground,
+                        darkIcons = !isDarkTheme
+                    )
                     systemUiController.setNavigationBarColor(color = barBackground)
                 }
 

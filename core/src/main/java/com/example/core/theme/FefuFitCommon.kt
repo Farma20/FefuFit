@@ -1,4 +1,4 @@
-package com.example.fefufit.presentation.theme
+package com.example.core.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -34,7 +34,7 @@ class FefuFitColors{
 }
 
 object FefuFitTheme{
-    val color:FefuFitColors
+    val color: FefuFitColors
     @Composable
     get() = LocalFefuFitColors.current
 

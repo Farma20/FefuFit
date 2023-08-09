@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.sp
 import com.example.fefufit.presentation.initialization.sing_up_screen.navigation.InputFieldsStates
 import com.example.fefufit.presentation.initialization.sing_up_screen.SingUpScreenViewModel
 import com.example.fefufit.presentation.initialization.sing_up_screen.validation.SingUpSecondFormEvent
-import com.example.fefufit.presentation.theme.FefuFitTheme
+import com.example.core.theme.FefuFitTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,11 +59,11 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             Text(
                 text = "Номер телефона",
                 fontSize = 14.sp,
-                color = FefuFitTheme.color.textColor.mainTextColor
+                color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color =  FefuFitTheme.color.mainAppColors.errorColor
+                color =  com.example.core.theme.FefuFitTheme.color.mainAppColors.errorColor
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -82,9 +82,9 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                textColor = FefuFitTheme.color.textColor.mainTextColor
+                cursorColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                focusedBorderColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                textColor = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
             )
         )
 
@@ -108,11 +108,11 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             Text(
                 text = "Почта",
                 fontSize = 14.sp,
-                color = FefuFitTheme.color.textColor.mainTextColor
+                color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color = FefuFitTheme.color.mainAppColors.errorColor,
+                color = com.example.core.theme.FefuFitTheme.color.mainAppColors.errorColor,
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -131,9 +131,9 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                textColor = FefuFitTheme.color.textColor.mainTextColor
+                cursorColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                focusedBorderColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                textColor = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
             )
         )
 
@@ -155,11 +155,11 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             Text(
                 text = "Пароль",
                 fontSize = 14.sp,
-                color = FefuFitTheme.color.textColor.mainTextColor
+                color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color = FefuFitTheme.color.mainAppColors.errorColor,
+                color = com.example.core.theme.FefuFitTheme.color.mainAppColors.errorColor,
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -179,9 +179,9 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                textColor = FefuFitTheme.color.textColor.mainTextColor
+                cursorColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                focusedBorderColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                textColor = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
             )
         )
         if (inputDataState.passwordError != null){
@@ -203,11 +203,11 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             Text(
                 text = "Повтор пароля",
                 fontSize = 14.sp,
-                color = FefuFitTheme.color.textColor.mainTextColor
+                color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
             )
             Text(
                 text = " *",
-                color = FefuFitTheme.color.mainAppColors.errorColor,
+                color = com.example.core.theme.FefuFitTheme.color.mainAppColors.errorColor,
             )
         }
         Spacer(modifier = Modifier.height(6.dp))
@@ -227,9 +227,9 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                textColor = FefuFitTheme.color.textColor.mainTextColor
+                cursorColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                focusedBorderColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                textColor = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
             )
         )
         if (inputDataState.repeatPasswordError != null){
@@ -252,8 +252,8 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
         ){
             Checkbox(
                 colors = CheckboxDefaults.colors(
-                    uncheckedColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                    checkedColor = FefuFitTheme.color.mainAppColors.appBlueColor
+                    uncheckedColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+                    checkedColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor
                 ),
                 checked = inputDataState.terms,
                 onCheckedChange = {
@@ -265,13 +265,13 @@ fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
                 Text(
                     text = buildAnnotatedString {
                         append("Я согласен на обработку персональных данных")
-                        withStyle(style = SpanStyle(color = FefuFitTheme.color.mainAppColors.errorColor)){
+                        withStyle(style = SpanStyle(color = com.example.core.theme.FefuFitTheme.color.mainAppColors.errorColor)){
                             append(" *")
                         }
                     },
                     fontSize = 13.sp,
                     fontWeight = FontWeight(300),
-                    color = FefuFitTheme.color.textColor.mainTextColor,
+                    color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
                     lineHeight = 16.sp
                 )
             }
@@ -301,7 +301,7 @@ private fun RegistrationButton(viewModel: SingUpScreenViewModel){
         ,
         shape = RoundedCornerShape(13.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = FefuFitTheme.color.mainAppColors.appBlueColor
+            containerColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor
         ),
         onClick = {
             viewModel.inputSecondDataEvent(SingUpSecondFormEvent.Submit)
