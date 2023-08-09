@@ -1,4 +1,4 @@
-package com.example.core
+package com.example.theme
 
 import org.junit.Test
 

@@ -104,7 +104,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
 
     //Modules
-    implementation project(':core')
+    implementation project(":core:theme")
 
 
     constraints{
