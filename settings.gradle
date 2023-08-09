@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "FefuFit"
 include ':app'
 include ':core:theme'
+include ':core:common'
 include ':features:sing-in'
+
