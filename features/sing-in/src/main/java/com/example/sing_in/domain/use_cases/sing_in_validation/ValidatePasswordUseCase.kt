@@ -1,6 +1,6 @@
 package com.example.fefufit.domain.use_cases.initial.validation.sing_in_validation
 
-import com.example.fefufit.domain.models.validation_models.ValidationResult
+import com.example.sing_in.domain.models.validation.ValidationResult
 import javax.inject.Inject
 
 class ValidatePasswordUseCase @Inject constructor(){

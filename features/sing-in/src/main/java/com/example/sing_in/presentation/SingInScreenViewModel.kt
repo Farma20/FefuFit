@@ -5,12 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fefufit.data.remote.models.initial_data_models.SingInDataModel
-import com.example.fefufit.domain.models.validation_models.SingInFormState
-import com.example.fefufit.domain.use_cases.initial.SingInUseCase
+import com.example.common.Resource
 import com.example.fefufit.domain.use_cases.initial.validation.sing_in_validation.ValidateEmailUseCase
 import com.example.fefufit.domain.use_cases.initial.validation.sing_in_validation.ValidatePasswordUseCase
-import com.example.fefufit.utils.Resource
+import com.example.sing_in.domain.models.validation.SingInFormState
+import com.example.sing_in.domain.use_cases.SingInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn

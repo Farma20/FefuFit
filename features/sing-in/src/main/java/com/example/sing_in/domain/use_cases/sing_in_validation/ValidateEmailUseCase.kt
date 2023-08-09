@@ -1,7 +1,7 @@
 package com.example.fefufit.domain.use_cases.initial.validation.sing_in_validation
 
 import android.util.Patterns
-import com.example.fefufit.domain.models.validation_models.ValidationResult
+import com.example.sing_in.domain.models.validation.ValidationResult
 import javax.inject.Inject
 
 class ValidateEmailUseCase @Inject constructor() {
