@@ -88,7 +88,7 @@ fun MainMenuScreen(
     val pagerState = rememberPagerState()
 
     Scaffold(
-        containerColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBackgroundColor,
+        containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor,
     ) {
         Column(
             modifier = Modifier
@@ -130,7 +130,7 @@ private fun ActiveServicesSpace(
                 text = "Действующие абонементы",
                 fontSize = 22.sp,
                 fontWeight = FontWeight(400),
-                color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                color = FefuFitTheme.color.textColor.mainTextColor,
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -140,7 +140,7 @@ private fun ActiveServicesSpace(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CircularProgressIndicator(
-                    color = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor
+                    color = FefuFitTheme.color.elementsColor.elementColor
                 )
             }
         else if (activeUserServicesState.error != null)
@@ -171,7 +171,7 @@ private fun ActiveServicesSpace(
                 Spacer(modifier = Modifier.height(16.dp))
                 HorizontalPagerIndicator(
                     pagerState = pagerState,
-                    activeColor = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor
+                    activeColor = FefuFitTheme.color.elementsColor.elementColor
                 )
             }
         }
@@ -183,13 +183,13 @@ private fun ActiveServicesSpace(
 fun ServiceCircle(number: Int, visited: Boolean){
     val backgroundColor =
         if (visited)
-            com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor
+            FefuFitTheme.color.elementsColor.elementColor
         else
             Color.Transparent
 
     Box(
         modifier = Modifier
-            .border(1.dp, com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor, CircleShape)
+            .border(1.dp, FefuFitTheme.color.elementsColor.elementColor, CircleShape)
             .size(32.dp)
             .background(backgroundColor, CircleShape),
         contentAlignment = Alignment.Center
@@ -198,12 +198,12 @@ fun ServiceCircle(number: Int, visited: Boolean){
             Icon(
                 painter = painterResource(id = R.drawable.check_mark),
                 contentDescription = "check_mark",
-                tint = com.example.core.theme.FefuFitTheme.color.elementsColor.onElementsColor
+                tint = FefuFitTheme.color.elementsColor.onElementsColor
             )
         }else{
             Text(
                 text = "$number",
-                color = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor,
+                color = FefuFitTheme.color.elementsColor.elementColor,
                 fontSize = 16.sp,
                 fontWeight = FontWeight(400),
                 lineHeight = 22.sp,
@@ -219,7 +219,7 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
         modifier = Modifier.padding(horizontal = 18.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appCardColor
+            containerColor = FefuFitTheme.color.mainAppColors.appCardColor
         )
     ) {
         Box(
@@ -241,7 +241,7 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                         text = data.serviceName,
                         fontSize = 17.sp,
                         fontWeight = FontWeight(500),
-                        color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                        color = FefuFitTheme.color.textColor.mainTextColor,
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Row(
@@ -250,14 +250,14 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                         Icon(
                             painter = painterResource(id = R.drawable.geo_pos_icon),
                             contentDescription = "geo_icon",
-                            tint = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+                            tint = FefuFitTheme.color.textColor.mainTextColor
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Корпус S, зал аэробики",
                             fontSize = 12.sp,
                             fontWeight = FontWeight(300),
-                            color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                            color = FefuFitTheme.color.textColor.mainTextColor,
                         )
                     }
                     Spacer(modifier = Modifier.height(20.dp))
@@ -298,7 +298,7 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                         textAlign = TextAlign.Center,
                         fontSize = 18.sp,
                         fontWeight = FontWeight(300),
-                        color = com.example.core.theme.FefuFitTheme.color.textColor.secondaryTextColor,
+                        color = FefuFitTheme.color.textColor.secondaryTextColor,
                     )
                 }
             }
@@ -322,7 +322,7 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
                 text = "Ближайшее занятие",
                 fontSize = 22.sp,
                 fontWeight = FontWeight(400),
-                color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                color = FefuFitTheme.color.textColor.mainTextColor,
             )
             Row(
                 modifier = Modifier
@@ -334,12 +334,12 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
                     text = "Все записи ",
                     fontSize = 16.sp,
                     fontWeight = FontWeight(400),
-                    color = com.example.core.theme.FefuFitTheme.color.textColor.secondaryTextColor,
+                    color = FefuFitTheme.color.textColor.secondaryTextColor,
                 )
                 Icon(
                     painter = painterResource(id = R.drawable.next_arrows),
                     contentDescription = "nextArrows",
-                    tint = com.example.core.theme.FefuFitTheme.color.textColor.secondaryTextColor,
+                    tint = FefuFitTheme.color.textColor.secondaryTextColor,
                 )
             }
         }
@@ -350,7 +350,7 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CircularProgressIndicator(
-                    color = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor
+                    color = FefuFitTheme.color.elementsColor.elementColor
                 )
             }
         else if (nearBookingState.error != null)
@@ -376,7 +376,7 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
 @Composable
 private fun DashedLine(){
     val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
-    val color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+    val color = FefuFitTheme.color.textColor.mainTextColor
     Canvas(
         Modifier.fillMaxHeight()
             ) {
@@ -432,7 +432,7 @@ fun NearEventCard(nearBookingData:UserBookingDataModelItem) {
         modifier = Modifier,
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appCardColor
+            containerColor = FefuFitTheme.color.mainAppColors.appCardColor
         )
     ) {
         Box(
@@ -455,14 +455,14 @@ fun NearEventCard(nearBookingData:UserBookingDataModelItem) {
                         text = nearBookingData.eventName,
                         fontSize = 17.sp,
                         fontWeight = FontWeight(500),
-                        color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                        color = FefuFitTheme.color.textColor.mainTextColor,
                     )
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = "Сегодня, 14:00 - 16:00",
                         fontSize = 16.sp,
                         fontWeight = FontWeight(500),
-                        color = com.example.core.theme.FefuFitTheme.color.textColor.secondaryTextColor,
+                        color = FefuFitTheme.color.textColor.secondaryTextColor,
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Row(
@@ -471,14 +471,14 @@ fun NearEventCard(nearBookingData:UserBookingDataModelItem) {
                         Icon(
                             painter = painterResource(id = R.drawable.geo_pos_icon),
                             contentDescription = "geo_icon",
-                            tint = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+                            tint = FefuFitTheme.color.textColor.mainTextColor
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = nearBookingData.buildingName,
                             fontSize = 12.sp,
                             fontWeight = FontWeight(300),
-                            color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                            color = FefuFitTheme.color.textColor.mainTextColor,
                         )
                     }
                     Spacer(modifier = Modifier.height(12.dp))
@@ -488,14 +488,14 @@ fun NearEventCard(nearBookingData:UserBookingDataModelItem) {
                         Icon(
                             painter = painterResource(id = R.drawable.person_icon),
                             contentDescription = "geo_icon",
-                            tint = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+                            tint = FefuFitTheme.color.textColor.mainTextColor
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = nearBookingData.coachName,
                             fontSize = 12.sp,
                             fontWeight = FontWeight(300),
-                            color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                            color = FefuFitTheme.color.textColor.mainTextColor,
                         )
                     }
                 }
@@ -522,7 +522,7 @@ fun NearEventCard(nearBookingData:UserBookingDataModelItem) {
                         textAlign = TextAlign.Center,
                         fontSize = 18.sp,
                         fontWeight = FontWeight(300),
-                        color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                        color = FefuFitTheme.color.textColor.mainTextColor,
                     )
                 }
             }
@@ -538,7 +538,7 @@ private fun QrCard() {
             .fillMaxWidth()
             .padding(horizontal = 18.dp),
         colors = CardDefaults.cardColors(
-            containerColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
+            containerColor = FefuFitTheme.color.mainAppColors.appBlueColor,
         ),
         shape = RoundedCornerShape(12.dp)
     ) {
@@ -552,7 +552,7 @@ private fun QrCard() {
             ) {
                 Text(
                     text = "Ваш пропуск на зянятие",
-                    color = com.example.core.theme.FefuFitTheme.color.textColor.whiteTextColor,
+                    color = FefuFitTheme.color.textColor.whiteTextColor,
                     fontSize = 17.sp,
                     fontWeight = FontWeight(500),
                 )
@@ -560,7 +560,7 @@ private fun QrCard() {
                 Text(
                     text = "Покажите QR-код\n" +
                             "администратору",
-                    color = com.example.core.theme.FefuFitTheme.color.textColor.whiteTextColor,
+                    color = FefuFitTheme.color.textColor.whiteTextColor,
                     fontSize = 14.sp,
                     fontWeight = FontWeight(300),
                 )
@@ -601,7 +601,7 @@ private fun MainMenuUppBar(
                },
                fontSize = 22.sp,
                fontWeight = FontWeight(500),
-               color  = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+               color  = FefuFitTheme.color.textColor.mainTextColor,
            )
        }
        else{
@@ -610,7 +610,7 @@ private fun MainMenuUppBar(
                 horizontalArrangement = Arrangement.Center
             ) {
                 CircularProgressIndicator(
-                    color = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor
+                    color = FefuFitTheme.color.elementsColor.elementColor
                 )
             }
        }
@@ -624,7 +624,7 @@ private fun MainMenuUppBar(
                 Icon(
                     painter = painterResource(id = R.drawable.notification_bell),
                     contentDescription = "bell",
-                    tint = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+                    tint = FefuFitTheme.color.textColor.mainTextColor
                 )
             }
             IconButton(
@@ -633,7 +633,7 @@ private fun MainMenuUppBar(
                 Icon(
                     painter = painterResource(id = R.drawable.person_icon),
                     contentDescription = "person",
-                    tint = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor
+                    tint = FefuFitTheme.color.elementsColor.elementColor
                 )
             }
         }

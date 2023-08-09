@@ -46,7 +46,7 @@ fun SingUpScreen(navController: NavController) {
     //page variables
     var labelText by remember { mutableStateOf("Личные данные") }
     var circlePagerColor by remember { mutableStateOf(Color.Transparent) }
-    val background = com.example.core.theme.FefuFitTheme.color.elementsColor.onElementsColor
+    val background = FefuFitTheme.color.elementsColor.onElementsColor
     var circlePagerTextColor by remember {
         mutableStateOf(background)
     }
@@ -55,12 +55,12 @@ fun SingUpScreen(navController: NavController) {
         InputFieldsStates.FirstInputFields -> {
             labelText = "Личные данные"
             circlePagerColor = Color.Transparent
-            circlePagerTextColor = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+            circlePagerTextColor = FefuFitTheme.color.textColor.mainTextColor
         }
         InputFieldsStates.SecondInputFields -> {
             labelText = "Учетные данные"
-            circlePagerColor = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor
-            circlePagerTextColor = com.example.core.theme.FefuFitTheme.color.elementsColor.onElementsColor
+            circlePagerColor = FefuFitTheme.color.elementsColor.elementColor
+            circlePagerTextColor = FefuFitTheme.color.elementsColor.onElementsColor
         }
     }
 
@@ -93,7 +93,7 @@ fun SingUpScreen(navController: NavController) {
         Surface(
             modifier = Modifier
                 .fillMaxSize(),
-            color = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBackgroundColor
+            color = FefuFitTheme.color.mainAppColors.appBackgroundColor
         ){
             Column(
                 modifier = Modifier
@@ -107,7 +107,7 @@ fun SingUpScreen(navController: NavController) {
                     text = labelText,
                     fontSize = 22.sp,
                     fontWeight = FontWeight(600),
-                    color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
+                    color = FefuFitTheme.color.textColor.mainTextColor,
                     textAlign = TextAlign.Center,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
@@ -129,7 +129,7 @@ private fun UppBar(modifier: Modifier, navController: NavController){
                 text = "Регистрация",
                 fontSize = 22.sp,
                 fontWeight = FontWeight(400),
-                color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+                color = FefuFitTheme.color.textColor.mainTextColor
             )
         },
         navigationIcon = {
@@ -137,13 +137,13 @@ private fun UppBar(modifier: Modifier, navController: NavController){
                 Icon(
                     modifier = Modifier.fillMaxWidth(),
                     painter = painterResource(id = R.drawable.back_arrow),
-                    tint = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor,
+                    tint = FefuFitTheme.color.elementsColor.elementColor,
                     contentDescription = null
                 )
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBackgroundColor
+            containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor
         )
     )
 }
@@ -156,14 +156,14 @@ private fun RegistrationPager(
     Row() {
         Box(
             modifier = Modifier
-                .border(1.dp, com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor, CircleShape)
+                .border(1.dp, FefuFitTheme.color.elementsColor.elementColor, CircleShape)
                 .size(32.dp)
-                .background(com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor, CircleShape),
+                .background(FefuFitTheme.color.elementsColor.elementColor, CircleShape),
             contentAlignment = Alignment.Center
         ){
             Text(
                 text = "1",
-                color = com.example.core.theme.FefuFitTheme.color.elementsColor.onElementsColor,
+                color = FefuFitTheme.color.elementsColor.onElementsColor,
                 fontSize = 16.sp,
                 fontWeight = FontWeight(400),
                 lineHeight = 22.sp,
@@ -172,7 +172,7 @@ private fun RegistrationPager(
         Spacer(modifier = Modifier.width(10.dp))
         Box(
             modifier = Modifier
-                .border(1.dp, com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor, CircleShape)
+                .border(1.dp, FefuFitTheme.color.elementsColor.elementColor, CircleShape)
                 .size(32.dp)
                 .background(circlePagerColor, CircleShape),
             contentAlignment = Alignment.Center

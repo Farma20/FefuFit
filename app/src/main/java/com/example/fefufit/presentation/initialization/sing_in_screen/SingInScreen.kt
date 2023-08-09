@@ -82,7 +82,7 @@ fun SingInScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            color = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBackgroundColor
+            color = FefuFitTheme.color.mainAppColors.appBackgroundColor
         ) {
             Column(
                 modifier = Modifier
@@ -94,7 +94,7 @@ fun SingInScreen(navController: NavController) {
                     modifier = Modifier.size(95.dp, 103.dp),
                     painter = painterResource(id = R.drawable.fefufiticonblue),
                     contentDescription = "logo",
-                    tint = com.example.core.theme.FefuFitTheme.color.elementsColor.elementColor
+                    tint = FefuFitTheme.color.elementsColor.elementColor
                 )
                 Spacer(modifier = Modifier.height(76.dp))
                 InputForm(viewModel)
@@ -120,7 +120,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         Text(
             text = "E-mail или телефон",
             fontSize = 14.sp,
-            color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+            color = FefuFitTheme.color.textColor.mainTextColor
         )
     }
     Spacer(modifier = Modifier.height(6.dp))
@@ -139,9 +139,9 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         singleLine = true,
         textStyle = TextStyle(fontSize = 16.sp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
-            textColor = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor,
-            cursorColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor
+            focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+            textColor = FefuFitTheme.color.textColor.mainTextColor,
+            cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor
         )
     )
 
@@ -164,7 +164,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         Text(
             text = "Пароль",
             fontSize = 14.sp,
-            color = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+            color = FefuFitTheme.color.textColor.mainTextColor
         )
     }
     Spacer(modifier = Modifier.height(6.dp))
@@ -183,9 +183,9 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         singleLine = true,
         textStyle = TextStyle(fontSize = 16.sp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
-            cursorColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor,
-            textColor = com.example.core.theme.FefuFitTheme.color.textColor.mainTextColor
+            focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+            cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
+            textColor = FefuFitTheme.color.textColor.mainTextColor
         )
     )
     if (inputDataState.passwordError != null){
@@ -209,7 +209,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
             Text(
                 text = "Забыли пароль?",
                 fontSize = 16.sp,
-                color = com.example.core.theme.FefuFitTheme.color.textColor.secondaryTextColor
+                color = FefuFitTheme.color.textColor.secondaryTextColor
             )
         }
     }
@@ -224,7 +224,7 @@ private fun InputButton(viewModel: SingInScreenViewModel){
         ,
         shape = RoundedCornerShape(13.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = com.example.core.theme.FefuFitTheme.color.mainAppColors.appBlueColor
+            containerColor = FefuFitTheme.color.mainAppColors.appBlueColor
         ),
         onClick = {
             viewModel.inputDataEvent(SingInFormEvent.Submit)
@@ -242,7 +242,7 @@ private fun InputButton(viewModel: SingInScreenViewModel){
 private fun SingUpButton(navController:NavController){
     Text(
         text = "Нет аккаунта?",
-        color = com.example.core.theme.FefuFitTheme.color.textColor.tertiaryTextColor,
+        color = FefuFitTheme.color.textColor.tertiaryTextColor,
         fontSize = 18.sp,
     )
     TextButton(
@@ -250,7 +250,7 @@ private fun SingUpButton(navController:NavController){
     ){
         Text(
             text = "Зарегистрируйтесь!",
-            color = com.example.core.theme.FefuFitTheme.color.textColor.secondaryTextColor,
+            color = FefuFitTheme.color.textColor.secondaryTextColor,
             fontSize = 18.sp
         )
     }
