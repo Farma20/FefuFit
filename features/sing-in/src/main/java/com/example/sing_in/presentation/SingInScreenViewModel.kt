@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
 import com.example.fefufit.domain.use_cases.initial.validation.sing_in_validation.ValidateEmailUseCase
 import com.example.fefufit.domain.use_cases.initial.validation.sing_in_validation.ValidatePasswordUseCase
+import com.example.sing_in.domain.models.SingInDataModel
 import com.example.sing_in.domain.models.validation.SingInFormState
 import com.example.sing_in.domain.use_cases.SingInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
