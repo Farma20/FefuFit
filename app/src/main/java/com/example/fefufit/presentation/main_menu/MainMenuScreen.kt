@@ -46,11 +46,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.LayoutModifier
@@ -151,48 +153,40 @@ private fun ActiveServicesSpace(
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
-        if (activeUserServicesState.isLoading)
-//            Column(
-//                modifier = Modifier.fillMaxWidth(),
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ) {
-//                CircularProgressIndicator(
-//                    color = FefuFitTheme.color.elementsColor.elementColor
-//                )
-//            }
-            EmptyCard(
-                modifier = emptyCardModifier,
-                text = "Активных абонементов нет")
-        else if (activeUserServicesState.error != null)
-            EmptyCard(
-                modifier = emptyCardModifier,
-                text = activeUserServicesState.error
-            )
-        else if (activeUserServicesState.data == null){
-            EmptyCard(
-                modifier = emptyCardModifier,
-                text = "Активных абонементов нет"
-            )
-        }
-        else{
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                HorizontalPager(
-                    modifier = Modifier.fillMaxWidth(),
-                    count = activeUserServicesState.data.size,
-                    state = pagerState
-                ) {id->
-                    ActiveServicesCard(activeUserServicesState.data[id])
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                HorizontalPagerIndicator(
-                    pagerState = pagerState,
-                    activeColor = FefuFitTheme.color.elementsColor.elementColor
+
+        ShimmerCardHolder(
+            isLoading = activeUserServicesState.isLoading,
+            modifier = emptyCardModifier
+        ) {
+            if (activeUserServicesState.error != null)
+                EmptyCard(
+                    modifier = emptyCardModifier,
+                    text = activeUserServicesState.error
                 )
+            else if (activeUserServicesState.data == null) {
+                EmptyCard(
+                    modifier = emptyCardModifier,
+                    text = "Активных абонементов нет"
+                )
+            } else {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    HorizontalPager(
+                        modifier = Modifier.fillMaxWidth(),
+                        count = activeUserServicesState.data.size,
+                        state = pagerState
+                    ) { id ->
+                        ActiveServicesCard(activeUserServicesState.data[id])
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    HorizontalPagerIndicator(
+                        pagerState = pagerState,
+                        activeColor = FefuFitTheme.color.elementsColor.elementColor
+                    )
+                }
             }
         }
-
     }
 }
 
@@ -324,15 +318,19 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
 }
 
 @Composable
-private fun ShimmerCard(
+private fun ShimmerCardHolder(
     isLoading:Boolean,
+    modifier: Modifier = Modifier,
     contentAfterLoading: @Composable () -> Unit,
-    modifier: Modifier = Modifier
 ){
-
+    if (isLoading){
+        ShimmerCard(modifier = modifier)
+    }
+    else
+        contentAfterLoading()
 }
 
-fun Modifier.shimmerEffect(): Modifier = composed {
+fun Modifier.shimmerEffect(shape: Shape): Modifier = composed {
     var size by remember {
         mutableStateOf(IntSize.Zero)
     }
@@ -357,10 +355,20 @@ fun Modifier.shimmerEffect(): Modifier = composed {
             ),
             start = Offset(startOffsetX, 0f),
             end = Offset(startOffsetX + size.width.toFloat(), size.height.toFloat())
-        )
+        ),
+        shape = shape
     ).onGloballyPositioned {
         size = it.size
     }
+}
+
+@Composable
+private fun ShimmerCard(modifier: Modifier){
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .shimmerEffect(RoundedCornerShape(16.dp))
+    )
 }
 
 @Composable
