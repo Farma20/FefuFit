@@ -116,6 +116,11 @@ private fun ActiveServicesSpace(
     pagerState: PagerState,
     activeUserServicesState: ActiveServicesState
 ) {
+
+    val emptyCardModifier = Modifier
+        .height(160.dp)
+        .padding(horizontal = 16.dp)
+
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -135,25 +140,25 @@ private fun ActiveServicesSpace(
         }
         Spacer(modifier = Modifier.height(10.dp))
         if (activeUserServicesState.isLoading)
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator(
-                    color = FefuFitTheme.color.elementsColor.elementColor
-                )
-            }
+//            Column(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                CircularProgressIndicator(
+//                    color = FefuFitTheme.color.elementsColor.elementColor
+//                )
+//            }
+            EmptyCard(
+                modifier = emptyCardModifier,
+                text = "Активных абонементов нет")
         else if (activeUserServicesState.error != null)
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = activeUserServicesState.error
-                )
-            }
+            EmptyCard(
+                modifier = emptyCardModifier,
+                text = activeUserServicesState.error
+            )
         else if (activeUserServicesState.data == null){
-            Text(
+            EmptyCard(
+                modifier = emptyCardModifier,
                 text = "Активных абонементов нет"
             )
         }
@@ -307,7 +312,37 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
 }
 
 @Composable
+private fun EmptyCard(
+    modifier: Modifier,
+    text: String
+){
+    Card(
+        modifier = modifier,
+//            .padding(horizontal = 18.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = FefuFitTheme.color.mainAppColors.appCardColor
+        )
+    ){
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+            Text(
+                text = text,
+                fontSize = 16.sp,
+                fontWeight = FontWeight(300),
+                color = FefuFitTheme.color.textColor.mainTextColor,
+            )
+        }
+    }
+}
+
+@Composable
 fun NearEventSpace(nearBookingState: NearBookingDataState) {
+
+    val emptyCardModifier = Modifier.height(144.dp)
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -345,25 +380,26 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
         }
         Spacer(modifier = Modifier.height(10.dp))
         if (nearBookingState.isLoading)
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator(
-                    color = FefuFitTheme.color.elementsColor.elementColor
-                )
-            }
+//            Column(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                CircularProgressIndicator(
+//                    color = FefuFitTheme.color.elementsColor.elementColor
+//                )
+//            }
+            EmptyCard(
+                modifier = emptyCardModifier,
+                text = "Ближайших занятий нет"
+            )
         else if (nearBookingState.error != null)
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = nearBookingState.error
-                )
-            }
+            EmptyCard(
+                modifier = emptyCardModifier,
+                text = nearBookingState.error
+            )
         else if (nearBookingState.data == null){
-            Text(
+            EmptyCard(
+                modifier = emptyCardModifier,
                 text = "Ближайших занятий нет"
             )
         }
