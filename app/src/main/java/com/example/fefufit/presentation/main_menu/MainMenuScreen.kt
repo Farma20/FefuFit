@@ -46,7 +46,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
@@ -340,7 +339,7 @@ fun Modifier.shimmerEffect(shape: Shape): Modifier = composed {
         targetValue = 2 * size.width.toFloat(),
         animationSpec = infiniteRepeatable(
             animation = tween(
-                durationMillis = 1000
+                durationMillis = 1100
             )
         ),
         label = ""
@@ -349,9 +348,9 @@ fun Modifier.shimmerEffect(shape: Shape): Modifier = composed {
     background(
         brush = Brush.linearGradient(
             colors = listOf(
-                Color(0xFFBEBEBE),
-                Color(0xFF797979),
-                Color(0xFFBEBEBE),
+                FefuFitTheme.color.mainAppColors.appCardColor,
+                FefuFitTheme.color.elementsColor.shimmerColor,
+                FefuFitTheme.color.mainAppColors.appCardColor,
             ),
             start = Offset(startOffsetX, 0f),
             end = Offset(startOffsetX + size.width.toFloat(), size.height.toFloat())
@@ -439,32 +438,24 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
-        if (nearBookingState.isLoading)
-//            Column(
-//                modifier = Modifier.fillMaxWidth(),
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            ) {
-//                CircularProgressIndicator(
-//                    color = FefuFitTheme.color.elementsColor.elementColor
-//                )
-//            }
-            EmptyCard(
-                modifier = emptyCardModifier,
-                text = "Ближайших занятий нет"
-            )
-        else if (nearBookingState.error != null)
+        ShimmerCardHolder(
+            isLoading = nearBookingState.isLoading,
+            modifier = emptyCardModifier
+        ) {
+            if (nearBookingState.error != null)
             EmptyCard(
                 modifier = emptyCardModifier,
                 text = nearBookingState.error
             )
-        else if (nearBookingState.data == null){
-            EmptyCard(
-                modifier = emptyCardModifier,
-                text = "Ближайших занятий нет"
-            )
-        }
-        else{
-            NearEventCard(nearBookingState.data)
+            else if (nearBookingState.data == null){
+                EmptyCard(
+                    modifier = emptyCardModifier,
+                    text = "Ближайших занятий нет"
+                )
+            }
+            else{
+                NearEventCard(nearBookingState.data)
+            }
         }
     }
 }
@@ -674,6 +665,9 @@ private fun QrCard() {
 private fun MainMenuUppBar(
     userDataState: UserDataState
 ) {
+
+    val emptyCardModifier = Modifier.height(52.dp).fillMaxWidth(0.7f)
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -681,35 +675,29 @@ private fun MainMenuUppBar(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-       if (!userDataState.isLoading){
-           Text(
-               modifier = Modifier.fillMaxWidth(0.7f),
-               text = buildAnnotatedString {
-                   append("Время тренировки, ")
-                   withStyle(style = SpanStyle(fontWeight = FontWeight(300))) {
-                       if (userDataState.data != null){
-                           append("${userDataState.data.firstName}!")
-                       }
-                       else{
-                           append("Ошибка!")
-                       }
-                   }
-               },
-               fontSize = 22.sp,
-               fontWeight = FontWeight(500),
-               color  = FefuFitTheme.color.textColor.mainTextColor,
-           )
-       }
-       else{
-            Row(
+        ShimmerCardHolder(
+            isLoading = userDataState.isLoading,
+            modifier = emptyCardModifier
+        ) {
+            Text(
                 modifier = Modifier.fillMaxWidth(0.7f),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                CircularProgressIndicator(
-                    color = FefuFitTheme.color.elementsColor.elementColor
-                )
-            }
-       }
+                text = buildAnnotatedString {
+                    append("Время тренировки, ")
+                    withStyle(style = SpanStyle(fontWeight = FontWeight(300))) {
+                        if (userDataState.data != null){
+                            append("${userDataState.data.firstName}!")
+                        }
+                        else{
+                            append("Ошибка!")
+                        }
+                    }
+                },
+                fontSize = 22.sp,
+                fontWeight = FontWeight(500),
+                color  = FefuFitTheme.color.textColor.mainTextColor,
+            )
+        }
+
         Row(
             modifier = Modifier,
             horizontalArrangement = Arrangement.SpaceEvenly

@@ -29,7 +29,8 @@ class FefuFitColors{
     data class ElementsColor(
         val elementColor:Color,
         val onElementsColor: Color,
-        val setColor:Color
+        val setColor:Color,
+        val shimmerColor:Color
     )
 }
 

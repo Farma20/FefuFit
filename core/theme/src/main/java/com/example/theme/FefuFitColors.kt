@@ -22,7 +22,8 @@ val whiteThemeAppPalette = FefuFitColors().apply {
     this.elementsColor = FefuFitColors.ElementsColor(
         elementColor = Color(0xFF4343F4),
         onElementsColor = Color(0xFFFFFFFF),
-        setColor = Color(0xFF4343F4)
+        setColor = Color(0xFF4343F4),
+        shimmerColor = Color(0x664343F4)
     )
 }
 
@@ -46,6 +47,7 @@ val blackThemeAppPalette = FefuFitColors().apply {
     this.elementsColor = FefuFitColors.ElementsColor(
         elementColor = Color(0xFFFFFFFF),
         onElementsColor = Color(0xFF252525),
-        setColor = Color(0xFF252525)
+        setColor = Color(0xFF252525),
+        shimmerColor = Color(0x66FFFFFF)
     )
 }
