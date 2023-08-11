@@ -275,8 +275,8 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                             val visit = i <= data.eventsDone
                             ServiceCircle(i, visit)
                             Spacer(modifier = Modifier
-                                .width(2.dp)
-                                .height(34.dp))
+                                .width(4.dp)
+                                .height(35.dp))
                         }
                     }
                 }
