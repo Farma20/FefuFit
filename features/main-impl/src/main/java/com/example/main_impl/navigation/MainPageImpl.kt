@@ -1,0 +1,30 @@
+package com.example.main_impl.navigation
+
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
+import androidx.navigation.navigation
+import com.example.main_api.MainPageApi
+import com.example.main_impl.presentation.MainMenuScreen
+import javax.inject.Inject
+
+private const val GRAPH_ROUTE = "mainPageGraph"
+private const val MAIN_PAGE_ROUTE = "mainPageRoute"
+class MainPageImpl @Inject constructor() :MainPageApi {
+    override val route = GRAPH_ROUTE
+    override fun registerGraph(
+        navGraphBuilder: NavGraphBuilder,
+        navController: NavHostController,
+        modifier: Modifier
+    ) {
+        navGraphBuilder.navigation(
+            route = route,
+            startDestination = MAIN_PAGE_ROUTE
+        ){
+            composable(MAIN_PAGE_ROUTE){
+                MainMenuScreen()
+            }
+        }
+    }
+}

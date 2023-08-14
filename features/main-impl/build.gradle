@@ -51,7 +51,9 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_nav_version"
 
+    //Modules
     implementation project(":features:main-api")
+    implementation(project(":core:feature-api"))
     implementation project(":core:common")
     implementation project(":core:theme")
 }
