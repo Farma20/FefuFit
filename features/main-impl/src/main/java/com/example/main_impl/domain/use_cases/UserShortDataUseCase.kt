@@ -3,13 +3,13 @@ package com.example.main_impl.domain.use_cases
 import com.example.common.Resource
 import com.example.main_impl.domain.models.UserShortDataModel
 import com.example.main_impl.domain.models.toShort
-import com.example.main_impl.domain.repositories.UserDataRepository
+import com.example.main_impl.domain.repositories.UserFeatureRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class UserShortDataUseCase @Inject constructor(
-    private val repository: UserDataRepository
+    private val repository: UserFeatureRepository
 ) {
     operator fun invoke(): Flow<Resource<UserShortDataModel>> = flow {
         try {

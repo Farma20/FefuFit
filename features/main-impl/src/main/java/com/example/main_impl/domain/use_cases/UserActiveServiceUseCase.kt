@@ -2,13 +2,13 @@ package com.example.main_impl.domain.use_cases
 
 import com.example.common.Resource
 import com.example.main_impl.domain.models.UserServicesDataModel
-import com.example.main_impl.domain.repositories.ServicesRepository
+import com.example.main_impl.domain.repositories.ServicesFeatureRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class UserActiveServiceUseCase @Inject constructor(
-    private val repository: ServicesRepository
+    private val repository: ServicesFeatureRepository
 ) {
     operator fun invoke(): Flow<Resource<UserServicesDataModel?>> = flow{
         try {

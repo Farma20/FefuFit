@@ -2,13 +2,13 @@ package com.example.main_impl.domain.use_cases
 
 import com.example.common.Resource
 import com.example.main_impl.domain.models.UserBookingDataModelItem
-import com.example.main_impl.domain.repositories.EventsRepository
+import com.example.main_impl.domain.repositories.EventsFeatureRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class UserNearBookingUseCase @Inject constructor(
-    private val repository: EventsRepository
+    private val repository: EventsFeatureRepository
 ) {
     operator fun invoke(): Flow<Resource<UserBookingDataModelItem?>> = flow {
         try {
