@@ -16,6 +16,8 @@
             <option value="$PROJECT_DIR$/core/common" />
             <option value="$PROJECT_DIR$/core/feature-api" />
             <option value="$PROJECT_DIR$/core/theme" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/remote" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/main-api" />
             <option value="$PROJECT_DIR$/features/main-impl" />

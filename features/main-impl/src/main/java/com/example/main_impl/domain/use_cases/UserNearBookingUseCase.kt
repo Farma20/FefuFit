@@ -5,7 +5,6 @@ import com.example.main_impl.domain.models.UserBookingDataModelItem
 import com.example.main_impl.domain.repositories.EventsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import org.json.JSONObject
 import javax.inject.Inject
 
 class UserNearBookingUseCase @Inject constructor(

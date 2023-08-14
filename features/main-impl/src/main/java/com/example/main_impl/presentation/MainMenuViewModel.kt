@@ -18,9 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainMenuViewModel @Inject constructor(
-    private val userActiveServiceUseCase: UserActiveServiceUseCase,
-    private val userNearBookingUseCase: UserNearBookingUseCase,
-    private val userShortDataUseCase: UserShortDataUseCase,
+//    private val userActiveServiceUseCase: UserActiveServiceUseCase,
+//    private val userNearBookingUseCase: UserNearBookingUseCase,
+//    private val userShortDataUseCase: UserShortDataUseCase,
 ):ViewModel() {
 
     //data states variables
@@ -40,51 +40,51 @@ class MainMenuViewModel @Inject constructor(
     }
 
     private fun getActiveServices() {
-        userActiveServiceUseCase().onEach { result ->
-            when(result){
-                is Resource.Success ->{
-                    _activeServicesState.value = ActiveServicesState(data = result.data)
-                }
-                is Resource.Error ->{
-                    _activeServicesState.value = ActiveServicesState(error = result.message)
-                }
-                is Resource.Loading ->{
-                    _activeServicesState.value = ActiveServicesState(isLoading = true)
-                }
-            }
-        }.launchIn(viewModelScope)
+//        userActiveServiceUseCase().onEach { result ->
+//            when(result){
+//                is Resource.Success ->{
+//                    _activeServicesState.value = ActiveServicesState(data = result.data)
+//                }
+//                is Resource.Error ->{
+//                    _activeServicesState.value = ActiveServicesState(error = result.message)
+//                }
+//                is Resource.Loading ->{
+//                    _activeServicesState.value = ActiveServicesState(isLoading = true)
+//                }
+//            }
+//        }.launchIn(viewModelScope)
     }
 
     private fun getNearBooking() {
-        userNearBookingUseCase().onEach { result ->
-            when(result){
-                is Resource.Success ->{
-                    _nearBookingState.value = NearBookingDataState(data = result.data)
-                }
-                is Resource.Error ->{
-                    _nearBookingState.value = NearBookingDataState(error = result.message)
-                }
-                is Resource.Loading ->{
-                    _nearBookingState.value = NearBookingDataState(isLoading = true)
-                }
-            }
-        }.launchIn(viewModelScope)
+//        userNearBookingUseCase().onEach { result ->
+//            when(result){
+//                is Resource.Success ->{
+//                    _nearBookingState.value = NearBookingDataState(data = result.data)
+//                }
+//                is Resource.Error ->{
+//                    _nearBookingState.value = NearBookingDataState(error = result.message)
+//                }
+//                is Resource.Loading ->{
+//                    _nearBookingState.value = NearBookingDataState(isLoading = true)
+//                }
+//            }
+//        }.launchIn(viewModelScope)
     }
 
     private fun getUserData(){
-        userShortDataUseCase().onEach { result->
-            when(result){
-                is Resource.Success ->{
-                    _userDataState.value = UserDataState(data = result.data)
-                }
-                is Resource.Error ->{
-                    _userDataState.value = UserDataState(error = result.message)
-                }
-                is Resource.Loading ->{
-                    _userDataState.value = UserDataState(isLoading = true)
-                }
-            }
-        }.launchIn(viewModelScope)
+//        userShortDataUseCase().onEach { result->
+//            when(result){
+//                is Resource.Success ->{
+//                    _userDataState.value = UserDataState(data = result.data)
+//                }
+//                is Resource.Error ->{
+//                    _userDataState.value = UserDataState(error = result.message)
+//                }
+//                is Resource.Loading ->{
+//                    _userDataState.value = UserDataState(isLoading = true)
+//                }
+//            }
+//        }.launchIn(viewModelScope)
     }
 
 

@@ -12,13 +12,12 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.core.theme.FefuFitTheme
 import com.example.fefufit.data.internal.data_store.DataStoreManager
 import com.example.fefufit.data.internal.data_store.entities.AppInternalData
 import com.example.fefufit.domain.use_cases.main.user_use_cases.UserActiveServiceUseCase
-import com.example.fefufit.presentation.main_menu.MainMenuScreen
+import com.example.main_impl.presentation.MainMenuScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.example.core.theme.FefuFitTheme
-import com.example.fefufit.presentation.initialization.navigation.InitializationScreens
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
