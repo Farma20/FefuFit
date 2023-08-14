@@ -4,13 +4,9 @@ package com.example.fefufit.data.remote.repositories
 import com.example.fefufit.data.remote.api.FefuFitApi
 import com.example.fefufit.data.remote.models.user_data_models.UserDataModel
 import com.example.remote.UserRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-class UserDataFefuRepository @Inject constructor(
+class UserFefuRepository @Inject constructor(
     private val api: FefuFitApi,
 //   private val dataStoreManager: DataStoreManager
 ): UserRepository {
