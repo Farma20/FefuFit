@@ -8,9 +8,12 @@ import androidx.navigation.navigation
 import com.example.main_api.MainPageApi
 import com.example.main_impl.presentation.MainMenuScreen
 import javax.inject.Inject
+import javax.inject.Singleton
 
 private const val GRAPH_ROUTE = "mainPageGraph"
 private const val MAIN_PAGE_ROUTE = "mainPageRoute"
+
+@Singleton
 class MainPageImpl @Inject constructor() :MainPageApi {
     override val route = GRAPH_ROUTE
     override fun registerGraph(
