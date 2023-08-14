@@ -1,4 +1,7 @@
 package com.example.main_api
 
-class MainPageApi {
+import com.example.feature_api.FeatureApi
+
+interface MainPageApi: FeatureApi {
+    val route: String
 }
