@@ -18,3 +18,5 @@ include ':core:theme'
 include ':core:common'
 include ':features:sing-in'
 
+include ':features:main-api'
+include ':core:feature-api'
