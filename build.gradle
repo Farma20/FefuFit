@@ -1,6 +1,11 @@
 buildscript {
     ext {
+        compileSdk_version = 34
+        minSdk_version = 24
+        targetSdk_vesion = 34
+
         compose_version = '1.1.0'
+        hilt_version = '2.47'
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-serialization:1.6.10"

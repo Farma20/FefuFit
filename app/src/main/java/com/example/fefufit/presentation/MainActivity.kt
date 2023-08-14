@@ -18,6 +18,7 @@ import com.example.fefufit.domain.use_cases.main.user_use_cases.UserActiveServic
 import com.example.fefufit.presentation.main_menu.MainMenuScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.example.core.theme.FefuFitTheme
+import com.example.fefufit.presentation.initialization.navigation.InitializationScreens
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
