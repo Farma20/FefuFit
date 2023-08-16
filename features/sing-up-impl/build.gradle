@@ -48,6 +48,14 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_nav_version"
 
+    //Accompanist
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
+
+    //DateTimePicker
+    implementation "io.github.vanpra.compose-material-dialogs:datetime:$datetime_picker_version"
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugaring_version"
+
     //Modules
     implementation project(":features:sing-up-api")
     implementation(project(":core:feature-api"))

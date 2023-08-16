@@ -1,4 +1,7 @@
 package com.example.sing_up_api
 
-interface SingUpApi {
+import com.example.feature_api.FeatureApi
+
+interface SingUpApi:FeatureApi {
+    val route:String
 }
