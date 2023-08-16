@@ -21,7 +21,8 @@
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/main-api" />
             <option value="$PROJECT_DIR$/features/main-impl" />
-            <option value="$PROJECT_DIR$/features/sing-in" />
+            <option value="$PROJECT_DIR$/features/sing-in-api" />
+            <option value="$PROJECT_DIR$/features/sing-in-impl" />
           </set>
         </option>
       </GradleProjectSettings>

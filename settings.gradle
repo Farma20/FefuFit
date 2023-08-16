@@ -16,9 +16,10 @@ rootProject.name = "FefuFit"
 include ':app'
 include ':core:theme'
 include ':core:common'
-include ':features:sing-in'
 
 include ':features:main-api'
 include ':core:feature-api'
 include ':features:main-impl'
 include ':data:remote'
+include ':features:sing-in-api'
+include ':features:sing-in-impl'
