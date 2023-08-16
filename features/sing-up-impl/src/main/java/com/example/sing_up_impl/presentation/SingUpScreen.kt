@@ -36,7 +36,7 @@ import com.example.sing_up_impl.presentation.navigation.SingUpFieldsScreensRoute
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingUpScreen(navController: NavController) {
+fun SingUpScreen() {
 
     val viewModel = hiltViewModel<SingUpScreenViewModel>()
 
@@ -87,7 +87,7 @@ fun SingUpScreen(navController: NavController) {
     Scaffold(
         snackbarHost = { SnackbarHost(hostState = snackBarHostState)},
         topBar = {
-            UppBar(modifier = Modifier, navController)
+            UppBar(modifier = Modifier)
         }
     ) {scaffoldPadding->
         Surface(
@@ -121,7 +121,7 @@ fun SingUpScreen(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun UppBar(modifier: Modifier, navController: NavController){
+private fun UppBar(modifier: Modifier){
     CenterAlignedTopAppBar(
         modifier = modifier,
         title = {
@@ -133,7 +133,7 @@ private fun UppBar(modifier: Modifier, navController: NavController){
             )
         },
         navigationIcon = {
-            IconButton(onClick = {navController.navigateUp()}) {
+            IconButton(onClick = {}) {
                 Icon(
                     modifier = Modifier.fillMaxWidth(),
                     painter = painterResource(id = R.drawable.back_arrow),
