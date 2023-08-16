@@ -11,5 +11,5 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 interface MainPageModule {
     @Binds
-    fun bindPageScreen(mainPageImpl: MainPageImpl): MainPageApi
+    fun bindMainScreen(mainPageImpl: MainPageImpl): MainPageApi
 }

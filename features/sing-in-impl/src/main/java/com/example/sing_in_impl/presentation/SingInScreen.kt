@@ -48,7 +48,7 @@ import com.example.sing_in_impl.R
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingInScreen(navController: NavController) {
+fun SingInScreen() {
 
     val viewModel = hiltViewModel<SingInScreenViewModel>()
 
@@ -100,7 +100,7 @@ fun SingInScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(24.dp))
                 InputButton(viewModel)
                 Spacer(modifier = Modifier.height(50.dp))
-                SingUpButton(navController)
+                SingUpButton()
                 Spacer(modifier = Modifier.height(57.dp))
             }
         }
@@ -238,7 +238,7 @@ private fun InputButton(viewModel: SingInScreenViewModel){
 }
 
 @Composable
-private fun SingUpButton(navController:NavController){
+private fun SingUpButton(){
     Text(
         text = "Нет аккаунта?",
         color = FefuFitTheme.color.textColor.tertiaryTextColor,
