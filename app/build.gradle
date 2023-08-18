@@ -98,8 +98,10 @@ dependencies {
 
     //Modules
     implementation project(":core:theme")
-    implementation project(":features:main-impl")
     implementation project(":data:remote")
+    implementation project(":features:main-impl")
+    implementation project(":features:sing-in-impl")
+    implementation project(":features:sing-up-impl")
 
 
     constraints{

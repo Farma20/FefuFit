@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface MainPageModule {
+ interface MainPageModule {
     @Binds
     fun bindMainScreen(mainPageImpl: MainPageImpl): MainPageApi
 }
