@@ -15,8 +15,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.core.theme.FefuFitTheme
 import com.example.fefufit.data.internal.data_store.DataStoreManager
 import com.example.fefufit.data.internal.data_store.entities.AppInternalData
-import com.example.fefufit.domain.use_cases.main.user_use_cases.UserActiveServiceUseCase
 import com.example.main_impl.presentation.MainMenuScreen
+import com.example.sing_in_impl.presentation.SingInScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,9 +28,6 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var dataStoreManager: DataStoreManager
-
-    @Inject
-    lateinit var bookingUseCase: UserActiveServiceUseCase
 
     @SuppressLint("CoroutineCreationDuringComposition", "FlowOperatorInvokedInComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +84,8 @@ class MainActivity : ComponentActivity() {
 
                 Surface {
 //                    InitializationScreens()
-                    MainMenuScreen()
+//                    MainMenuScreen()
+                    SingInScreen()
                 }
             }
         }

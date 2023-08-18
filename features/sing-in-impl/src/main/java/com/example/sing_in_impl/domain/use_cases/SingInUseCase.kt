@@ -3,14 +3,14 @@ package com.example.sing_in_impl.domain.use_cases
 import com.example.common.Resource
 import com.example.sing_in_impl.domain.models.SingInDataModel
 import com.example.sing_in_impl.domain.models.SingInSuccessResponse
-import com.example.sing_in_impl.domain.repositories.SingInRepository
+import com.example.sing_in_impl.domain.repositories.SingInFeatureRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 
 class SingInUseCase @Inject constructor(
-    private val repository: SingInRepository,
+    private val repository: SingInFeatureRepository,
 //    private val dataStoreManager:DataStoreManager,
 ) {
     operator fun invoke(singInData: SingInDataModel): Flow<Resource<SingInSuccessResponse>> = flow {
@@ -24,8 +24,8 @@ class SingInUseCase @Inject constructor(
 //                )
 //            )
             emit(Resource.Success(response))
-        }catch (cause:Throwable){
-            emit(Resource.Error("SingInUseCaseError"))
+        }catch (e:Error){
+            emit(Resource.Error("$e"))
 //            when (cause) {
 //                is HttpException -> {
 //                    if (cause.code() == 400){
