@@ -100,6 +100,7 @@ dependencies {
     //Modules
     implementation project(":core:theme")
     implementation project(":data:remote")
+    implementation project(":core:feature-api")
 
     implementation project(":features:main-impl")
     implementation project(":features:main-api")

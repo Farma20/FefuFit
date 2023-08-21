@@ -2,18 +2,36 @@ package com.example.fefufit.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.example.sing_in_impl.naigation.SingInImpl
+import com.example.feature_api.register
 
 @Composable
 fun AppNavGraph(
     modifier: Modifier = Modifier,
     featureApiHolder: FeatureApiHolder,
-    navController: NavController
+    navController: NavHostController
 ) {
     NavHost(
-        navController = ,
-        graph = SingInImpl
-    )
+        navController = navController,
+        startDestination = featureApiHolder.singInScreen.route
+    ){
+        register(
+            featureApiHolder.singInScreen,
+            navController,
+            modifier
+        )
+
+        register(
+            featureApiHolder.singUpScreen,
+            navController,
+            modifier
+        )
+
+        register(
+            featureApiHolder.mainScreen,
+            navController,
+            modifier
+        )
+    }
 }

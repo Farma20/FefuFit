@@ -11,5 +11,5 @@ interface FeatureApiHolder {
 
     val singUpScreen: SingUpApi
 
-    val mainPageApi: MainPageApi
+    val mainScreen: MainPageApi
 }

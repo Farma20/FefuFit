@@ -17,7 +17,7 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor(
     override val singInScreen: SingInApi,
     override val singUpScreen: SingUpApi,
-    override val mainPageApi: MainPageApi
+    override val mainScreen: MainPageApi
 ) :ViewModel(), FeatureApiHolder {
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
