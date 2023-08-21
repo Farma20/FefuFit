@@ -40,7 +40,9 @@ import com.example.sing_up_impl.presentation.validation.SingUpSecondFormEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingUpFieldsSecond(viewModel: SingUpScreenViewModel) {
+fun SingUpFieldsSecond(
+    viewModel: SingUpScreenViewModel,
+) {
     viewModel.pageState = InputFieldsStates.SecondInputFields
 
     val inputDataState = viewModel.inputSecondDataState

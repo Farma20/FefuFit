@@ -41,6 +41,7 @@ import com.example.sing_up_impl.presentation.navigation.SingUpFieldsScreensRoute
 @Composable
 fun SingUpScreen(
     modifier: Modifier,
+    onNavigateToMain: () -> Unit,
     onNavigateToSingIn: () -> Unit
 ) {
 
@@ -80,6 +81,7 @@ fun SingUpScreen(
                     snackBarHostState.showSnackbar(
                         message = "Success"
                     )
+                    onNavigateToMain()
                 }
                 is SingUpScreenViewModel.ValidationEvent.Error ->{
                     snackBarHostState.showSnackbar(
@@ -122,7 +124,9 @@ fun SingUpScreen(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
 
-                SingUpFieldsScreens(viewModel)
+                SingUpFieldsScreens(
+                    viewModel,
+                )
             }
         }
     }
@@ -132,7 +136,8 @@ fun SingUpScreen(
 @Composable
 private fun UppBar(
     modifier: Modifier,
-    onBackClick: () -> Unit){
+    onBackClick: () -> Unit
+) {
     CenterAlignedTopAppBar(
         modifier = modifier,
         title = {

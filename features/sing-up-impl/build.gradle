@@ -62,4 +62,5 @@ dependencies {
     implementation(project(":core:feature-api"))
 
     implementation project(":features:sing-up-api")
+    implementation project(":features:main-api")
 }

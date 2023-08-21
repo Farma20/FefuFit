@@ -18,7 +18,9 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun SingUpFieldsScreens(viewModel: SingUpScreenViewModel) {
+fun SingUpFieldsScreens(
+    viewModel: SingUpScreenViewModel,
+) {
     val navController = rememberAnimatedNavController()
     AnimatedNavHost(navController = navController, startDestination = SingUpFieldsScreensRoute.SingUpFieldsFirst.route){
         viewModel.getFieldsNavController(navController = navController)
@@ -66,7 +68,9 @@ fun SingUpFieldsScreens(viewModel: SingUpScreenViewModel) {
                 )
             },
         ){
-            SingUpFieldsSecond(viewModel = viewModel)
+            SingUpFieldsSecond(
+                viewModel = viewModel,
+            )
         }
     }
 }

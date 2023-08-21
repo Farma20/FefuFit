@@ -31,7 +31,7 @@ class SingInImpl @Inject constructor(
                 modifier = modifier,
                 onNavigateToMain = {
                     navController.navigate(mainPage.route){
-                        popUpTo(route) { inclusive = true }
+                        popUpTo(0)
                     }
                 },
                 onNavigateToSingUp = {
