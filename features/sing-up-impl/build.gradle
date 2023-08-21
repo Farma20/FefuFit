@@ -57,8 +57,9 @@ dependencies {
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:$desugaring_version"
 
     //Modules
-    implementation project(":features:sing-up-api")
-    implementation(project(":core:feature-api"))
     implementation project(":core:common")
     implementation project(":core:theme")
+    implementation(project(":core:feature-api"))
+
+    implementation project(":features:sing-up-api")
 }

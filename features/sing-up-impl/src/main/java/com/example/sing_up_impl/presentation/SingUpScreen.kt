@@ -1,6 +1,8 @@
 package com.example.sing_up_impl.presentation
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -33,10 +35,14 @@ import com.example.sing_up_impl.presentation.navigation.InputFieldsStates
 import com.example.sing_up_impl.presentation.navigation.SingUpFieldsScreens
 import com.example.sing_up_impl.presentation.navigation.SingUpFieldsScreensRoute
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingUpScreen() {
+fun SingUpScreen(
+    modifier: Modifier,
+    onNavigateToSingIn: () -> Unit
+) {
 
     val viewModel = hiltViewModel<SingUpScreenViewModel>()
 
@@ -85,9 +91,13 @@ fun SingUpScreen() {
     }
 
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackBarHostState)},
+        modifier = modifier,
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
         topBar = {
-            UppBar(modifier = Modifier)
+            UppBar(
+                modifier = Modifier,
+                onBackClick = onNavigateToSingIn
+            )
         }
     ) {scaffoldPadding->
         Surface(
@@ -113,7 +123,6 @@ fun SingUpScreen() {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 SingUpFieldsScreens(viewModel)
-
             }
         }
     }
@@ -121,7 +130,9 @@ fun SingUpScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun UppBar(modifier: Modifier){
+private fun UppBar(
+    modifier: Modifier,
+    onBackClick: () -> Unit){
     CenterAlignedTopAppBar(
         modifier = modifier,
         title = {
@@ -133,7 +144,9 @@ private fun UppBar(modifier: Modifier){
             )
         },
         navigationIcon = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {
+                onBackClick()
+            }) {
                 Icon(
                     modifier = Modifier.fillMaxWidth(),
                     painter = painterResource(id = R.drawable.back_arrow),

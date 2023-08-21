@@ -213,7 +213,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         ) {
             Text(
                 text = "Забыли пароль?",
-                fontSize = 24.sp,
+                fontSize = 18.sp,
                 color = FefuFitTheme.color.textColor.secondaryTextColor
             )
         }
