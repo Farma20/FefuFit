@@ -55,5 +55,5 @@ dependencies {
 
     implementation project(":features:sing-in-api")
     implementation project(":features:sing-up-api")
-//    implementation project(":features:sing-up-impl")
+    implementation project(":features:main-api")
 }

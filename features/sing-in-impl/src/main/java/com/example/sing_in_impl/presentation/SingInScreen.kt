@@ -50,6 +50,7 @@ import com.example.sing_in_impl.R
 @Composable
 fun SingInScreen(
     modifier: Modifier,
+    onNavigateToMain: () -> Unit,
     onNavigateToSingUp: () -> Unit
 ) {
 
@@ -63,9 +64,10 @@ fun SingInScreen(
         viewModel.validationEvents.collect{event ->
             when(event){
                 is SingInScreenViewModel.ValidationEvent.Success ->{
-                    snackBarHostState.showSnackbar(
-                        message = "Success"
-                    )
+//                    snackBarHostState.showSnackbar(
+//                        message = "Success"
+//                    )
+                    onNavigateToMain()
                 }
                 is SingInScreenViewModel.ValidationEvent.Error ->{
                     snackBarHostState.showSnackbar(
