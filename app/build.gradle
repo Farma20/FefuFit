@@ -96,17 +96,16 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-collections-immutable:$immutable_collections_version"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialiation_version"
 
+
     //Modules
     implementation project(":core:theme")
     implementation project(":data:remote")
+
     implementation project(":features:main-impl")
+    implementation project(":features:main-api")
     implementation project(":features:sing-in-impl")
-//    implementation project(":features:sing-up-impl")
-
-
-    constraints{
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$jdk_version"
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$jdk_version"
-    }
+    implementation project(":features:sing-in-api")
+    implementation project(":features:sing-up-impl")
+    implementation project(":features:sing-up-api")
 
 }

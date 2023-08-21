@@ -26,7 +26,7 @@ buildscript {
 
         serialiation_version = "1.5.1"
 
-        jdk_version = '1.8.0'
+        jdk_version = '1.9.0'
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-serialization:1.7.20"

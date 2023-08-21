@@ -1,4 +1,4 @@
-package com.example.fefufit.glue.sing_in.repositories
+package com.example.fefufit.glue.initialization.repositories
 
 import com.example.remote.InitializationRepository
 import com.example.sing_in_impl.domain.models.InitialUserDataModel

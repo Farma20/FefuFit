@@ -17,6 +17,7 @@ import com.example.fefufit.data.internal.data_store.DataStoreManager
 import com.example.fefufit.data.internal.data_store.entities.AppInternalData
 import com.example.main_impl.presentation.MainMenuScreen
 import com.example.sing_in_impl.presentation.SingInScreen
+import com.example.sing_up_impl.presentation.SingUpScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -85,7 +86,8 @@ class MainActivity : ComponentActivity() {
                 Surface {
 //                    InitializationScreens()
 //                    MainMenuScreen()
-                    SingInScreen()
+//                    SingInScreen()
+                    SingUpScreen()
                 }
             }
         }

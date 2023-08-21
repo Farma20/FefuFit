@@ -2,12 +2,12 @@ package com.example.sing_up_impl.domain.use_cases
 
 import com.example.common.Resource
 import com.example.sing_up_impl.domain.models.SingUpDataModel
-import com.example.sing_up_impl.domain.repositories.SingUpRepository
+import com.example.sing_up_impl.domain.repositories.SingUpFeatureRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class SingUpUseCase @Inject constructor(private val repository: SingUpRepository) {
+class SingUpUseCase @Inject constructor(private val repository: SingUpFeatureRepository) {
     operator fun invoke(singUpData: SingUpDataModel): Flow<Resource<Map<String, String>>> = flow {
         try {
             emit(Resource.Loading())
