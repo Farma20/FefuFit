@@ -83,12 +83,7 @@ class MainActivity : ComponentActivity() {
                     systemUiController.setNavigationBarColor(color = barBackground)
                 }
 
-                Surface {
-//                    InitializationScreens()
-//                    MainMenuScreen()
-//                    SingInScreen()
-                    SingUpScreen()
-                }
+                AppContent(viewModel = viewModel)
             }
         }
     }

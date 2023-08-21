@@ -48,7 +48,9 @@ import com.example.sing_in_impl.R
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingInScreen() {
+fun SingInScreen(
+
+) {
 
     val viewModel = hiltViewModel<SingInScreenViewModel>()
 
@@ -99,9 +101,9 @@ fun SingInScreen() {
                 InputForm(viewModel)
                 Spacer(modifier = Modifier.height(24.dp))
                 InputButton(viewModel)
-                Spacer(modifier = Modifier.height(50.dp))
+                Spacer(modifier = Modifier.weight(1f))
                 SingUpButton()
-                Spacer(modifier = Modifier.height(57.dp))
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
