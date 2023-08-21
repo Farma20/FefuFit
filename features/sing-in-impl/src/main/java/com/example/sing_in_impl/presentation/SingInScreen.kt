@@ -49,7 +49,8 @@ import com.example.sing_in_impl.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SingInScreen(
-
+    modifier: Modifier,
+    onNavigateToSingUp: () -> Unit
 ) {
 
     val viewModel = hiltViewModel<SingInScreenViewModel>()
@@ -77,6 +78,7 @@ fun SingInScreen(
 
 
     Scaffold(
+        modifier = modifier,
         snackbarHost = {SnackbarHost(snackBarHostState)}
     ) {
         Surface(
@@ -101,8 +103,9 @@ fun SingInScreen(
                 InputForm(viewModel)
                 Spacer(modifier = Modifier.height(24.dp))
                 InputButton(viewModel)
+                Spacer(modifier = Modifier.height(16.dp))
                 Spacer(modifier = Modifier.weight(1f))
-                SingUpButton()
+                SingUpButton(onClick = onNavigateToSingUp)
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
@@ -177,6 +180,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         onValueChange = {
             viewModel.inputDataEvent(SingInFormEvent.PasswordChanged(it))
         },
+        isError = inputDataState.passwordError != null,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password
         ),
@@ -209,7 +213,7 @@ private fun InputForm(viewModel: SingInScreenViewModel){
         ) {
             Text(
                 text = "Забыли пароль?",
-                fontSize = 16.sp,
+                fontSize = 24.sp,
                 color = FefuFitTheme.color.textColor.secondaryTextColor
             )
         }
@@ -240,14 +244,16 @@ private fun InputButton(viewModel: SingInScreenViewModel){
 }
 
 @Composable
-private fun SingUpButton(){
+private fun SingUpButton(
+    onClick: () -> Unit
+){
     Text(
         text = "Нет аккаунта?",
         color = FefuFitTheme.color.textColor.tertiaryTextColor,
         fontSize = 18.sp,
     )
     TextButton(
-        onClick = {}
+        onClick = {onClick()}
     ){
         Text(
             text = "Зарегистрируйтесь!",
