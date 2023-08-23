@@ -7,28 +7,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.core.theme.FefuFitTheme
-import com.example.fefufit.data.internal.data_store.DataStoreManager
-import com.example.fefufit.data.internal.data_store.entities.AppInternalData
-import com.example.main_impl.presentation.MainMenuScreen
-import com.example.sing_in_impl.presentation.SingInScreen
-import com.example.sing_up_impl.presentation.SingUpScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
-
-    @Inject
-    lateinit var dataStoreManager: DataStoreManager
 
     @SuppressLint("CoroutineCreationDuringComposition", "FlowOperatorInvokedInComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +34,6 @@ class MainActivity : ComponentActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         setContent {
-            val userToken = dataStoreManager.data.collectAsState(initial = AppInternalData())
 
             val isDarkTheme = isSystemInDarkTheme()
             FefuFitTheme(isDarkTheme) {
