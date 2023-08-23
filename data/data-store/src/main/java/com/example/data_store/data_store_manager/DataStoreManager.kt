@@ -7,7 +7,7 @@ import com.example.data_store.entities.AppInternalData
 import com.example.data_store.entities.UserMetaData
 
 
-class DataStoreManager(
+internal class DataStoreManager(
     private val appContext:Context,
     private val serializer: Serializer<AppInternalData>
 ) {

@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Suppress("BlockingMethodInNonBlockingContext")
-class AppInternalSerializer: Serializer<AppInternalData> {
+internal class AppInternalSerializer: Serializer<AppInternalData> {
     override val defaultValue: AppInternalData
         get() = AppInternalData()
 

@@ -7,7 +7,7 @@ import com.example.data_store.entities.UserMetaData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class UserMetaDataStoreRepository @Inject constructor(
+internal class UserMetaDataStoreRepository @Inject constructor(
     private val dataStore: DataStoreManager
 ):DataStoreRepository {
     override fun getUserMetaData(): Flow<AppInternalData> {

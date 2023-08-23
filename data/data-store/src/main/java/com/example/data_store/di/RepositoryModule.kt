@@ -9,10 +9,11 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface RepositoryModule {
+internal interface RepositoryModule {
 
     @Binds
     fun bindDataStoreRepository(
         dataStoreRepository: UserMetaDataStoreRepository
     ):DataStoreRepository
+
 }
