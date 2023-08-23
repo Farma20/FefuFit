@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
-import com.example.sing_in_impl.domain.models.SingInDataModel
+import com.example.sing_in_impl.domain.models.FeatureSingInDataModel
 import com.example.sing_in_impl.domain.use_cases.SingInUseCase
 import com.example.sing_in_impl.utils.validation.SingInFormState
 import com.example.sing_in_impl.utils.validation.ValidateEmailUseCase
@@ -75,7 +75,7 @@ class SingInScreenViewModel @Inject constructor(
     }
 
     private fun singInData(email:String, password:String){
-        singInUseCase(SingInDataModel(email, password)).onEach { result->
+        singInUseCase(FeatureSingInDataModel(email, password)).onEach { result->
             when(result){
                 is Resource.Success->{
                     validationEventChannel.send(ValidationEvent.Success)
