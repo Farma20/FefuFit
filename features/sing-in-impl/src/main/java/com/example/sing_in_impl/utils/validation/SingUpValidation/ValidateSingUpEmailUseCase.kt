@@ -1,10 +1,9 @@
-package com.example.sing_in_impl.utils.validation
+package com.example.sing_in_impl.utils.validation.SingUpValidation
 
 import android.util.Patterns
 import javax.inject.Inject
 
-class ValidateEmailUseCase @Inject constructor() {
-
+class ValidateSingUpEmailUseCase @Inject constructor() {
     operator fun invoke(email: String): ValidationResult {
         if (email.isBlank()) {
             return ValidationResult(
@@ -12,10 +11,10 @@ class ValidateEmailUseCase @Inject constructor() {
                 errorMessage = "Поле не должно быть пустым"
             )
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             return ValidationResult(
                 success = false,
-                errorMessage = "Неккоректный почтовый адрес"
+                errorMessage = "Неверная электронная почта"
             )
         }
         return ValidationResult(

@@ -4,10 +4,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.example.main_api.MainPageApi
 import com.example.sing_in_api.SingInApi
-import com.example.sing_in_impl.presentation.SingInScreen
+import com.example.sing_in_impl.presentation.SingIn.SingInScreen
 import com.example.sing_up_api.SingUpApi
 import javax.inject.Inject
 import javax.inject.Singleton

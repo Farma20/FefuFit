@@ -1,4 +1,4 @@
-package com.example.sing_in_impl.presentation
+package com.example.sing_in_impl.presentation.SingIn
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.Resource
 import com.example.sing_in_impl.domain.models.FeatureSingInDataModel
 import com.example.sing_in_impl.domain.use_cases.SingInUseCase
-import com.example.sing_in_impl.utils.validation.SingInFormState
-import com.example.sing_in_impl.utils.validation.ValidateEmailUseCase
-import com.example.sing_in_impl.utils.validation.ValidatePasswordUseCase
+import com.example.sing_in_impl.utils.validation.SingInValidation.SingInFormState
+import com.example.sing_in_impl.utils.validation.SingInValidation.ValidateEmailUseCase
+import com.example.sing_in_impl.utils.validation.SingInValidation.ValidatePasswordUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
@@ -33,12 +33,12 @@ class SingInScreenViewModel @Inject constructor(
     val validationEvents = validationEventChannel.receiveAsFlow()
 
     //listener ui input events
-    fun inputDataEvent(event:SingInFormEvent){
+    fun inputDataEvent(event: SingInFormEvent){
         when(event){
             is SingInFormEvent.EmailChanged ->{
                 inputDataState = inputDataState.copy(email = event.email)
             }
-            is SingInFormEvent.PasswordChanged->{
+            is SingInFormEvent.PasswordChanged ->{
                 inputDataState = inputDataState.copy(password = event.password)
             }
             is SingInFormEvent.Submit ->{
@@ -93,7 +93,7 @@ class SingInScreenViewModel @Inject constructor(
     }
 
     sealed class ValidationEvent{
-        object Success:ValidationEvent()
-        object Error:ValidationEvent()
+        object Success: ValidationEvent()
+        object Error: ValidationEvent()
     }
 }

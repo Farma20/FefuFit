@@ -1,4 +1,4 @@
-package com.example.sing_in_impl.utils.validation
+package com.example.sing_in_impl.utils.validation.SingInValidation
 
 import javax.inject.Inject
 

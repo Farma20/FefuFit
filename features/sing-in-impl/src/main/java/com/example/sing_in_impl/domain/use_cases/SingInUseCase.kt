@@ -5,14 +5,14 @@ import com.example.sing_in_impl.domain.models.FeatureSingInDataModel
 import com.example.sing_in_impl.domain.models.FeatureSingInSuccessResponse
 import com.example.sing_in_impl.domain.models.FeatureUserMetaData
 import com.example.sing_in_impl.domain.repositories.SingInFeatureMetaDataRepository
-import com.example.sing_in_impl.domain.repositories.SingInFeatureRepository
+import com.example.sing_in_impl.domain.repositories.InitializationFeatureRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 
 class SingInUseCase @Inject constructor(
-    private val singInRepository: SingInFeatureRepository,
+    private val singInRepository: InitializationFeatureRepository,
     private val metaDataRepository: SingInFeatureMetaDataRepository,
 ) {
     operator fun invoke(singInData: FeatureSingInDataModel): Flow<Resource<FeatureSingInSuccessResponse>> = flow {

@@ -4,12 +4,12 @@ import com.example.remote.InitializationRepository
 import com.example.sing_in_impl.domain.models.FeatureInitialUserDataModel
 import com.example.sing_in_impl.domain.models.FeatureSingInDataModel
 import com.example.sing_in_impl.domain.models.FeatureSingInSuccessResponse
-import com.example.sing_in_impl.domain.repositories.SingInFeatureRepository
+import com.example.sing_in_impl.domain.repositories.InitializationFeatureRepository
 import javax.inject.Inject
 
 class AdapterSingInRepository @Inject constructor(
     private val initialRepository: InitializationRepository
-):SingInFeatureRepository {
+):InitializationFeatureRepository {
     override suspend fun singIn(singInData: FeatureSingInDataModel): FeatureSingInSuccessResponse {
         val data = com.example.fefufit.data.remote.models.initial_data_models.SingInDataModel(
             singInData.email,
