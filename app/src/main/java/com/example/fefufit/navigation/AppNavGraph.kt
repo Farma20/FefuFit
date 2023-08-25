@@ -22,11 +22,6 @@ fun AppNavGraph(
             modifier
         )
 
-        register(
-            featureApiHolder.singUpScreen,
-            navController,
-            modifier
-        )
 
         register(
             featureApiHolder.mainScreen,

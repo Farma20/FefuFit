@@ -57,17 +57,13 @@ class SingUpScreenViewModel @Inject constructor(
         inputFieldsNavController = navController
     }
 
-    private val singInEventChannel = Channel<SingInEvent>()
-    val singInEvents = singInEventChannel.receiveAsFlow()
-    var singIneErrorData by mutableStateOf("")
-
     //first registration page validation
     var inputDataState by mutableStateOf(SingUpFirstFormState())
     var errorData by mutableStateOf("")
 
     //a thread for sending notifications to the UI thread
-    private val validationEventChannel = Channel<ValidationEvent>()
-    val validationFirstEvents = validationEventChannel.receiveAsFlow()
+    private val registrationEventChannel = Channel<RegistrationEvent>()
+    val registrationFirstEvents = registrationEventChannel.receiveAsFlow()
 
     //listener ui input events
     fun inputDataEvent(event: SingUpFirstFormEvent){
@@ -134,7 +130,7 @@ class SingUpScreenViewModel @Inject constructor(
         )
 
         viewModelScope.launch {
-            validationEventChannel.send(ValidationEvent.SuccessFirst)
+            registrationEventChannel.send(RegistrationEvent.SuccessFirst)
         }
     }
 
@@ -199,8 +195,6 @@ class SingUpScreenViewModel @Inject constructor(
             return
         }
 
-        println("_______yes__________")
-
         inputSecondDataState = inputSecondDataState.copy(
             phoneNumberError = null,
             emailError = null,
@@ -235,7 +229,7 @@ class SingUpScreenViewModel @Inject constructor(
         ).onEach { result->
             when(result){
                 is Resource.Success->{
-                    validationEventChannel.send(ValidationEvent.SuccessSecond)
+                    registrationEventChannel.send(RegistrationEvent.SuccessSecond)
                     singInData(
                         FeatureSingInDataModel(
                             email = inputSecondDataState.email,
@@ -245,7 +239,7 @@ class SingUpScreenViewModel @Inject constructor(
                 }
                 is Resource.Error->{
                     errorData = result.message!!
-                    validationEventChannel.send(ValidationEvent.Error)
+                    registrationEventChannel.send(RegistrationEvent.SingUpError)
                 }
                 is Resource.Loading->{
 
@@ -258,28 +252,25 @@ class SingUpScreenViewModel @Inject constructor(
         singInUseCase(featureSingInDataModel).onEach { result ->
             when(result){
                 is Resource.Success->{
-                    singInEventChannel.send(SingInEvent.SingInSuccess)
+                    registrationEventChannel.send(RegistrationEvent.SingInSuccess)
                 }
                 is Resource.Error->{
                     errorData = result.message!!
-                    singInEventChannel.send(SingInEvent.SingInError)
+                    registrationEventChannel.send(RegistrationEvent.SingInError)
                 }
                 is Resource.Loading->{
 
                 }
             }
-        }
+        }.launchIn(viewModelScope)
     }
 
-    sealed class SingInEvent{
-        object SingInSuccess:SingInEvent()
 
-        object SingInError:SingInEvent()
-    }
-
-    sealed class ValidationEvent{
-        object SuccessFirst: ValidationEvent()
-        object SuccessSecond: ValidationEvent()
-        object Error: ValidationEvent()
+    sealed class RegistrationEvent{
+        object SuccessFirst: RegistrationEvent()
+        object SuccessSecond: RegistrationEvent()
+        object SingUpError: RegistrationEvent()
+        object SingInSuccess:RegistrationEvent()
+        object SingInError:RegistrationEvent()
     }
 }

@@ -72,36 +72,33 @@ fun SingUpScreen(
     }
 
     LaunchedEffect(key1 = context){
-        viewModel.validationFirstEvents.collect{event ->
+        viewModel.registrationFirstEvents.collect{event ->
             when(event){
-                is SingUpScreenViewModel.ValidationEvent.SuccessFirst ->{
+                is SingUpScreenViewModel.RegistrationEvent.SuccessFirst ->{
                     viewModel.inputFieldsNavController!!.navigate(SingUpFieldsScreensRoute.SingUpFieldsSecond.route)
                 }
-                is SingUpScreenViewModel.ValidationEvent.SuccessSecond ->{
+                is SingUpScreenViewModel.RegistrationEvent.SuccessSecond ->{
                     snackBarHostState.showSnackbar(
                         message = "Success"
                     )
                 }
-                is SingUpScreenViewModel.ValidationEvent.Error ->{
+                is SingUpScreenViewModel.RegistrationEvent.SingUpError ->{
                     snackBarHostState.showSnackbar(
                         message = viewModel.errorData
                     )
                 }
-            }
-        }
-
-        viewModel.singInEvents.collect{event->
-            when(event){
-                is SingUpScreenViewModel.SingInEvent.SingInError -> {
+                is SingUpScreenViewModel.RegistrationEvent.SingInError -> {
                     snackBarHostState.showSnackbar(
                         message = viewModel.errorData
                     )
                 }
-                is SingUpScreenViewModel.SingInEvent.SingInSuccess -> {
+                is SingUpScreenViewModel.RegistrationEvent.SingInSuccess -> {
                     onNavigateToMain()
                 }
             }
         }
+
+
     }
 
     Scaffold(
