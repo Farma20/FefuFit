@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fefufit.navigation.FeatureApiHolder
 import com.example.main_api.MainPageApi
-import com.example.sing_in_api.SingInApi
+import com.example.initialization_api.InitializationApi
 import com.example.sing_up_api.SingUpApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    override val singInScreen: SingInApi,
+    override val singInScreen: InitializationApi,
     override val singUpScreen: SingUpApi,
     override val mainScreen: MainPageApi
 ) :ViewModel(), FeatureApiHolder {

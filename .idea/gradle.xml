@@ -20,10 +20,10 @@
             <option value="$PROJECT_DIR$/data/data-store" />
             <option value="$PROJECT_DIR$/data/remote" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/initialization-api" />
+            <option value="$PROJECT_DIR$/features/initialization-impl" />
             <option value="$PROJECT_DIR$/features/main-api" />
             <option value="$PROJECT_DIR$/features/main-impl" />
-            <option value="$PROJECT_DIR$/features/sing-in-api" />
-            <option value="$PROJECT_DIR$/features/sing-in-impl" />
             <option value="$PROJECT_DIR$/features/sing-up-api" />
             <option value="$PROJECT_DIR$/features/sing-up-impl" />
           </set>

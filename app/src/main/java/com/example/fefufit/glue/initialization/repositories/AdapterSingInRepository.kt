@@ -1,10 +1,10 @@
 package com.example.fefufit.glue.initialization.repositories
 
 import com.example.remote.InitializationRepository
-import com.example.sing_in_impl.domain.models.FeatureInitialUserDataModel
-import com.example.sing_in_impl.domain.models.FeatureSingInDataModel
-import com.example.sing_in_impl.domain.models.FeatureSingInSuccessResponse
-import com.example.sing_in_impl.domain.repositories.InitializationFeatureRepository
+import com.example.initialization_impl.domain.models.FeatureInitialUserDataModel
+import com.example.initialization_impl.domain.models.FeatureSingInDataModel
+import com.example.initialization_impl.domain.models.FeatureSingInSuccessResponse
+import com.example.initialization_impl.domain.repositories.InitializationFeatureRepository
 import javax.inject.Inject
 
 class AdapterSingInRepository @Inject constructor(
