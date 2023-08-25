@@ -49,8 +49,8 @@ import androidx.compose.ui.unit.sp
 import com.example.core.theme.FefuFitTheme
 import com.example.initialization_impl.presentation.SingUp.SingUpScreenViewModel
 import com.example.initialization_impl.presentation.SingUp.navigation.InputFieldsStates
-import com.example.initialization_impl.R
 import com.example.initialization_impl.utils.validation.SingUpValidation.SingUpFirstFormEvent
+import com.example.sing_in_impl.R
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.DatePickerDefaults
 import com.vanpra.composematerialdialogs.datetime.date.datepicker

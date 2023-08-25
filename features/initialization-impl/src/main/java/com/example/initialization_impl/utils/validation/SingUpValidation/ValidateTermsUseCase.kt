@@ -1,5 +1,6 @@
 package com.example.initialization_impl.utils.validation.SingUpValidation
 
+import com.example.initialization_impl.utils.validation.ValidationResult
 import javax.inject.Inject
 
 class ValidateTermsUseCase @Inject constructor() {

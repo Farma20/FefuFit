@@ -1,4 +1,4 @@
-package com.example.initialization_impl.presentation.SingUp
+package com.example.initialization_impl.presentation.SingUp.data
 
 data class SingUpSecondFormState(
     val phoneNumber:String = "",

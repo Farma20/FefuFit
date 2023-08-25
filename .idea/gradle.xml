@@ -24,8 +24,6 @@
             <option value="$PROJECT_DIR$/features/initialization-impl" />
             <option value="$PROJECT_DIR$/features/main-api" />
             <option value="$PROJECT_DIR$/features/main-impl" />
-            <option value="$PROJECT_DIR$/features/sing-up-api" />
-            <option value="$PROJECT_DIR$/features/sing-up-impl" />
           </set>
         </option>
       </GradleProjectSettings>

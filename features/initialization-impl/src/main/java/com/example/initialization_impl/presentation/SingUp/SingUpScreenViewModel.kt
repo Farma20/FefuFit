@@ -7,6 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.common.Resource
+import com.example.initialization_impl.domain.models.FeatureSingInDataModel
+import com.example.initialization_impl.domain.models.SingUpDataModel
+import com.example.initialization_impl.domain.use_cases.SingInUseCase
+import com.example.initialization_impl.domain.use_cases.SingUpUseCase
+import com.example.initialization_impl.presentation.SingUp.data.SingUpFirstFormState
+import com.example.initialization_impl.presentation.SingUp.data.SingUpSecondFormState
+import com.example.initialization_impl.presentation.SingUp.navigation.InputFieldsStates
+import com.example.initialization_impl.utils.validation.SingUpValidation.SingUpFirstFormEvent
+import com.example.initialization_impl.utils.validation.SingUpValidation.SingUpSecondFormEvent
 import com.example.initialization_impl.utils.validation.SingUpValidation.ValidateBirthdayUseCase
 import com.example.initialization_impl.utils.validation.SingUpValidation.ValidateFirstNameUseCase
 import com.example.initialization_impl.utils.validation.SingUpValidation.ValidateGenderUseCase
@@ -17,11 +26,6 @@ import com.example.initialization_impl.utils.validation.SingUpValidation.Validat
 import com.example.initialization_impl.utils.validation.SingUpValidation.ValidateSingUpPasswordUseCase
 import com.example.initialization_impl.utils.validation.SingUpValidation.ValidateStatusUseCase
 import com.example.initialization_impl.utils.validation.SingUpValidation.ValidateTermsUseCase
-import com.example.sing_up_impl.domain.models.SingUpDataModel
-import com.example.sing_up_impl.domain.use_cases.SingUpUseCase
-import com.example.sing_up_impl.presentation.navigation.InputFieldsStates
-import com.example.sing_up_impl.presentation.validation.SingUpFirstFormEvent
-import com.example.sing_up_impl.presentation.validation.SingUpSecondFormEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
@@ -32,7 +36,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SingUpScreenViewModel @Inject constructor(
-    private var singUpUseCase: SingUpUseCase,
+    private val singInUseCase: SingInUseCase,
+    private val singUpUseCase: SingUpUseCase,
     private val validateSecondNameUseCase: ValidateSecondNameUseCase,
     private val validateFirstNameUseCase: ValidateFirstNameUseCase,
     private val validateGenderUseCase: ValidateGenderUseCase,
@@ -51,6 +56,10 @@ class SingUpScreenViewModel @Inject constructor(
     fun getFieldsNavController(navController: NavController){
         inputFieldsNavController = navController
     }
+
+    private val singInEventChannel = Channel<SingInEvent>()
+    val singInEvents = singInEventChannel.receiveAsFlow()
+    var singIneErrorData by mutableStateOf("")
 
     //first registration page validation
     var inputDataState by mutableStateOf(SingUpFirstFormState())
@@ -227,6 +236,12 @@ class SingUpScreenViewModel @Inject constructor(
             when(result){
                 is Resource.Success->{
                     validationEventChannel.send(ValidationEvent.SuccessSecond)
+                    singInData(
+                        FeatureSingInDataModel(
+                            email = inputSecondDataState.email,
+                            password = inputSecondDataState.password
+                        )
+                    )
                 }
                 is Resource.Error->{
                     errorData = result.message!!
@@ -236,8 +251,30 @@ class SingUpScreenViewModel @Inject constructor(
 
                 }
             }
-
         }.launchIn(viewModelScope)
+    }
+
+    private fun singInData(featureSingInDataModel: FeatureSingInDataModel) {
+        singInUseCase(featureSingInDataModel).onEach { result ->
+            when(result){
+                is Resource.Success->{
+                    singInEventChannel.send(SingInEvent.SingInSuccess)
+                }
+                is Resource.Error->{
+                    errorData = result.message!!
+                    singInEventChannel.send(SingInEvent.SingInError)
+                }
+                is Resource.Loading->{
+
+                }
+            }
+        }
+    }
+
+    sealed class SingInEvent{
+        object SingInSuccess:SingInEvent()
+
+        object SingInError:SingInEvent()
     }
 
     sealed class ValidationEvent{

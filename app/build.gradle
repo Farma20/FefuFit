@@ -108,7 +108,4 @@ dependencies {
     implementation project(":features:main-api")
     implementation project(':features:initialization-impl')
     implementation project(':features:initialization-api')
-    implementation project(":features:sing-up-impl")
-    implementation project(":features:sing-up-api")
-
 }

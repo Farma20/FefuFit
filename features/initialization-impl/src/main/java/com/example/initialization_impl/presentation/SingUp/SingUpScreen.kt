@@ -29,10 +29,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.theme.FefuFitTheme
-import com.example.sing_up_impl.R
-import com.example.sing_up_impl.presentation.navigation.InputFieldsStates
-import com.example.sing_up_impl.presentation.navigation.SingUpFieldsScreens
-import com.example.sing_up_impl.presentation.navigation.SingUpFieldsScreensRoute
+import com.example.initialization_impl.presentation.SingUp.navigation.InputFieldsStates
+import com.example.initialization_impl.presentation.SingUp.navigation.SingUpFieldsScreens
+import com.example.initialization_impl.presentation.SingUp.navigation.SingUpFieldsScreensRoute
+import com.example.sing_in_impl.R
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -80,12 +81,24 @@ fun SingUpScreen(
                     snackBarHostState.showSnackbar(
                         message = "Success"
                     )
-                    onNavigateToMain()
                 }
                 is SingUpScreenViewModel.ValidationEvent.Error ->{
                     snackBarHostState.showSnackbar(
                         message = viewModel.errorData
                     )
+                }
+            }
+        }
+
+        viewModel.singInEvents.collect{event->
+            when(event){
+                is SingUpScreenViewModel.SingInEvent.SingInError -> {
+                    snackBarHostState.showSnackbar(
+                        message = viewModel.errorData
+                    )
+                }
+                is SingUpScreenViewModel.SingInEvent.SingInSuccess -> {
+                    onNavigateToMain()
                 }
             }
         }

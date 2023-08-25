@@ -4,10 +4,11 @@ import com.example.remote.InitializationRepository
 import com.example.initialization_impl.domain.models.FeatureInitialUserDataModel
 import com.example.initialization_impl.domain.models.FeatureSingInDataModel
 import com.example.initialization_impl.domain.models.FeatureSingInSuccessResponse
+import com.example.initialization_impl.domain.models.SingUpDataModel
 import com.example.initialization_impl.domain.repositories.InitializationFeatureRepository
 import javax.inject.Inject
 
-class AdapterSingInRepository @Inject constructor(
+class InitializationRepository @Inject constructor(
     private val initialRepository: InitializationRepository
 ):InitializationFeatureRepository {
     override suspend fun singIn(singInData: FeatureSingInDataModel): FeatureSingInSuccessResponse {
@@ -24,6 +25,22 @@ class AdapterSingInRepository @Inject constructor(
                 result.initialUserDataModel.type,
             ),
             status = result.status
+        )
+    }
+
+    override suspend fun singUp(singUpData: SingUpDataModel): Map<String, String> {
+        return initialRepository.singUp(
+            com.example.fefufit.data.remote.models.initial_data_models.SingUpDataModel(
+                singUpData.birthdate,
+                singUpData.email,
+                singUpData.firstName,
+                singUpData.gender,
+                singUpData.password,
+                singUpData.phoneNumber,
+                singUpData.secondName,
+                singUpData.status,
+                singUpData.thirdName
+            )
         )
     }
 }

@@ -3,6 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="FefuFit.features.sing-in" target="17" />
+      <module name="FefuFit.features.sing-up-api" target="17" />
+      <module name="FefuFit.features.sing-up-impl" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
