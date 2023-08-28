@@ -8,8 +8,8 @@ import javax.inject.Inject
 class AdapterUserRepository @Inject constructor(
     private val userRepository: UserDataRepository
 ): UserFeatureRepository {
-    override suspend fun getUserData(): UserDataModel {
-        val userData = userRepository.getUserData()
+    override suspend fun getUserData(token: String): UserDataModel {
+        val userData = userRepository.getUserData(token)
 
         return UserDataModel(
             userData.birthdate,
