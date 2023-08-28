@@ -3,7 +3,7 @@ package com.example.fefufit.data.remote.models.events_data_models
 
 import com.google.gson.annotations.SerializedName
 
-data class UserBookingDataModelItem(
+data class DataUserBookingDataModelItem(
     @SerializedName("begin_time")
     val beginTime: String,
     @SerializedName("booking_status")

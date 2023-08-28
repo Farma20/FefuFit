@@ -3,7 +3,7 @@ package com.example.fefufit.data.remote.models.services_data_models
 
 import com.google.gson.annotations.SerializedName
 
-data class UserServicesDataModelItem(
+data class DataUserServicesDataModelItem(
     @SerializedName("events_done")
     val eventsDone: Int,
     @SerializedName("exp_date")

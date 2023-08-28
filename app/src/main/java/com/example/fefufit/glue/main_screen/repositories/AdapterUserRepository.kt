@@ -1,5 +1,6 @@
 package com.example.fefufit.glue.main_screen.repositories
 
+import com.example.fefufit.glue.main_screen.mappers.toUserDataModel
 import com.example.main_impl.domain.models.UserDataModel
 import com.example.main_impl.domain.repositories.UserFeatureRepository
 import com.example.remote.UserDataRepository
@@ -11,18 +12,6 @@ class AdapterUserRepository @Inject constructor(
     override suspend fun getUserData(token: String): UserDataModel {
         val userData = userRepository.getUserData(token)
 
-        return UserDataModel(
-            userData.birthdate,
-            userData.email,
-            userData.firstName,
-            userData.gender,
-            userData.phoneNumber,
-            userData.photo,
-            userData.secondName,
-            userData.status,
-            userData.telegramId,
-            userData.middleName,
-            userData.type
-        )
+        return userData.toUserDataModel()
     }
 }
