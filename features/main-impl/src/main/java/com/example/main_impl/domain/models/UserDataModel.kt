@@ -6,7 +6,7 @@ data class UserDataModel(
     val firstName: String,
     val gender: String,
     val phoneNumber: Any,
-    val photo: Any,
+    val photo: Any?,
     val secondName: String,
     val status: String,
     val telegramId: Any?,

@@ -20,7 +20,7 @@ import javax.inject.Inject
 class MainMenuViewModel @Inject constructor(
 //    private val userActiveServiceUseCase: UserActiveServiceUseCase,
 //    private val userNearBookingUseCase: UserNearBookingUseCase,
-//    private val userShortDataUseCase: UserShortDataUseCase,
+    private val userShortDataUseCase: UserShortDataUseCase,
 ):ViewModel() {
 
     //data states variables
@@ -72,19 +72,19 @@ class MainMenuViewModel @Inject constructor(
     }
 
     private fun getUserData(){
-//        userShortDataUseCase().onEach { result->
-//            when(result){
-//                is Resource.Success ->{
-//                    _userDataState.value = UserDataState(data = result.data)
-//                }
-//                is Resource.Error ->{
-//                    _userDataState.value = UserDataState(error = result.message)
-//                }
-//                is Resource.Loading ->{
-//                    _userDataState.value = UserDataState(isLoading = true)
-//                }
-//            }
-//        }.launchIn(viewModelScope)
+        userShortDataUseCase().onEach { result->
+            when(result){
+                is Resource.Success ->{
+                    _userDataState.value = UserDataState(data = result.data)
+                }
+                is Resource.Error ->{
+                    _userDataState.value = UserDataState(error = result.message)
+                }
+                is Resource.Loading ->{
+                    _userDataState.value = UserDataState(isLoading = true)
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
 
