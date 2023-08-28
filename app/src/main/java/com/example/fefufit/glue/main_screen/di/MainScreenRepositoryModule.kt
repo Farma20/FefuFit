@@ -1,6 +1,8 @@
 package com.example.fefufit.glue.main_screen.di
 
+import com.example.fefufit.glue.main_screen.repositories.AdapterMetaDataRepository
 import com.example.fefufit.glue.main_screen.repositories.AdapterUserRepository
+import com.example.main_impl.domain.repositories.MainMetaDataRepository
 import com.example.main_impl.domain.repositories.UserFeatureRepository
 import dagger.Binds
 import dagger.Module
@@ -15,4 +17,9 @@ interface MainScreenRepositoryModule {
     fun bindUserRepository(
         userRepository: AdapterUserRepository
     ): UserFeatureRepository
+
+    @Binds
+    fun bindMetaDataRepository(
+        metaDataRepository: AdapterMetaDataRepository
+    ): MainMetaDataRepository
 }

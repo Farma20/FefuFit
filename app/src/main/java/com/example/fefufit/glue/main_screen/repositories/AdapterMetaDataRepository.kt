@@ -19,5 +19,4 @@ class AdapterMetaDataRepository @Inject constructor(
             throw Exception("incorrect token")
         }
     }
-
 }
