@@ -7,19 +7,10 @@ import javax.inject.Inject
 
 
 class EventsFefuRepository @Inject constructor(
-    private val api: FefuFitApi,
-//    private val dataStoreManager: DataStoreManager
+    private val api: FefuFitApi
 ): EventsDataRepository {
-    private var userToken: String? = null
-
-//    init {
-//        dataStoreManager.data.onEach {
-//            userToken = it.userMetaData.userToken
-//        }.launchIn(CoroutineScope(Dispatchers.IO))
-//    }
-
-    override suspend fun getAllUserBookings(): UserBookingDataModel {
-        return api.getUserBookings(mapOf("token" to userToken!!))
+    override suspend fun getAllUserBookings(token:String): UserBookingDataModel {
+        return api.getUserBookings(mapOf("token" to token))
     }
 
 }

@@ -3,5 +3,5 @@ package com.example.main_impl.domain.repositories
 import com.example.main_impl.domain.models.UserBookingDataModel
 
 interface EventsFeatureRepository {
-    suspend fun getAllUserBookings(): UserBookingDataModel
+    suspend fun getAllUserBookings(token:String): UserBookingDataModel
 }
