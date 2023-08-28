@@ -9,7 +9,7 @@ data class UserDataModel(
     val photo: Any,
     val secondName: String,
     val status: String,
-    val telegramId: Any,
+    val telegramId: Any?,
     val middleName: String,
     val type: String
 )
