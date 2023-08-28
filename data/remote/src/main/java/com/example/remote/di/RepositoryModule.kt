@@ -3,10 +3,10 @@ package com.example.remote.di
 import com.example.fefufit.data.remote.repositories.EventsFefuRepository
 import com.example.fefufit.data.remote.repositories.ServicesFefuRepository
 import com.example.fefufit.data.remote.repositories.UserFefuRepository
-import com.example.remote.EventsRepository
-import com.example.remote.InitializationRepository
-import com.example.remote.ServicesRepository
-import com.example.remote.UserRepository
+import com.example.remote.EventsDataRepository
+import com.example.remote.InitializationDataRepository
+import com.example.remote.ServicesDataRepository
+import com.example.remote.UserDataRepository
 import com.example.remote.repositories.InitialFefuRepository
 import dagger.Binds
 import dagger.Module
@@ -21,23 +21,23 @@ abstract class RepositoryModule {
     @Singleton
     abstract fun bindUserDataRepository(
         userDataRepository: UserFefuRepository
-    ): UserRepository
+    ): UserDataRepository
 
     @Binds
     @Singleton
     abstract fun bindEventsDataRepository(
         eventsDataRepository: EventsFefuRepository
-    ): EventsRepository
+    ): EventsDataRepository
 
     @Binds
     @Singleton
     abstract fun bindServicesDataRepository(
         servicesDataRepository: ServicesFefuRepository
-    ): ServicesRepository
+    ): ServicesDataRepository
 
     @Binds
     @Singleton
     abstract fun bindInitialRepository(
         initialRepository: InitialFefuRepository
-    ): InitializationRepository
+    ): InitializationDataRepository
 }

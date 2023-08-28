@@ -1,6 +1,6 @@
 package com.example.fefufit.glue.initialization.repositories
 
-import com.example.remote.InitializationRepository
+import com.example.remote.InitializationDataRepository
 import com.example.initialization_impl.domain.models.FeatureInitialUserDataModel
 import com.example.initialization_impl.domain.models.FeatureSingInDataModel
 import com.example.initialization_impl.domain.models.FeatureSingInSuccessResponse
@@ -9,7 +9,7 @@ import com.example.initialization_impl.domain.repositories.InitializationFeature
 import javax.inject.Inject
 
 class InitializationRepository @Inject constructor(
-    private val initialRepository: InitializationRepository
+    private val initialRepository: InitializationDataRepository
 ):InitializationFeatureRepository {
     override suspend fun singIn(singInData: FeatureSingInDataModel): FeatureSingInSuccessResponse {
         val data = com.example.fefufit.data.remote.models.initial_data_models.SingInDataModel(

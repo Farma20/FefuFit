@@ -4,5 +4,5 @@ import com.example.main_impl.domain.models.UserDataModel
 
 interface UserFeatureRepository {
 
-    suspend fun getUserData(): UserDataModel
+    suspend fun getUserData(token:String): UserDataModel
 }

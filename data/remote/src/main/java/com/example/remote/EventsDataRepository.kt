@@ -2,6 +2,6 @@ package com.example.remote
 
 import com.example.fefufit.data.remote.models.events_data_models.UserBookingDataModel
 
-interface EventsRepository {
+interface EventsDataRepository {
     suspend fun getAllUserBookings(): UserBookingDataModel
 }

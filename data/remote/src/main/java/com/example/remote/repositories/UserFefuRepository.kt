@@ -3,27 +3,18 @@ package com.example.fefufit.data.remote.repositories
 
 import com.example.fefufit.data.remote.api.FefuFitApi
 import com.example.fefufit.data.remote.models.user_data_models.UserDataModel
-import com.example.remote.UserRepository
+import com.example.remote.UserDataRepository
 import javax.inject.Inject
 
 class UserFefuRepository @Inject constructor(
     private val api: FefuFitApi,
-//   private val dataStoreManager: DataStoreManager
-): UserRepository {
+): UserDataRepository {
 
-    private var userToken:String? = null
-
-//    init {
-//        dataStoreManager.data.onEach {
-//            userToken = it.userMetaData.userToken
-//        }.launchIn(CoroutineScope(Dispatchers.IO))
-//    }
-
-    override suspend fun getUserData(): UserDataModel {
-        return api.getUserData(mapOf("token" to userToken!!))
+    override suspend fun getUserData(token:String): UserDataModel {
+        return api.getUserData(mapOf("token" to token))
     }
 
-    override suspend fun editUserData(): Map<String, String> {
+    override suspend fun editUserData(token:String): Map<String, String> {
        return mapOf("don`t_work" to  "don`t_work")
     }
 }
