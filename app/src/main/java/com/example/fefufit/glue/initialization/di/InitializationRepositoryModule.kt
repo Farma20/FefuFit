@@ -1,7 +1,7 @@
 package com.example.fefufit.glue.initialization.di
 
 import com.example.fefufit.glue.initialization.repositories.AdapterMetaDataSingInRepository
-import com.example.fefufit.glue.initialization.repositories.InitializationRepository
+import com.example.fefufit.glue.initialization.repositories.AdapterInitializationRepository
 import com.example.initialization_impl.domain.repositories.InitializationFeatureRepository
 import com.example.initialization_impl.domain.repositories.SingInFeatureMetaDataRepository
 import dagger.Binds
@@ -15,7 +15,7 @@ interface InitializationRepositoryModule {
 
     @Binds
     fun bindInitializationRepository(
-        initializationRepository: InitializationRepository
+        initializationRepository: AdapterInitializationRepository
     ):InitializationFeatureRepository
 
     @Binds

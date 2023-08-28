@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.common.Resource
 import com.example.initialization_impl.domain.models.FeatureSingInDataModel
-import com.example.initialization_impl.domain.models.SingUpDataModel
+import com.example.initialization_impl.domain.models.FeatureSingUpDataModel
 import com.example.initialization_impl.domain.use_cases.SingInUseCase
 import com.example.initialization_impl.domain.use_cases.SingUpUseCase
 import com.example.initialization_impl.presentation.SingUp.data.SingUpFirstFormState
@@ -215,7 +215,7 @@ class SingUpScreenViewModel @Inject constructor(
     ){
         println(inputDataState.birthday)
         singUpUseCase(
-            SingUpDataModel(
+            FeatureSingUpDataModel(
             birthdate = inputDataState.birthday,
             email = inputSecondDataState.email,
             firstName = inputDataState.firstName,

@@ -1,7 +1,7 @@
 package com.example.initialization_impl.domain.models
 
 
-data class SingUpDataModel(
+data class FeatureSingUpDataModel(
     val birthdate: String,
     val email: String,
     val firstName: String,

@@ -3,7 +3,7 @@ package com.example.fefufit.data.remote.models.initial_data_models
 
 import com.google.gson.annotations.SerializedName
 
-data class SingUpDataModel(
+data class DataSingUpDataModel(
     @SerializedName("birthdate")
     val birthdate: String,
     @SerializedName("email")
