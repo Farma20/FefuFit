@@ -3,7 +3,7 @@ package com.example.main_impl.domain.models
 
 data class UserBookingDataModelItem(
     val beginTime: String,
-    val bookingStatus: String,
+    val bookingStatus: String?,
     val buildingName: String,
     val coachEmail: String,
     val coachName: String,

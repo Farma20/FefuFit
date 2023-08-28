@@ -22,8 +22,8 @@ class UserNearBookingUseCase @Inject constructor(
             else
                 emit(Resource.Success(null))
         }
-        catch (cause: Throwable){
-            emit(Resource.Error("error in UserNearBookingUseCase"))
+        catch (e: Exception){
+            emit(Resource.Error(e.message.toString()))
         }
     }
 }
