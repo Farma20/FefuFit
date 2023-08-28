@@ -6,20 +6,10 @@ import com.example.remote.ServicesDataRepository
 import javax.inject.Inject
 
 class ServicesFefuRepository @Inject constructor(
-    private val api: FefuFitApi,
-//    private val dataStoreManager: DataStoreManager
+    private val api: FefuFitApi
 ): ServicesDataRepository {
-
-    private var userToken:String? = null
-
-//    init {
-//        dataStoreManager.data.onEach {
-//            userToken = it.userMetaData.userToken
-//        }.launchIn(CoroutineScope(Dispatchers.IO))
-//    }
-
-    override suspend fun getUserServices(): UserServicesDataModel {
-        return api.getActiveUserPlans(mapOf("token" to userToken!!))
+    override suspend fun getUserServices(token:String): UserServicesDataModel {
+        return api.getActiveUserPlans(mapOf("token" to token))
     }
 
 }
