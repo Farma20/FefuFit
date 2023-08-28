@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainMenuViewModel @Inject constructor(
 //    private val userActiveServiceUseCase: UserActiveServiceUseCase,
-//    private val userNearBookingUseCase: UserNearBookingUseCase,
+    private val userNearBookingUseCase: UserNearBookingUseCase,
     private val userShortDataUseCase: UserShortDataUseCase,
 ):ViewModel() {
 
@@ -56,19 +56,19 @@ class MainMenuViewModel @Inject constructor(
     }
 
     private fun getNearBooking() {
-//        userNearBookingUseCase().onEach { result ->
-//            when(result){
-//                is Resource.Success ->{
-//                    _nearBookingState.value = NearBookingDataState(data = result.data)
-//                }
-//                is Resource.Error ->{
-//                    _nearBookingState.value = NearBookingDataState(error = result.message)
-//                }
-//                is Resource.Loading ->{
-//                    _nearBookingState.value = NearBookingDataState(isLoading = true)
-//                }
-//            }
-//        }.launchIn(viewModelScope)
+        userNearBookingUseCase().onEach { result ->
+            when(result){
+                is Resource.Success ->{
+                    _nearBookingState.value = NearBookingDataState(data = result.data)
+                }
+                is Resource.Error ->{
+                    _nearBookingState.value = NearBookingDataState(error = result.message)
+                }
+                is Resource.Loading ->{
+                    _nearBookingState.value = NearBookingDataState(isLoading = true)
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
     private fun getUserData(){
