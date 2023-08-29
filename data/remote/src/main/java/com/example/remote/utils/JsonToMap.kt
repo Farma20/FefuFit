@@ -1,4 +1,4 @@
-package com.example.fefufit.utils
+package com.example.remote.utils
 
 import org.json.JSONArray
 import org.json.JSONObject

@@ -27,18 +27,3 @@ class UserNearBookingUseCase @Inject constructor(
         }
     }
 }
-
-
-//TODO DELETE
-
-//when (cause) {
-//    is HttpException -> {
-//        val result = JSONObject(cause.response()?.errorBody()?.string().toString()).toMap()
-//        emit(Resource.Error(result["detail"].toString()))
-//    }
-//    is NullPointerException -> {
-//        val errorText = "User token is null"
-//        emit(Resource.Error(errorText))
-//    }
-//    else -> emit(Resource.Error("Unknown error"))
-//}

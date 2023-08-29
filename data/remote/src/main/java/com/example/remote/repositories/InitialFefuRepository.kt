@@ -21,14 +21,16 @@ class InitialFefuRepository @Inject constructor(private val fefuFitApi: FefuFitA
             return fefuFitApi.singIn(singInData)
         } catch (cause: Throwable) {
 
-            var errorText: String = ""
-
-            when (cause) {
-                is HttpException ->
+            val errorText: String = when (cause) {
+                is HttpException -> {
                     if (cause.code() == 400)
-                        errorText = INPUT_ERROR_TEXT
-
-                else -> errorText = INTERNET_ERROR_TEXT
+                        INPUT_ERROR_TEXT
+                    else
+                        INTERNET_ERROR_TEXT
+                }
+                else -> {
+                    INTERNET_ERROR_TEXT
+                }
             }
             throw Exception(errorText)
         }
