@@ -15,25 +15,6 @@ class SingUpUseCase @Inject constructor(private val repository: InitializationFe
             emit(Resource.Success(response))
         }catch (cause:Throwable){
             emit(Resource.Error("SingUpUseCaseError"))
-//            when (cause) {
-//                is HttpException -> {
-//                    val result = JSONObject(cause.response()?.errorBody()?.string().toString()).toMap()
-//
-//                    if (cause.code() == 400){
-//                        val errorText = when (result["msg"]) {
-//                            "not an email" -> "Произошла ошибка при регистрации, несуществующая почта"
-//                            "wrong birthdate" -> "Произошла ошибка при регистрации, некорректная дата рождения"
-//                            "user already exists" -> "Произошла ошибка при регистрации, пользователь с данной почтой уже существует"
-//                            else -> "Произошла ошибка при регистрации, проверьте правильность введенных данных"
-//                        }
-//                        emit(Resource.Error(errorText))
-//                    }
-//                }
-//                else->{
-//                    val errorText = "Произошла непредвиденная ошибка. Проверьте соединение с интернетом или свяжитесь с разработчиками"
-//                    emit(Resource.Error(errorText))
-//                }
-//            }
         }
     }
 }
