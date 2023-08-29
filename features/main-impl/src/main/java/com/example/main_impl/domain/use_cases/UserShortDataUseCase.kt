@@ -20,8 +20,8 @@ class UserShortDataUseCase @Inject constructor(
             val userData = repository.getUserData(userToken)
             emit(Resource.Success(userData.toShort()))
         }
-        catch (cause:Throwable){
-            emit(Resource.Error("error in UserShortDataUseCase"))
+        catch (e:Exception){
+            emit(Resource.Error(e.message.toString()))
         }
     }
 }

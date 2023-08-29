@@ -13,8 +13,8 @@ class SingUpUseCase @Inject constructor(private val repository: InitializationFe
             emit(Resource.Loading())
             val response = repository.singUp(singUpData)
             emit(Resource.Success(response))
-        }catch (cause:Throwable){
-            emit(Resource.Error("SingUpUseCaseError"))
+        }catch (e:Exception){
+            emit(Resource.Error(e.message.toString()))
         }
     }
 }
