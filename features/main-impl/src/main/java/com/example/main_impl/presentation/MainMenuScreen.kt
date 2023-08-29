@@ -128,7 +128,7 @@ private fun ActiveServicesSpace(
 ) {
 
     val emptyCardModifier = Modifier
-        .height(160.dp)
+        .height(176.dp)
         .padding(horizontal = 16.dp)
 
     Column(
@@ -397,7 +397,7 @@ private fun EmptyCard(
 @Composable
 fun NearEventSpace(nearBookingState: NearBookingDataState) {
 
-    val emptyCardModifier = Modifier.height(144.dp)
+    val emptyCardModifier = Modifier.height(147.dp)
 
     Column(
         modifier = Modifier
@@ -664,7 +664,7 @@ private fun MainMenuUppBar(
 ) {
 
     val emptyCardModifier = Modifier
-        .height(52.dp)
+        .height(56.dp)
         .fillMaxWidth(0.7f)
 
     Row(
