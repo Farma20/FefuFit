@@ -26,23 +26,8 @@ class SingInUseCase @Inject constructor(
                 )
             )
             emit(Resource.Success(response))
-        }catch (e:Error){
-            emit(Resource.Error("$e"))
-//            when (cause) {
-//                is HttpException -> {
-//                    if (cause.code() == 400){
-//                        val errorText =
-//                            "Ошибка входа. Проверьте корректность введенных данных или зарегистрируйтесь"
-//                        emit(Resource.Error(errorText))
-//                    }
-//
-//                }
-//                else -> {
-//                    val errorText =
-//                        "Ошибка входа. Проверьте соединение с интернетом или свяжитесь с разработчиками"
-//                    emit(Resource.Error(errorText))
-//                }
-//            }
+        }catch (e:Exception){
+            emit(Resource.Error(e.message.toString()))
         }
     }
 }
