@@ -80,6 +80,7 @@ import com.example.main_page_impl.R
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import com.google.accompanist.pager.HorizontalPagerIndicator
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -175,10 +176,11 @@ private fun ActiveServicesSpace(
                         ActiveServicesCard(activeUserServicesState.data[id])
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-//                    Hori(
-//                        pagerState = pagerState,
-//                        activeColor = FefuFitTheme.color.elementsColor.elementColor
-//                    )
+                    HorizontalPagerIndicator(
+                        pagerState = pagerState,
+                        pageCount =  activeUserServicesState.data.size,
+                        activeColor = FefuFitTheme.color.elementsColor.elementColor
+                    )
                 }
             }
         }
@@ -661,7 +663,9 @@ private fun MainMenuUppBar(
     userDataState: UserDataState
 ) {
 
-    val emptyCardModifier = Modifier.height(52.dp).fillMaxWidth(0.7f)
+    val emptyCardModifier = Modifier
+        .height(52.dp)
+        .fillMaxWidth(0.7f)
 
     Row(
         modifier = Modifier
