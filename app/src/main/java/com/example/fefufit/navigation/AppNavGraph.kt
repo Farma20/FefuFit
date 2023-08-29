@@ -14,7 +14,7 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = featureApiHolder.singInScreen.route
+        startDestination = featureApiHolder.mainScreen.route
     ){
         register(
             featureApiHolder.singInScreen,

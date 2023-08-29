@@ -6,6 +6,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -76,14 +77,13 @@ import com.example.main_impl.presentation.models.ActiveServicesState
 import com.example.main_impl.presentation.models.NearBookingDataState
 import com.example.main_impl.presentation.models.UserDataState
 import com.example.main_page_impl.R
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class,)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,)
 @Composable
 fun MainMenuScreen(
     viewModel:MainMenuViewModel = hiltViewModel()
@@ -119,7 +119,7 @@ fun MainMenuScreen(
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ActiveServicesSpace(
     pagerState: PagerState,
@@ -169,16 +169,16 @@ private fun ActiveServicesSpace(
                 ) {
                     HorizontalPager(
                         modifier = Modifier.fillMaxWidth(),
-                        count = activeUserServicesState.data.size,
+                        pageCount = activeUserServicesState.data.size,
                         state = pagerState
                     ) { id ->
                         ActiveServicesCard(activeUserServicesState.data[id])
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-                    HorizontalPagerIndicator(
-                        pagerState = pagerState,
-                        activeColor = FefuFitTheme.color.elementsColor.elementColor
-                    )
+//                    Hori(
+//                        pagerState = pagerState,
+//                        activeColor = FefuFitTheme.color.elementsColor.elementColor
+//                    )
                 }
             }
         }
