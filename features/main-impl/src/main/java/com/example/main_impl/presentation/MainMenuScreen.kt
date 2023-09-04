@@ -83,10 +83,12 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.example.main_impl.presentation.models.QrCodeState
 import com.google.accompanist.pager.HorizontalPagerIndicator
 
 
@@ -100,6 +102,7 @@ fun MainMenuScreen(
     val userDataState = viewModel.userDataState.value
     val nearBookingState = viewModel.nearBookingState.value
     val activeUserServicesState = viewModel.activeServicesState.value
+    val qrCodeState = viewModel.qrCodeState.value
 
     //pages variables
     val pagerState = rememberPagerState()
@@ -115,7 +118,7 @@ fun MainMenuScreen(
             Spacer(modifier = Modifier.height(26.dp))
             MainMenuUppBar(userDataState)
             Spacer(modifier = Modifier.height(26.dp))
-            QrCard()
+            QrCard(qrCodeState)
             Spacer(modifier = Modifier.height(18.dp))
             NearEventSpace(nearBookingState)
             Spacer(modifier = Modifier.height(18.dp))
@@ -615,7 +618,7 @@ fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
 
 
 @Composable
-private fun QrCard() {
+private fun QrCard(qrCodeState: QrCodeState) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -648,11 +651,17 @@ private fun QrCard() {
                     fontWeight = FontWeight(300),
                 )
             }
-            Spacer(modifier = Modifier.width(30.dp))
-            Image(
-                painter = painterResource(id = R.drawable.fake_qr),
-                contentDescription = "qr"
-            )
+            Spacer(modifier = Modifier.width(25.dp))
+            if (qrCodeState.data != null) {
+                Image(
+                    bitmap = qrCodeState.data.asImageBitmap(),
+                    contentDescription = "qrCode",
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(RoundedCornerShape(16.dp)),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
         }
     }
 }

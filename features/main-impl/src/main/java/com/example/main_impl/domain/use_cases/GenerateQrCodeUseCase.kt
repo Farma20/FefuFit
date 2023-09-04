@@ -2,8 +2,6 @@ package com.example.main_impl.domain.use_cases
 
 import android.graphics.Bitmap
 import com.example.common.Resource
-import com.example.main_impl.domain.models.UserShortDataModel
-import com.example.main_impl.domain.models.toShort
 import com.example.main_impl.domain.repositories.MainMetaDataRepository
 import com.example.main_impl.utils.QrCodeGenerator
 import kotlinx.coroutines.flow.Flow
