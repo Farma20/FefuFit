@@ -11,6 +11,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -81,6 +82,7 @@ import com.example.main_page_impl.R
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
@@ -88,6 +90,7 @@ import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.example.main_impl.presentation.elements.QrCodeDialog
 import com.example.main_impl.presentation.models.QrCodeState
 import com.google.accompanist.pager.HorizontalPagerIndicator
 
@@ -619,14 +622,27 @@ fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
 
 @Composable
 private fun QrCard(qrCodeState: QrCodeState) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isClicked = remember { mutableStateOf(false) }
+
+    if(isClicked.value)
+        QrCodeDialog(isClicked, qrCodeState.data!!)
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 18.dp),
+            .padding(horizontal = 18.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .clickable(
+                interactionSource = interactionSource,
+                indication = rememberRipple(radius = 400.dp),
+                onClick = {
+                    isClicked.value = !isClicked.value
+                },
+            ),
         colors = CardDefaults.cardColors(
             containerColor = FefuFitTheme.color.mainAppColors.appBlueColor,
         ),
-        shape = RoundedCornerShape(12.dp)
     ) {
         Row(
             modifier = Modifier
@@ -658,7 +674,7 @@ private fun QrCard(qrCodeState: QrCodeState) {
                     contentDescription = "qrCode",
                     modifier = Modifier
                         .size(80.dp)
-                        .clip(RoundedCornerShape(16.dp)),
+                        .clip(RoundedCornerShape(12.dp)),
                     contentScale = ContentScale.FillBounds
                 )
             }
