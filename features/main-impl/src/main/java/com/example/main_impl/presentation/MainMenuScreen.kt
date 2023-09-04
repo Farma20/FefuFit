@@ -82,6 +82,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.CircularProgressIndicator
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.HorizontalPagerIndicator
 
@@ -650,9 +652,22 @@ private fun QrCard() {
 }
 
 @Composable
+private fun EmptyPhotoIcon(){
+    Icon(
+        painter = painterResource(id = R.drawable.person_icon),
+        contentDescription = "person",
+        tint = FefuFitTheme.color.elementsColor.elementColor
+    )
+}
+
+@OptIn(ExperimentalCoilApi::class)
+@Composable
 private fun MainMenuUppBar(
     userDataState: UserDataState
 ) {
+    val userPhoto = rememberImagePainter(
+        data = userDataState.data?.photo,
+    )
 
     val emptyCardModifier = Modifier
         .height(56.dp)
@@ -674,12 +689,7 @@ private fun MainMenuUppBar(
                 text = buildAnnotatedString {
                     append("Время тренировки, ")
                     withStyle(style = SpanStyle(fontWeight = FontWeight(300))) {
-                        if (userDataState.data != null){
-                            append("${userDataState.data.firstName}!")
-                        }
-                        else{
-                            append("Ошибка!")
-                        }
+                        append("${userDataState.data?.firstName}!")
                     }
                 },
                 fontSize = 22.sp,
@@ -701,36 +711,24 @@ private fun MainMenuUppBar(
                     tint = FefuFitTheme.color.textColor.mainTextColor
                 )
             }
-            if (!userDataState.isLoading){
-                IconButton(
-                    onClick = {},
-                ) {
-                    if (userDataState.data?.photo == null){
-                        Icon(
-                            painter = painterResource(id = R.drawable.person_icon),
-                            contentDescription = "person",
-                            tint = FefuFitTheme.color.elementsColor.elementColor
-                        )
-                    }
-                    else{
-                        val painter = rememberImagePainter(
-                            data = userDataState.data.photo,
-                        )
-                        Image(
-                            painter = painter,
-                            contentDescription = "person"
-                        )
-                    }
-                }
-            }else{
-                IconButton(onClick = {}) {
+            IconButton(
+                onClick = {},
+            ) {
+                if (userDataState.isLoading || userPhoto.state is ImagePainter.State.Loading) {
                     CircularProgressIndicator(
-                        color = FefuFitTheme.color.elementsColor.elementColor
+                        modifier = Modifier.size(24.dp),
+                        color = FefuFitTheme.color.elementsColor.elementColor,
+                        strokeWidth = 2.dp
+                    )
+                } else if (userDataState.data?.photo == null) {
+                    EmptyPhotoIcon()
+                } else {
+                    Image(
+                        painter = userPhoto,
+                        contentDescription = "person"
                     )
                 }
             }
         }
     }
 }
-
-
