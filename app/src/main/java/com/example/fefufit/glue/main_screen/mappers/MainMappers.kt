@@ -1,7 +1,5 @@
 package com.example.fefufit.glue.main_screen.mappers
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.fefufit.data.remote.models.events_data_models.DataUserBookingDataModel
 import com.example.fefufit.data.remote.models.services_data_models.DataUserServicesDataModel
 import com.example.fefufit.data.remote.models.user_data_models.DataUserDataModel
@@ -11,13 +9,14 @@ import com.example.main_impl.domain.models.UserDataModel
 import com.example.main_impl.domain.models.UserServicesDataModel
 import com.example.main_impl.domain.models.UserServicesDataModelItem
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 private const val NOW_DAY = "Сегодня"
 private const val TOMORROW_DAY = "Завтра"
 
-private fun dateFormatter(date:String, format:DateFormat):String{
+private fun formatDate(date:String, format:DateFormat):String{
     val currentDate = LocalDate.now()
 
     val myDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
@@ -37,6 +36,13 @@ private fun dateFormatter(date:String, format:DateFormat):String{
     return formattedDate.toString()
 }
 
+private fun formatTime(date: String): String {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+    val myDate = LocalDateTime.parse(date, formatter)
+    val time = myDate.format(DateTimeFormatter.ofPattern("HH:mm"))
+    return time.toString()
+}
+
 fun DataUserBookingDataModel.toUserBookingDataModel():UserBookingDataModel{
     val data = UserBookingDataModel()
     for (item in this){
@@ -48,9 +54,9 @@ fun DataUserBookingDataModel.toUserBookingDataModel():UserBookingDataModel{
                 coachEmail = item.coachEmail,
                 coachName = item.coachName,
                 coachPhoneNumber = item.coachPhoneNumber,
-                beginData = dateFormatter(item.beginTime, DateFormat.MonthIsWords),
-                beginTime = "",
-                endTime = "",
+                beginData = formatDate(item.beginTime, DateFormat.MonthIsWords),
+                beginTime = formatTime(item.beginTime),
+                endTime = formatTime(item.endTime),
                 bookingStatus = item.bookingStatus,
                 serviceCost = item.serviceCost,
                 occupiedSpaces = item.occupiedSpaces,
