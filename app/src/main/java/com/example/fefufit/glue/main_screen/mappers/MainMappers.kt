@@ -1,5 +1,7 @@
 package com.example.fefufit.glue.main_screen.mappers
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.fefufit.data.remote.models.events_data_models.DataUserBookingDataModel
 import com.example.fefufit.data.remote.models.services_data_models.DataUserServicesDataModel
 import com.example.fefufit.data.remote.models.user_data_models.DataUserDataModel
@@ -8,24 +10,51 @@ import com.example.main_impl.domain.models.UserBookingDataModelItem
 import com.example.main_impl.domain.models.UserDataModel
 import com.example.main_impl.domain.models.UserServicesDataModel
 import com.example.main_impl.domain.models.UserServicesDataModelItem
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+
+private const val NOW_DAY = "Сегодня"
+private const val TOMORROW_DAY = "Завтра"
+
+private fun dateFormatter(date:String, format:DateFormat):String{
+    val currentDate = LocalDate.now()
+
+    val myDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+
+    when(myDate){
+        currentDate -> return NOW_DAY
+        currentDate.plusDays(1) -> return TOMORROW_DAY
+    }
+
+    val dateFormat = when (format){
+        DateFormat.MonthIsNumbers -> "dd.MM.yyyy"
+        DateFormat.MonthIsWords -> "d MMMM"
+    }
+    val formatter = DateTimeFormatter.ofPattern(dateFormat, Locale("ru"))
+    val formattedDate = myDate.format(formatter)
+
+    return formattedDate.toString()
+}
 
 fun DataUserBookingDataModel.toUserBookingDataModel():UserBookingDataModel{
     val data = UserBookingDataModel()
     for (item in this){
         data.add(
             UserBookingDataModelItem(
-                item.beginTime,
-                item.bookingStatus,
-                item.buildingName,
-                item.coachEmail,
-                item.coachName,
-                item.coachPhoneNumber,
-                item.endTime,
-                item.eventName,
-                item.id,
-                item.occupiedSpaces,
-                item.serviceCost,
-                item.totalSpaces
+                id = item.id,
+                eventName = item.eventName,
+                buildingName = item.buildingName,
+                coachEmail = item.coachEmail,
+                coachName = item.coachName,
+                coachPhoneNumber = item.coachPhoneNumber,
+                beginData = dateFormatter(item.beginTime, DateFormat.MonthIsWords),
+                beginTime = "",
+                endTime = "",
+                bookingStatus = item.bookingStatus,
+                serviceCost = item.serviceCost,
+                occupiedSpaces = item.occupiedSpaces,
+                totalSpaces = item.totalSpaces
             )
         )
     }
@@ -62,4 +91,9 @@ fun DataUserDataModel.toUserDataModel():UserDataModel{
         this.middleName,
         this.type
     )
+}
+
+sealed class DateFormat{
+    object MonthIsWords:DateFormat()
+    object MonthIsNumbers:DateFormat()
 }

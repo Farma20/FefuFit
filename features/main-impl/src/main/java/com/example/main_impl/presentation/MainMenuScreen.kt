@@ -301,7 +301,7 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                 ) {
                     Text(
                         modifier = Modifier,
-                        text = "до 25.07.2023",
+                        text = "до ${data.expDate}",
                         maxLines = 1,
                         textAlign = TextAlign.Center,
                         fontSize = 18.sp,
@@ -543,7 +543,7 @@ fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
                     )
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = "Сегодня, 14:00 - 16:00",
+                        text = "${nearBookingData.beginData}, ${nearBookingData.beginTime} - ${nearBookingData.endTime}",
                         fontSize = 16.sp,
                         fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.secondaryTextColor,

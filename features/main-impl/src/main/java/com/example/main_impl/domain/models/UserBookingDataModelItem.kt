@@ -2,16 +2,17 @@ package com.example.main_impl.domain.models
 
 
 data class UserBookingDataModelItem(
-    val beginTime: String,
-    val bookingStatus: String?,
+    val id: Int,
+    val eventName: String,
     val buildingName: String,
     val coachEmail: String,
     val coachName: String,
     val coachPhoneNumber: String,
+    val beginData:String,
+    val beginTime: String,
     val endTime: String,
-    val eventName: String,
-    val id: Int,
-    val occupiedSpaces: Int,
+    val bookingStatus: String?,
     val serviceCost: Int,
+    val occupiedSpaces: Int,
     val totalSpaces: Int
 )
