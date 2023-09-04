@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -271,27 +272,29 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                 TextButton(
                     enabled = false,
                     modifier = Modifier
-                        .rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
-                        .fillMaxWidth(),
+                        .fillMaxHeight()
+                        .width(44.dp),
                     shape = RoundedCornerShape(
                         topStart = 0.dp,
-                        topEnd = 0.dp,
+                        topEnd = 16.dp,
                         bottomEnd = 16.dp,
-                        bottomStart = 16.dp
+                        bottomStart = 0.dp
                     ),
                     onClick = {}
                 ) {
-                    Text(
-                        modifier = Modifier,
-                        text = "до ${data.expDate}",
-                        maxLines = 1,
-                        textAlign = TextAlign.Center,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight(300),
-                        color = FefuFitTheme.color.textColor.secondaryTextColor,
-                    )
                 }
             }
+            Text(
+                modifier = Modifier
+                    .rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
+                    .padding(bottom = 12.dp),
+                text = "до ${data.expDate}",
+                maxLines = 1,
+                textAlign = TextAlign.Center,
+                fontSize = 18.sp,
+                fontWeight = FontWeight(300),
+                color = FefuFitTheme.color.textColor.secondaryTextColor,
+            )
         }
     }
 }
@@ -570,28 +573,32 @@ fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
             Row() {
                 DashedLine()
                 TextButton(
+                    contentPadding = PaddingValues(0.dp),
                     modifier = Modifier
-                        .rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
-                        .fillMaxWidth(),
+                        .fillMaxHeight()
+                        .width(44.dp),
                     shape = RoundedCornerShape(
                         topStart = 0.dp,
-                        topEnd = 0.dp,
+                        topEnd = 16.dp,
                         bottomEnd = 16.dp,
-                        bottomStart = 16.dp
+                        bottomStart = 0.dp
                     ),
                     onClick = {}
                 ) {
-                    Text(
-                        modifier = Modifier,
-                        text = "отменить",
-                        maxLines = 1,
-                        textAlign = TextAlign.Center,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight(300),
-                        color = FefuFitTheme.color.textColor.mainTextColor,
-                    )
+
                 }
             }
+            Text(
+                modifier = Modifier
+                    .rotateVertically(VerticalRotation.COUNTER_CLOCKWISE)
+                    .padding(bottom = 12.dp),
+                text = "отменить",
+                maxLines = 1,
+                textAlign = TextAlign.Center,
+                fontSize = 18.sp,
+                fontWeight = FontWeight(300),
+                color = FefuFitTheme.color.textColor.mainTextColor,
+            )
         }
     }
 }
