@@ -198,7 +198,7 @@ fun ServiceCircle(number: Int, visited: Boolean){
     Box(
         modifier = Modifier
             .border(1.dp, FefuFitTheme.color.elementsColor.elementColor, CircleShape)
-            .size(32.dp)
+            .size(40.dp)
             .background(backgroundColor, CircleShape),
         contentAlignment = Alignment.Center
     ){
@@ -242,7 +242,7 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
             ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth(0.85f)
+                        .fillMaxWidth(0.90f)
                         .padding(15.dp)
                 ) {
                     Text(
@@ -252,34 +252,16 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                         color = FefuFitTheme.color.textColor.mainTextColor,
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.geo_pos_icon),
-                            contentDescription = "geo_icon",
-                            tint = FefuFitTheme.color.textColor.mainTextColor
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "Корпус S, зал аэробики",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight(300),
-                            color = FefuFitTheme.color.textColor.mainTextColor,
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(20.dp))
                     FlowRow(
                         modifier = Modifier
                             .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Start,
+                        horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
                         for (i in 1..data.planCapacity){
                             val visit = i <= data.eventsDone
                             ServiceCircle(i, visit)
                             Spacer(modifier = Modifier
-                                .width(4.dp)
-                                .height(35.dp))
+                                .height(44.dp))
                         }
                     }
                 }
@@ -571,7 +553,7 @@ fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.person_icon),
-                            contentDescription = "geo_icon",
+                            contentDescription = "coach_icon",
                             tint = FefuFitTheme.color.textColor.mainTextColor
                         )
                         Spacer(modifier = Modifier.width(8.dp))
