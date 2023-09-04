@@ -262,7 +262,7 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                     FlowRow(
                         modifier = Modifier
                             .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                        horizontalArrangement = Arrangement.SpaceEvenly,
                     ) {
                         for (i in 1..data.planCapacity){
                             val visit = i <= data.eventsDone

@@ -54,6 +54,9 @@ dependencies {
     //Coil
     implementation "io.coil-kt:coil-compose:$coil_version"
 
+    //QrGenerator
+    implementation "com.google.zxing:core:$zxing_version"
+
     //Modules
     implementation project(":features:main-api")
     implementation(project(":core:feature-api"))

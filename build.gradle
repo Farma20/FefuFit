@@ -23,6 +23,8 @@ buildscript {
 
         coil_version = "1.4.0"
 
+        zxing_version = "3.4.0"
+
         datastore_version = '1.0.0'
         immutable_collections_version = '0.3.5'
 
