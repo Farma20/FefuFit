@@ -81,6 +81,8 @@ import com.example.main_page_impl.R
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.CircularProgressIndicator
+import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.HorizontalPagerIndicator
 
 
@@ -199,7 +201,7 @@ fun ServiceCircle(number: Int, visited: Boolean){
     Box(
         modifier = Modifier
             .border(1.dp, FefuFitTheme.color.elementsColor.elementColor, CircleShape)
-            .size(40.dp)
+            .size(39.dp)
             .background(backgroundColor, CircleShape),
         contentAlignment = Alignment.Center
     ){
@@ -699,14 +701,33 @@ private fun MainMenuUppBar(
                     tint = FefuFitTheme.color.textColor.mainTextColor
                 )
             }
-            IconButton(
-                onClick = {},
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.person_icon),
-                    contentDescription = "person",
-                    tint = FefuFitTheme.color.elementsColor.elementColor
-                )
+            if (!userDataState.isLoading){
+                IconButton(
+                    onClick = {},
+                ) {
+                    if (userDataState.data?.photo == null){
+                        Icon(
+                            painter = painterResource(id = R.drawable.person_icon),
+                            contentDescription = "person",
+                            tint = FefuFitTheme.color.elementsColor.elementColor
+                        )
+                    }
+                    else{
+                        val painter = rememberImagePainter(
+                            data = userDataState.data.photo,
+                        )
+                        Image(
+                            painter = painter,
+                            contentDescription = "person"
+                        )
+                    }
+                }
+            }else{
+                IconButton(onClick = {}) {
+                    CircularProgressIndicator(
+                        color = FefuFitTheme.color.elementsColor.elementColor
+                    )
+                }
             }
         }
     }

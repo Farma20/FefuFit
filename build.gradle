@@ -21,6 +21,8 @@ buildscript {
 
         splash_screen_version = "1.0.0-alpha01"
 
+        coil_version = "1.4.0"
+
         datastore_version = '1.0.0'
         immutable_collections_version = '0.3.5'
 

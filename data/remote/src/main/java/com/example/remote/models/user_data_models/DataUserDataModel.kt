@@ -15,7 +15,7 @@ data class DataUserDataModel(
     @SerializedName("phone_number")
     val phoneNumber: Any,
     @SerializedName("photo")
-    val photo: Any,
+    val photo: String?,
     @SerializedName("second_name")
     val secondName: String,
     @SerializedName("status")

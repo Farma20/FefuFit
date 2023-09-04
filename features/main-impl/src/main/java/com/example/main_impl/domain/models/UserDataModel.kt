@@ -6,7 +6,7 @@ data class UserDataModel(
     val firstName: String,
     val gender: String,
     val phoneNumber: Any,
-    val photo: Any?,
+    val photo: String?,
     val secondName: String,
     val status: String,
     val telegramId: Any?,
@@ -18,6 +18,7 @@ fun UserDataModel.toShort():UserShortDataModel{
     return UserShortDataModel(
         firstName = firstName,
         secondName = secondName,
-        middleName = middleName
+        middleName = middleName,
+        photo = photo
     )
 }

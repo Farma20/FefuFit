@@ -70,6 +70,9 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_nav_version"
 
+    //Accompanist
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+
     //Navigation
     implementation "androidx.navigation:navigation-compose:$compose_nav_version"
 
