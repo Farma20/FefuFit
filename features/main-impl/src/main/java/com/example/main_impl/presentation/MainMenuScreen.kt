@@ -388,15 +388,18 @@ private fun EmptyCard(
 @Composable
 fun NearEventSpace(nearBookingState: NearBookingDataState) {
 
-    val emptyCardModifier = Modifier.height(147.dp)
+    val emptyCardModifier = Modifier
+        .height(147.dp)
+        .padding(horizontal = 18.dp)
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 18.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 18.dp, end = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -406,23 +409,24 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
                 fontWeight = FontWeight(400),
                 color = FefuFitTheme.color.textColor.mainTextColor,
             )
-            Row(
-                modifier = Modifier
-                    .padding(top = 4.dp)
-                    .clickable { },
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = "Все записи ",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight(400),
-                    color = FefuFitTheme.color.textColor.secondaryTextColor,
-                )
-                Icon(
-                    painter = painterResource(id = R.drawable.next_arrows),
-                    contentDescription = "nextArrows",
-                    tint = FefuFitTheme.color.textColor.secondaryTextColor,
-                )
+            TextButton(onClick = { /*TODO*/ }) {
+                Row(
+                    modifier = Modifier
+                        .padding(top = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Все записи ",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(400),
+                        color = FefuFitTheme.color.textColor.secondaryTextColor,
+                    )
+                    Icon(
+                        painter = painterResource(id = R.drawable.next_arrows),
+                        contentDescription = "nextArrows",
+                        tint = FefuFitTheme.color.textColor.secondaryTextColor,
+                    )
+                }
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -504,7 +508,7 @@ enum class VerticalRotation(val value: Float) {
 @Composable
 fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
     Card(
-        modifier = Modifier,
+        modifier = Modifier.padding(horizontal = 18.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = FefuFitTheme.color.mainAppColors.appCardColor
