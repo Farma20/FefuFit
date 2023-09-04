@@ -82,6 +82,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
@@ -724,8 +726,11 @@ private fun MainMenuUppBar(
                     EmptyPhotoIcon()
                 } else {
                     Image(
+                        modifier = Modifier
+                            .clip(CircleShape),
                         painter = userPhoto,
-                        contentDescription = "person"
+                        contentDescription = "person",
+                        contentScale = ContentScale.Crop
                     )
                 }
             }
