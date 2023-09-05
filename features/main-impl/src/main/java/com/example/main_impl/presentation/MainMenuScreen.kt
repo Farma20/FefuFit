@@ -268,13 +268,15 @@ fun ActiveServicesCard(data: UserServicesDataModelItem) {
                     FlowRow(
                         modifier = Modifier
                             .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        horizontalArrangement = Arrangement.Start
                     ) {
                         for (i in 1..data.planCapacity){
                             val visit = i <= data.eventsDone
                             ServiceCircle(i, visit)
                             Spacer(modifier = Modifier
-                                .height(44.dp))
+                                .width(4.dp)
+                                .height(44.dp)
+                            )
                         }
                     }
                 }
@@ -415,7 +417,9 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
                 fontWeight = FontWeight(400),
                 color = FefuFitTheme.color.textColor.mainTextColor,
             )
-            TextButton(onClick = { /*TODO*/ }) {
+            TextButton(
+                onClick = { /*TODO*/ },
+            ) {
                 Row(
                     modifier = Modifier
                         .padding(top = 4.dp),
@@ -435,7 +439,7 @@ fun NearEventSpace(nearBookingState: NearBookingDataState) {
                 }
             }
         }
-        Spacer(modifier = Modifier.height(10.dp))
+//        Spacer(modifier = Modifier.height(10.dp))
         ShimmerCardHolder(
             isLoading = nearBookingState.isLoading,
             modifier = emptyCardModifier

@@ -16,8 +16,8 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-//        startDestination = featureApiHolder.mainScreen.route
-        startDestination = featureApiHolder.singInScreen.route,
+        startDestination = featureApiHolder.mainScreen.route,
+//        startDestination = featureApiHolder.singInScreen.route,
         modifier = Modifier.background(FefuFitTheme.color.mainAppColors.appBackgroundColor)
     ){
         register(
