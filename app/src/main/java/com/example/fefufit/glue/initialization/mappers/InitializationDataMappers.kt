@@ -1,12 +1,13 @@
 package com.example.fefufit.glue.initialization.mappers
 
 import com.example.fefufit.data.remote.models.initial_data_models.DataSingInDataModel
-import com.example.fefufit.data.remote.models.initial_data_models.DataSingInSuccessResponse
 import com.example.fefufit.data.remote.models.initial_data_models.DataSingUpDataModel
 import com.example.initialization_impl.domain.models.FeatureInitialUserDataModel
 import com.example.initialization_impl.domain.models.FeatureSingInDataModel
-import com.example.initialization_impl.domain.models.FeatureSingInSuccessResponse
+import com.example.initialization_impl.domain.models.FeatureSingInResponse
 import com.example.initialization_impl.domain.models.FeatureSingUpDataModel
+import com.example.initialization_impl.domain.models.UserMeta
+import com.example.remote.models.initial_data_models.DataSingInResponse
 
 fun FeatureSingInDataModel.toDataSingInDataModel():DataSingInDataModel{
     return DataSingInDataModel(
@@ -29,12 +30,13 @@ fun FeatureSingUpDataModel.toDataSingUpDataModel():DataSingUpDataModel{
     )
 }
 
-fun DataSingInSuccessResponse.toFeatureSingInSuccessResponse(): FeatureSingInSuccessResponse {
-    return FeatureSingInSuccessResponse(
-        initialUserDataModel = FeatureInitialUserDataModel(
-            this.initialUserDataModel.qrToken,
-            this.initialUserDataModel.token,
-            this.initialUserDataModel.type,
+fun DataSingInResponse.toFeatureSingInSuccessResponse(): FeatureSingInResponse {
+    return FeatureSingInResponse(
+        data = UserMeta(
+            qrToken = this.data.qrToken,
+            refreshToken = this.data.refreshToken,
+            token = this.data.token,
+            type = this.data.type
         ),
         status = this.status
     )

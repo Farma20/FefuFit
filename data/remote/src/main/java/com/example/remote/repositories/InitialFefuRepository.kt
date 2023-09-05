@@ -2,9 +2,9 @@ package com.example.remote.repositories
 
 import com.example.fefufit.data.remote.api.FefuFitApi
 import com.example.fefufit.data.remote.models.initial_data_models.DataSingInDataModel
-import com.example.fefufit.data.remote.models.initial_data_models.DataSingInSuccessResponse
 import com.example.fefufit.data.remote.models.initial_data_models.DataSingUpDataModel
 import com.example.remote.InitializationDataRepository
+import com.example.remote.models.initial_data_models.DataSingInResponse
 import com.example.remote.utils.toMap
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -30,7 +30,7 @@ private const val SING_UP_DATA_ERROR = "Произошла ошибка при �
 
 class InitialFefuRepository @Inject constructor(private val fefuFitApi: FefuFitApi) :
     InitializationDataRepository {
-    override suspend fun singIn(singInData: DataSingInDataModel): DataSingInSuccessResponse {
+    override suspend fun singIn(singInData: DataSingInDataModel): DataSingInResponse {
         try {
             return fefuFitApi.singIn(singInData)
         } catch (cause: Throwable) {

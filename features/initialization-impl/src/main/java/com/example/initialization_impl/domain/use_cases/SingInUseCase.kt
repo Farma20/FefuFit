@@ -2,7 +2,7 @@ package com.example.initialization_impl.domain.use_cases
 
 import com.example.common.Resource
 import com.example.initialization_impl.domain.models.FeatureSingInDataModel
-import com.example.initialization_impl.domain.models.FeatureSingInSuccessResponse
+import com.example.initialization_impl.domain.models.FeatureSingInResponse
 import com.example.initialization_impl.domain.models.FeatureUserMetaData
 import com.example.initialization_impl.domain.repositories.SingInFeatureMetaDataRepository
 import com.example.initialization_impl.domain.repositories.InitializationFeatureRepository
@@ -15,14 +15,16 @@ class SingInUseCase @Inject constructor(
     private val singInRepository: InitializationFeatureRepository,
     private val metaDataRepository: SingInFeatureMetaDataRepository,
 ) {
-    operator fun invoke(singInData: FeatureSingInDataModel): Flow<Resource<FeatureSingInSuccessResponse>> = flow {
+    operator fun invoke(singInData: FeatureSingInDataModel): Flow<Resource<FeatureSingInResponse>> = flow {
         try {
             emit(Resource.Loading())
             val response = singInRepository.singIn(singInData)
             metaDataRepository.saveUserMetaData(
                 FeatureUserMetaData(
-                    userToken = response.initialUserDataModel.token,
-                    userQrToken = response.initialUserDataModel.qrToken
+                    userToken = response.data.token,
+                    userQrToken = response.data.qrToken,
+                    refreshToken = response.data.refreshToken,
+                    type = response.data.type
                 )
             )
             emit(Resource.Success(response))
