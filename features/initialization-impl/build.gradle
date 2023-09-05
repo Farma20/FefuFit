@@ -23,6 +23,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -41,7 +42,6 @@ dependencies {
     //ui
     implementation platform("androidx.compose:compose-bom:$compose_boom_version")
     implementation 'androidx.compose.material3:material3'
-
 
     //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"

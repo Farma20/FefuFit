@@ -32,6 +32,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -216,7 +219,7 @@ class SingUpScreenViewModel @Inject constructor(
         println(inputDataState.birthday)
         singUpUseCase(
             FeatureSingUpDataModel(
-            birthdate = inputDataState.birthday,
+            birthdate = formatDate(inputDataState.birthday),
             email = inputSecondDataState.email,
             firstName = inputDataState.firstName,
             gender = inputDataState.gender,
@@ -272,5 +275,12 @@ class SingUpScreenViewModel @Inject constructor(
         object SingUpError: RegistrationEvent()
         object SingInSuccess:RegistrationEvent()
         object SingInError:RegistrationEvent()
+    }
+
+    private fun formatDate(date: String): String {
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val myDate = LocalDate.parse(date, formatter)
+        val newDate = myDate.atStartOfDay().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+        return newDate.toString()
     }
 }

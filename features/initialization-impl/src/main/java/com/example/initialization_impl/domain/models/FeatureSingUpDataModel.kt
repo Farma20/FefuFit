@@ -7,7 +7,7 @@ data class FeatureSingUpDataModel(
     val firstName: String,
     val gender: String,
     val password: String,
-    val phoneNumber: Any,
+    val phoneNumber: String,
     val secondName: String,
     val status: String,
     val thirdName: String

@@ -1,4 +1,4 @@
-package com.example.fefufit.data.remote.models.initial_data_models
+package com.example.remote.models.initial_data_models
 
 
 import com.google.gson.annotations.SerializedName
@@ -15,7 +15,7 @@ data class DataSingUpDataModel(
     @SerializedName("password")
     val password: String,
     @SerializedName("phone_number")
-    val phoneNumber: Any,
+    val phoneNumber: String,
     @SerializedName("second_name")
     val secondName: String,
     @SerializedName("status")

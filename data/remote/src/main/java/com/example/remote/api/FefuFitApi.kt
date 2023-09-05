@@ -2,10 +2,11 @@ package com.example.fefufit.data.remote.api
 
 import com.example.fefufit.data.remote.models.events_data_models.DataUserBookingDataModel
 import com.example.fefufit.data.remote.models.initial_data_models.DataSingInDataModel
-import com.example.fefufit.data.remote.models.initial_data_models.DataSingUpDataModel
 import com.example.fefufit.data.remote.models.services_data_models.DataUserServicesDataModel
 import com.example.fefufit.data.remote.models.user_data_models.DataUserDataModel
 import com.example.remote.models.initial_data_models.DataSingInResponse
+import com.example.remote.models.initial_data_models.DataSingUpDataModel
+import com.example.remote.models.initial_data_models.DataSingUpResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -14,8 +15,8 @@ interface FefuFitApi {
     @POST("/api2/auth/login")
     suspend fun singIn(@Body singInData: DataSingInDataModel): DataSingInResponse
 
-    @POST("/api/auth/signup")
-    suspend fun singUp(@Body singUpData: DataSingUpDataModel):Map<String, String>
+    @POST("/api2/auth/signup")
+    suspend fun singUp(@Body singUpData: DataSingUpDataModel):DataSingUpResponse
 
     //userData api
     @POST("/api/user/user/view_self")
