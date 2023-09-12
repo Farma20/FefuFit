@@ -26,3 +26,4 @@ include ':features:main-impl'
 include ':features:initialization-api'
 include ':features:initialization-impl'
 
+include ':features:timetable-api'
