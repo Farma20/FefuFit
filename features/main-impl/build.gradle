@@ -61,8 +61,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-swiperefresh:$swipe_refresh_version"
 
     //Modules
-    implementation project(":features:main-api")
-    implementation(project(":core:feature-api"))
+    api project(":features:main-api")
     implementation project(":core:common")
     implementation project(":core:theme")
 }

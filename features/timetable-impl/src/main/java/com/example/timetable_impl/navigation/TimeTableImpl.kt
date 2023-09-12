@@ -14,10 +14,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.core.theme.FefuFitTheme
 import com.example.timetable_api.TimeTableApi
+import javax.inject.Inject
+import javax.inject.Singleton
 
 private const val GRAPH_ROUTE = "timeTablePageGraph"
 private const val TIMETABLE_ROUTE = "timeTablePageRoute"
-class TimeTableImpl():TimeTableApi {
+@Singleton
+class TimeTableImpl @Inject constructor():TimeTableApi {
     override val route: String = GRAPH_ROUTE
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

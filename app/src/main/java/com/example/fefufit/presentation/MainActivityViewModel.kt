@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.fefufit.navigation.FeatureApiHolder
 import com.example.initialization_api.InitializationApi
 import com.example.main_api.MainPageApi
+import com.example.timetable_api.TimeTableApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     override val singInScreen: InitializationApi,
-    override val mainScreen: MainPageApi
+    override val mainScreen: MainPageApi,
+    override val timetableScreen: TimeTableApi
 ) :ViewModel(), FeatureApiHolder {
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()

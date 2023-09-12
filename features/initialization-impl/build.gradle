@@ -59,8 +59,7 @@ dependencies {
     //Modules
     implementation project(":core:common")
     implementation project(":core:theme")
-    implementation(project(":core:feature-api"))
 
-    implementation project(':features:initialization-api')
-    implementation project(":features:main-api")
+    api project(':features:initialization-api')
+    api project(":features:main-api")
 }

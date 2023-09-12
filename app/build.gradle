@@ -82,13 +82,11 @@ dependencies {
 
     //Modules
     implementation project(":core:theme")
-    implementation project(":core:feature-api")
 
     implementation project(":data:remote")
     implementation project(":data:data-store")
 
     implementation project(":features:main-impl")
-    implementation project(":features:main-api")
     implementation project(':features:initialization-impl')
-    implementation project(':features:initialization-api')
+    implementation project(':features:timetable-impl')
 }
