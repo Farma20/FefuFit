@@ -1,9 +1,12 @@
 package com.example.fefufit.presentation
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
@@ -17,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -29,6 +33,7 @@ import com.example.fefufit.navigation.AppNavGraph
 import com.example.fefufit.navigation.BottomTabs
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppContent(viewModel: MainActivityViewModel) {
@@ -37,14 +42,20 @@ fun AppContent(viewModel: MainActivityViewModel) {
     val tabs = remember { BottomTabs.values() }
 
     Scaffold(
-        modifier = Modifier.background(FefuFitTheme.color.mainAppColors.appBackgroundColor),
-        bottomBar = { BottomNavBar(navController = navController, tabItems = tabs)}
-    ) { innerPaddingModifier ->
-        AppNavGraph(
-            modifier = Modifier.padding(innerPaddingModifier),
-            featureApiHolder = viewModel,
-            navController = navController,
-        )
+        modifier = Modifier
+            .background(FefuFitTheme.color.mainAppColors.appBackgroundColor)
+        ,
+    ) {
+        Box(
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            AppNavGraph(
+                bottomHeight = Modifier.height(84.dp),
+                featureApiHolder = viewModel,
+                navController = navController,
+            )
+            BottomNavBar(navController = navController, tabItems = tabs)
+        }
     }
 }
 
@@ -63,13 +74,16 @@ fun BottomNavBar(navController: NavController, tabItems: Array<BottomTabs>) {
 
     if (showBottomTabs) {
         Box(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Transparent)
+                .padding(bottom = 14.dp),
             contentAlignment = Alignment.Center
         ) {
             BottomNavigation(
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
-                    .clip(RoundedCornerShape(16.dp)),
+                    .clip(RoundedCornerShape(16)),
                 backgroundColor = FefuFitTheme.color.mainAppColors.appBottomNavColor,
                 elevation = 0.dp
             ) {

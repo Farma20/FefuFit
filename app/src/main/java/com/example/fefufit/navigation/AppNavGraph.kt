@@ -22,7 +22,7 @@ import com.example.feature_api.register
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppNavGraph(
-    modifier: Modifier = Modifier,
+    bottomHeight: Modifier = Modifier,
     featureApiHolder: FeatureApiHolder,
     navController: NavHostController
 ) {
@@ -35,7 +35,7 @@ fun AppNavGraph(
         register(
             featureApiHolder.singInScreen,
             navController,
-            modifier
+            bottomHeight
         )
 
         navigation(
@@ -45,7 +45,7 @@ fun AppNavGraph(
             register(
                 featureApiHolder.mainScreen,
                 navController,
-                modifier
+                bottomHeight
             )
         }
 

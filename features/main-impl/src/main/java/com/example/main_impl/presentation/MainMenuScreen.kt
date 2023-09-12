@@ -112,7 +112,6 @@ fun MainMenuScreen(
     val pagerState = rememberPagerState()
 
     Scaffold(
-        modifier = modifier,
         containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor,
     ) {scaffoldPadding ->
         Column(
@@ -120,7 +119,7 @@ fun MainMenuScreen(
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
         ) {
-            Spacer(modifier = Modifier.height(26.dp))
+            Spacer(modifier = Modifier.height(18.dp))
             MainMenuUppBar(userDataState)
             Spacer(modifier = Modifier.height(26.dp))
             QrCard(qrCodeState)
@@ -131,6 +130,7 @@ fun MainMenuScreen(
                 pagerState,
                 activeUserServicesState,
             )
+            Spacer(modifier = modifier)
         }
     }
 }

@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.core.theme.FefuFitTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -38,25 +39,6 @@ class MainActivity : ComponentActivity() {
             FefuFitTheme(isDarkTheme) {
                 val scope = rememberCoroutineScope()
 
-//                scope.launch {
-//                    dataStoreManager.setUserMetaData(UserMetaData())
-//                }
-
-//                bookingUseCase().onEach {
-//                    when(it){
-//                        is Resource.Loading ->{
-//                            println("loading")
-//                        }
-//                        is Resource.Success ->{
-//                            println(it.data)
-//                        }
-//                        is Resource.Error ->{
-//                            println(it.message)
-//                        }
-//                    }
-//                }.launchIn(scope)
-
-
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
                 val barBackground =
@@ -68,7 +50,7 @@ class MainActivity : ComponentActivity() {
                         color = barBackground,
                         darkIcons = !isDarkTheme
                     )
-                    systemUiController.setNavigationBarColor(color = barBackground)
+                    systemUiController.setNavigationBarColor(color = Color.Transparent)
                 }
 
                 AppContent(viewModel = viewModel)
