@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/features/main-api" />
             <option value="$PROJECT_DIR$/features/main-impl" />
             <option value="$PROJECT_DIR$/features/timetable-api" />
+            <option value="$PROJECT_DIR$/features/timetable-impl" />
           </set>
         </option>
       </GradleProjectSettings>
