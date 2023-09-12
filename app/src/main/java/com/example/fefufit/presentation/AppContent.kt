@@ -16,6 +16,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -60,6 +61,7 @@ fun BottomNavBar(navController: NavController, tabItems: Array<BottomTabs>) {
     if (showBottomTabs) {
         BottomNavigation(
             modifier = Modifier,
+            backgroundColor = FefuFitTheme.color.mainAppColors.appBottomNavColor,
             elevation = 0.dp
         ) {
             tabItems.forEach { tab ->
@@ -77,6 +79,7 @@ fun BottomNavBar(navController: NavController, tabItems: Array<BottomTabs>) {
                         }
                     },
                     selected = isTabSelected,
+                    selectedContentColor = FefuFitTheme.color.textColor.setTextColor,
                     onClick = {
                         navController.navigate(tab.route) {
                             popUpTo(navController.graph.findStartDestination().id) {

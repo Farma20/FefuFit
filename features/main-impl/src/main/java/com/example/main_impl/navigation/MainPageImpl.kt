@@ -26,7 +26,7 @@ class MainPageImpl @Inject constructor() :MainPageApi {
             startDestination = MAIN_PAGE_ROUTE
         ){
             composable(MAIN_PAGE_ROUTE){
-                MainMenuScreen()
+                MainMenuScreen(modifier = modifier)
             }
         }
     }

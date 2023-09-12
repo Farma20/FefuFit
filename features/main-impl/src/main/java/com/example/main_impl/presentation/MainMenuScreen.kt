@@ -99,6 +99,7 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,)
 @Composable
 fun MainMenuScreen(
+    modifier: Modifier,
     viewModel:MainMenuViewModel = hiltViewModel()
 ) {
     //data states
@@ -111,12 +112,13 @@ fun MainMenuScreen(
     val pagerState = rememberPagerState()
 
     Scaffold(
+        modifier = modifier,
         containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor,
-    ) {
+    ) {scaffoldPadding ->
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-                .fillMaxWidth()
+                .fillMaxSize()
         ) {
             Spacer(modifier = Modifier.height(26.dp))
             MainMenuUppBar(userDataState)
