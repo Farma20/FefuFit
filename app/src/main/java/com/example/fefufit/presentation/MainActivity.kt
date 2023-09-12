@@ -44,13 +44,15 @@ class MainActivity : ComponentActivity() {
                 val barBackground =
                     FefuFitTheme.color.mainAppColors.appBackgroundColor
 
+                val bottomBackground = FefuFitTheme.color.mainAppColors.appBottomNavColor
+
                 //painted system upp & bottom panels
                 SideEffect {
                     systemUiController.setStatusBarColor(
                         color = barBackground,
                         darkIcons = !isDarkTheme
                     )
-                    systemUiController.setNavigationBarColor(color = Color.Transparent)
+                    systemUiController.setNavigationBarColor(color = bottomBackground)
                 }
 
                 AppContent(viewModel = viewModel)

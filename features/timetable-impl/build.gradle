@@ -50,6 +50,9 @@ dependencies {
     //SwipeToRefresh
     implementation "com.google.accompanist:accompanist-swiperefresh:$swipe_refresh_version"
 
+    //Calendar
+    implementation "com.kizitonwose.calendar:compose:$calendar_version"
+
     //Modules
     api project(":features:timetable-api")
     implementation project(":core:common")

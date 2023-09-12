@@ -3,6 +3,7 @@ package com.example.timetable_impl.navigation
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.magnifier
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -14,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.core.theme.FefuFitTheme
 import com.example.timetable_api.TimeTableApi
+import com.example.timetable_impl.presentation.timetable_screen.TimeTableScreen
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -38,12 +40,9 @@ class TimeTableImpl @Inject constructor():TimeTableApi {
                 Scaffold(
                     containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor
                 ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text(text = "Расписание в разработке")
-                    }
+                    TimeTableScreen(
+                        modifier = modifier
+                    )
                 }
             }
         }
