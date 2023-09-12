@@ -57,6 +57,9 @@ dependencies {
     //QrGenerator
     implementation "com.google.zxing:core:$zxing_version"
 
+    //SwipeToRefresh
+    implementation "com.google.accompanist:accompanist-swiperefresh:$swipe_refresh_version"
+
     //Modules
     implementation project(":features:main-api")
     implementation(project(":core:feature-api"))

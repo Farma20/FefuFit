@@ -93,6 +93,9 @@ import coil.compose.rememberImagePainter
 import com.example.main_impl.presentation.elements.QrCodeDialog
 import com.example.main_impl.presentation.models.QrCodeState
 import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -107,6 +110,9 @@ fun MainMenuScreen(
     val nearBookingState = viewModel.nearBookingState.value
     val activeUserServicesState = viewModel.activeServicesState.value
     val qrCodeState = viewModel.qrCodeState.value
+    val swipeLoadingState = viewModel.isSwipeLoading.value
+
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = swipeLoadingState)
 
     //pages variables
     val pagerState = rememberPagerState()
@@ -114,23 +120,35 @@ fun MainMenuScreen(
     Scaffold(
         containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor,
     ) {scaffoldPadding ->
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .fillMaxSize()
-        ) {
-            Spacer(modifier = Modifier.height(18.dp))
-            MainMenuUppBar(userDataState)
-            Spacer(modifier = Modifier.height(26.dp))
-            QrCard(qrCodeState)
-            Spacer(modifier = Modifier.height(18.dp))
-            NearEventSpace(nearBookingState)
-            Spacer(modifier = Modifier.height(18.dp))
-            ActiveServicesSpace(
-                pagerState,
-                activeUserServicesState,
-            )
-            Spacer(modifier = modifier)
+        SwipeRefresh(
+            state = swipeRefreshState,
+            onRefresh = viewModel::loadStaff,
+            indicator = {state, refreshTrigger ->
+                SwipeRefreshIndicator(
+                    state = state,
+                    refreshTriggerDistance = refreshTrigger,
+                    contentColor = FefuFitTheme.color.mainAppColors.appBlueColor
+                )
+            }
+        ){
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .fillMaxSize()
+            ) {
+                Spacer(modifier = Modifier.height(18.dp))
+                MainMenuUppBar(userDataState)
+                Spacer(modifier = Modifier.height(26.dp))
+                QrCard(qrCodeState)
+                Spacer(modifier = Modifier.height(18.dp))
+                NearEventSpace(nearBookingState)
+                Spacer(modifier = Modifier.height(18.dp))
+                ActiveServicesSpace(
+                    pagerState,
+                    activeUserServicesState,
+                )
+                Spacer(modifier = modifier)
+            }
         }
     }
 }

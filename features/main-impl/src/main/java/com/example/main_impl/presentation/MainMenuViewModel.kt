@@ -14,8 +14,10 @@ import com.example.main_impl.presentation.models.NearBookingDataState
 import com.example.main_impl.presentation.models.QrCodeState
 import com.example.main_impl.presentation.models.UserDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,11 +41,26 @@ class MainMenuViewModel @Inject constructor(
     private var _qrCodeState = mutableStateOf(QrCodeState())
     val qrCodeState:State<QrCodeState> = _qrCodeState
 
+    private var _isSwipeLoading = mutableStateOf(false)
+    val isSwipeLoading:State<Boolean> = _isSwipeLoading
+
     init {
         getUserData()
         getNearBooking()
         getActiveServices()
         getQrCode()
+    }
+
+    fun loadStaff(){
+        viewModelScope.launch {
+            getUserData()
+            getNearBooking()
+            getActiveServices()
+            getQrCode()
+            _isSwipeLoading.value = true
+            delay(1000L)
+            _isSwipeLoading.value = false
+        }
     }
 
     private fun getActiveServices() {

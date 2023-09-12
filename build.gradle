@@ -30,6 +30,8 @@ buildscript {
 
         serialiation_version = "1.5.1"
 
+        swipe_refresh_version = "0.27.0"
+
         jdk_version = '1.9.0'
     }
     dependencies {
