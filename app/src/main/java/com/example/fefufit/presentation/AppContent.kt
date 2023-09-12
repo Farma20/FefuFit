@@ -50,7 +50,7 @@ fun AppContent(viewModel: MainActivityViewModel) {
             contentAlignment = Alignment.BottomCenter
         ) {
             AppNavGraph(
-                bottomHeight = Modifier.height(84.dp),
+                modifier = Modifier.height(84.dp),
                 featureApiHolder = viewModel,
                 navController = navController,
             )

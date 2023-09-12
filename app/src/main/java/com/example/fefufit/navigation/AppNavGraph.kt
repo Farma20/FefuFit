@@ -22,7 +22,7 @@ import com.example.feature_api.register
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppNavGraph(
-    bottomHeight: Modifier = Modifier,
+    modifier: Modifier = Modifier,
     featureApiHolder: FeatureApiHolder,
     navController: NavHostController
 ) {
@@ -35,7 +35,7 @@ fun AppNavGraph(
         register(
             featureApiHolder.singInScreen,
             navController,
-            bottomHeight
+            modifier
         )
 
         navigation(
@@ -45,26 +45,19 @@ fun AppNavGraph(
             register(
                 featureApiHolder.mainScreen,
                 navController,
-                bottomHeight
+                modifier
             )
         }
 
         navigation(
             route = BottomTabs.Calendar.route,
-            startDestination ="calendar"
+            startDestination =featureApiHolder.timetableScreen.route
         ){
-            composable("calendar"){
-                Scaffold(
-                    containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text(text = "Расписание в разработке")
-                    }
-                }
-            }
+            register(
+                featureApiHolder.timetableScreen,
+                navController,
+                modifier
+            )
         }
 
         navigation(
