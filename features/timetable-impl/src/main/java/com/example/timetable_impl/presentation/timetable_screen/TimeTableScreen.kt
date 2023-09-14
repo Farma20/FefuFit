@@ -23,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -74,6 +75,8 @@ private fun SingleRowCalendar() {
     val endMonth = remember {currentMonth.plusMonths(100).atEndOfMonth()}
     val firstDayOfWeek = remember { firstDayOfWeekFromLocale() }
 
+    val selectedDay = remember {mutableStateOf(currentDate)}
+
     val calendarState = rememberWeekCalendarState(
         startDate = startMonth,
         endDate = endMonth,
@@ -83,22 +86,24 @@ private fun SingleRowCalendar() {
 
     WeekCalendar(
         state = calendarState,
-        dayContent = {Day(it, currentDate)}
+        dayContent = {Day(it, selectedDay)}
     ) {
 
     }
 }
 
 @Composable
-private fun Day(dayData: WeekDay, currentDate: LocalDate) {
+private fun Day(dayData: WeekDay, selectedDay: MutableState<LocalDate>) {
     TextButton(
         modifier = Modifier.aspectRatio(1f),
         colors = ButtonDefaults.textButtonColors(
-            containerColor = if (dayData.date == currentDate) FefuFitTheme.color.elementsColor.elementColor else Color.Transparent,
-            contentColor = if (dayData.date == currentDate) FefuFitTheme.color.elementsColor.onElementsColor else FefuFitTheme.color.textColor.mainTextColor
+            containerColor = if (dayData.date == selectedDay.value) FefuFitTheme.color.elementsColor.elementColor else Color.Transparent,
+            contentColor = if (dayData.date == selectedDay.value) FefuFitTheme.color.elementsColor.onElementsColor else FefuFitTheme.color.textColor.mainTextColor
         ),
         contentPadding = PaddingValues(0.dp),
-        onClick = {}
+        onClick = {
+            selectedDay.value = dayData.date
+        }
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
@@ -150,7 +155,7 @@ fun TopBar(modifier: Modifier) {
 
 private fun numberToDayName(dayNumber:Int):String{
     if (dayNumber < 1 || dayNumber > 7)
-        throw IllegalArgumentException("Value must be in range 1-7")
+        throw IllegalArgumentException("Value must be in range 1..7")
 
     val dayDict = mapOf<Int, String>(
         1 to "пн", 2 to "вт", 3 to "ср", 4 to "чт", 5 to "пт", 6 to "сб", 7 to "вс"
