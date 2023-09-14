@@ -1,12 +1,14 @@
 package com.example.timetable_impl.presentation.timetable_screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -90,7 +92,7 @@ private fun SingleRowCalendar() {
 @Composable
 private fun Day(dayData: WeekDay, currentDate: LocalDate) {
     TextButton(
-        modifier = Modifier.size(42.dp),
+        modifier = Modifier.aspectRatio(1f),
         colors = ButtonDefaults.textButtonColors(
             containerColor = if (dayData.date == currentDate) FefuFitTheme.color.elementsColor.elementColor else Color.Transparent,
             contentColor = if (dayData.date == currentDate) FefuFitTheme.color.elementsColor.onElementsColor else FefuFitTheme.color.textColor.mainTextColor
@@ -98,7 +100,20 @@ private fun Day(dayData: WeekDay, currentDate: LocalDate) {
         contentPadding = PaddingValues(0.dp),
         onClick = {}
     ) {
-        Text(text = dayData.date.dayOfMonth.toString())
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = numberToDayName(dayData.date.dayOfWeek.value),
+                fontSize = 14.sp,
+                fontWeight = FontWeight(300),
+            )
+            Text(
+                text = dayData.date.dayOfMonth.toString(),
+                fontSize = 16.sp,
+                fontWeight = FontWeight(600),
+            )
+        }
     }
 }
 
@@ -131,4 +146,15 @@ fun TopBar(modifier: Modifier) {
             )
         }
     }
+}
+
+private fun numberToDayName(dayNumber:Int):String{
+    if (dayNumber < 1 || dayNumber > 7)
+        throw IllegalArgumentException("Value must be in range 1-7")
+
+    val dayDict = mapOf<Int, String>(
+        1 to "пн", 2 to "вт", 3 to "ср", 4 to "чт", 5 to "пт", 6 to "сб", 7 to "вс"
+    )
+
+    return dayDict[dayNumber]!!
 }
