@@ -99,7 +99,9 @@ private fun SingleRowCalendar() {
             modifier = Modifier.weight(1f),
             onClick = {
                 scope.launch {
-                    calendarState.animateScrollToWeek(currentDate.minusWeeks(1))
+                    calendarState.animateScrollToWeek(
+                        calendarState.firstVisibleWeek.days[0].date.minusWeeks(1)
+                    )
                 }
             })
         {
@@ -119,10 +121,12 @@ private fun SingleRowCalendar() {
             modifier = Modifier.weight(1f),
             onClick = {
                 scope.launch {
-                    calendarState.animateScrollToWeek(currentDate.plusWeeks(1))
+                    calendarState.animateScrollToWeek(
+                        calendarState.firstVisibleWeek.days[0].date.plusWeeks(1)
+                    )
                 }
-            })
-        {
+            }
+        ) {
             Icon(
                 painter = painterResource(id = R.drawable.front_arrow),
                 contentDescription = "backArrow",
