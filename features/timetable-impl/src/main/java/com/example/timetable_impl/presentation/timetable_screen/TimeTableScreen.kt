@@ -193,7 +193,11 @@ fun TopBar(modifier: Modifier, firstDay: LocalDate, lastDay: LocalDate) {
                 color = FefuFitTheme.color.textColor.mainTextColor,
             )
             Text(
-                text = "${firstDay.dayOfMonth} ${firstDay.month.value}-${lastDay.dayOfMonth} ${lastDay.month.value}",
+                text = "${firstDay.dayOfMonth} ${
+                    if (firstDay.month.value != lastDay.month.value) numberToMonthName(
+                        firstDay.month.value
+                    ) + " " else ""
+                }- ${lastDay.dayOfMonth} ${numberToMonthName(lastDay.month.value)}",
                 fontSize = 22.sp,
                 fontWeight = FontWeight(300),
                 color = FefuFitTheme.color.textColor.mainTextColor,
