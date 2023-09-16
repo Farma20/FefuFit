@@ -33,8 +33,11 @@ import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -69,7 +72,7 @@ fun EventCard() {
                 ) {
                     Text(
                         text = "Настольный теннис",
-                        fontSize = 17.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.mainTextColor,
                     )
@@ -80,7 +83,7 @@ fun EventCard() {
                         fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.secondaryTextColor,
                     )
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -92,12 +95,12 @@ fun EventCard() {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Фитнес-центр ГК11, зал групповых программ",
-                            fontSize = 12.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight(300),
                             color = FefuFitTheme.color.textColor.mainTextColor,
                         )
                     }
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -109,17 +112,24 @@ fun EventCard() {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = "Шукурова Карина Андреевна",
-                            fontSize = 12.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight(300),
                             color = FefuFitTheme.color.textColor.mainTextColor,
                         )
                     }
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(14.dp))
                     Row(
+                        modifier = Modifier.padding(start = 4.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Свободно 13 мест из 25",
+                            text = buildAnnotatedString {
+                                append("Свободно")
+                                withStyle(style = SpanStyle(color = FefuFitTheme.color.textColor.secondaryTextColor)){
+                                    append(" 13 мест ")
+                                }
+                                append("из 25")
+                            },
                             fontSize = 16.sp,
                             fontWeight = FontWeight(400),
                             color = FefuFitTheme.color.textColor.mainTextColor,

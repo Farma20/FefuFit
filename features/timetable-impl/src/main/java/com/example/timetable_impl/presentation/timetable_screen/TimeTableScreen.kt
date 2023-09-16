@@ -1,6 +1,7 @@
 package com.example.timetable_impl.presentation.timetable_screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -47,7 +50,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun TimeTableScreen(
@@ -78,13 +81,21 @@ fun TimeTableScreen(
                 }
             )
             Spacer(modifier = Modifier.height(4.dp))
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
-            ){
-                items(16){
-                    EventCard()
-                    Spacer(modifier = Modifier.height(8.dp))
+
+            val pagerState = rememberPagerState(5)
+
+            HorizontalPager(
+                pageCount = 15,
+                state = pagerState,
+            ) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
+                ){
+                    items(16){
+                        EventCard()
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
                 }
             }
         }

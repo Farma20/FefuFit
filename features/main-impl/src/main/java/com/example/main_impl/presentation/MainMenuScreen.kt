@@ -562,7 +562,7 @@ fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
                 ) {
                     Text(
                         text = nearBookingData.eventName,
-                        fontSize = 17.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.mainTextColor,
                     )
@@ -585,7 +585,7 @@ fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = nearBookingData.buildingName,
-                            fontSize = 12.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight(300),
                             color = FefuFitTheme.color.textColor.mainTextColor,
                         )
@@ -602,7 +602,7 @@ fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = nearBookingData.coachName,
-                            fontSize = 12.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight(300),
                             color = FefuFitTheme.color.textColor.mainTextColor,
                         )
