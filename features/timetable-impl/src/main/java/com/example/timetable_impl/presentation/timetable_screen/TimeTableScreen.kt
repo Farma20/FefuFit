@@ -26,8 +26,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,6 +43,7 @@ import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
 import kotlin.time.Duration.Companion.days
@@ -57,10 +60,12 @@ fun TimeTableScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
         ) {
             Spacer(modifier = Modifier.height(18.dp))
-            TopBar(modifier.fillMaxWidth())
+            TopBar(
+                modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp))
             SingleRowCalendar()
             Spacer(modifier = modifier)
         }
@@ -74,6 +79,7 @@ private fun SingleRowCalendar() {
     val startMonth = remember {currentMonth.minusMonths(100).atStartOfMonth()}
     val endMonth = remember {currentMonth.plusMonths(100).atEndOfMonth()}
     val firstDayOfWeek = remember { firstDayOfWeekFromLocale() }
+    val scope = rememberCoroutineScope()
 
     val selectedDay = remember {mutableStateOf(currentDate)}
 
@@ -84,11 +90,45 @@ private fun SingleRowCalendar() {
         firstDayOfWeek = firstDayOfWeek
     )
 
-    WeekCalendar(
-        state = calendarState,
-        dayContent = {Day(it, selectedDay)}
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-
+        IconButton(
+            modifier = Modifier.weight(1f),
+            onClick = {
+                scope.launch {
+                    calendarState.animateScrollToWeek(currentDate.minusWeeks(1))
+                }
+            })
+        {
+            Icon(
+                modifier = Modifier.rotate(180f),
+                painter = painterResource(id = R.drawable.front_arrow),
+                contentDescription = "backArrow",
+                tint = FefuFitTheme.color.elementsColor.elementColor
+            )
+        }
+        WeekCalendar(
+            modifier = Modifier.weight(7f),
+            state = calendarState,
+            dayContent = {Day(it, selectedDay)}
+        )
+        IconButton(
+            modifier = Modifier.weight(1f),
+            onClick = {
+                scope.launch {
+                    calendarState.animateScrollToWeek(currentDate.plusWeeks(1))
+                }
+            })
+        {
+            Icon(
+                painter = painterResource(id = R.drawable.front_arrow),
+                contentDescription = "backArrow",
+                tint = FefuFitTheme.color.elementsColor.elementColor
+            )
+        }
     }
 }
 
