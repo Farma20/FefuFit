@@ -21,6 +21,8 @@ buildscript {
 
         splash_screen_version = "1.0.0-alpha01"
 
+        preview_version = "1.0.0-alpha07"
+
         coil_version = "1.4.0"
 
         zxing_version = "3.4.0"

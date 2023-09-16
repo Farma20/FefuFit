@@ -538,7 +538,7 @@ enum class VerticalRotation(val value: Float) {
 @Composable
 fun NearEventCard(nearBookingData: UserBookingDataModelItem) {
     Card(
-        modifier = Modifier.padding(horizontal = 18.dp),
+        modifier = Modifier.padding(horizontal = 16.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = FefuFitTheme.color.mainAppColors.appCardColor

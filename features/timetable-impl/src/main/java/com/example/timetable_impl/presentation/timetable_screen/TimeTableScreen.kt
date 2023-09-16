@@ -11,7 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.core.theme.FefuFitTheme
 import com.example.timetable_impl.R
+import com.example.timetable_impl.presentation.timetable_screen.elements.EventCard
 import com.kizitonwose.calendar.compose.WeekCalendar
 import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
 import com.kizitonwose.calendar.core.WeekDay
@@ -72,10 +77,20 @@ fun TimeTableScreen(
                     lastVisibleDay.value= lastDayOfWeek
                 }
             )
-            Spacer(modifier = modifier)
+            Spacer(modifier = Modifier.height(4.dp))
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
+            ){
+                items(16){
+                    EventCard()
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            }
         }
     }
 }
+
 
 @Composable
 private fun SingleRowCalendar(
