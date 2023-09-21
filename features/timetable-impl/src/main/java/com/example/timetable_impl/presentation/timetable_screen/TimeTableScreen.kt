@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -42,6 +43,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.theme.FefuFitTheme
 import com.example.timetable_impl.R
 import com.example.timetable_impl.presentation.timetable_screen.elements.EventCard
+import com.example.timetable_impl.presentation.timetable_screen.models.EventsState
 import com.kizitonwose.calendar.compose.WeekCalendar
 import com.kizitonwose.calendar.compose.weekcalendar.rememberWeekCalendarState
 import com.kizitonwose.calendar.core.WeekDay
@@ -61,6 +63,8 @@ fun TimeTableScreen(
     val firstVisibleDay = remember { mutableStateOf(LocalDate.now()) }
     val lastVisibleDay = remember { mutableStateOf(LocalDate.now()) }
     val selectedDay = remember { mutableStateOf(LocalDate.now()) }
+
+    val eventsState =  viewModel.eventsState.collectAsState().value
 
     Scaffold(
         containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor,
@@ -88,21 +92,33 @@ fun TimeTableScreen(
             )
             Spacer(modifier = Modifier.height(4.dp))
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
-            ){
-                if(!viewModel.eventsState.value.isLoading){
-                    items(viewModel.eventsState.value.data!!.size){
-                        if (selectedDay.value == viewModel.eventsState.value.data!![it].day){
-                            EventCard(viewModel.eventsState.value.data!![it])
-                            Spacer(modifier = Modifier.height(8.dp))
-                        }
-                    }
+            EventsList(
+                eventsState,
+                selectedDay
+            )
+        }
+    }
+}
+
+@Composable
+fun EventsList(
+    eventsState: EventsState,
+    selectedDay: MutableState<LocalDate>
+) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
+    ){
+        if(!eventsState.isLoading){
+            items(eventsState.data!!.size){
+                if (selectedDay.value == eventsState.data[it].day){
+                    EventCard(eventsState.data[it])
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
         }
     }
+
 }
 
 
