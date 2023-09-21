@@ -28,8 +28,8 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-//        startDestination = BottomTabs.Calendar.route,
-        startDestination = featureApiHolder.singInScreen.route,
+        startDestination = BottomTabs.Calendar.route,
+//        startDestination = featureApiHolder.singInScreen.route,
         modifier = Modifier.background(FefuFitTheme.color.mainAppColors.appBackgroundColor)
     ){
         register(

@@ -102,7 +102,6 @@ fun SingUpScreen(
     }
 
     Scaffold(
-        modifier = modifier,
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
         topBar = {
             UppBar(

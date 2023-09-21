@@ -60,6 +60,7 @@ fun TimeTableScreen(
 ){
     val firstVisibleDay = remember { mutableStateOf(LocalDate.now()) }
     val lastVisibleDay = remember { mutableStateOf(LocalDate.now()) }
+    val selectedDay = remember { mutableStateOf(LocalDate.now()) }
 
     Scaffold(
         containerColor = FefuFitTheme.color.mainAppColors.appBackgroundColor,
@@ -80,6 +81,9 @@ fun TimeTableScreen(
                 getWeekDaysInfoListener = {firstDayOfWeek:LocalDate, lastDayOfWeek:LocalDate ->
                     firstVisibleDay.value = firstDayOfWeek
                     lastVisibleDay.value= lastDayOfWeek
+                },
+                getSelectedDay = {day:LocalDate ->
+                    selectedDay.value = day
                 }
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -90,8 +94,10 @@ fun TimeTableScreen(
             ){
                 if(!viewModel.eventsState.value.isLoading){
                     items(viewModel.eventsState.value.data!!.size){
-                        EventCard()
-                        Spacer(modifier = Modifier.height(8.dp))
+                        if (selectedDay.value == viewModel.eventsState.value.data!![it].day){
+                            EventCard(viewModel.eventsState.value.data!![it])
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
                     }
                 }
             }
@@ -102,7 +108,8 @@ fun TimeTableScreen(
 
 @Composable
 private fun SingleRowCalendar(
-    getWeekDaysInfoListener:(LocalDate, LocalDate) -> Unit
+    getWeekDaysInfoListener:(firstDay:LocalDate, lastDay:LocalDate) -> Unit,
+    getSelectedDay:(day:LocalDate)-> Unit
 ) {
     val currentDate = remember {LocalDate.now()}
     val currentMonth = remember {YearMonth.now()}
@@ -112,6 +119,8 @@ private fun SingleRowCalendar(
     val scope = rememberCoroutineScope()
 
     val selectedDay = remember {mutableStateOf(currentDate)}
+
+    getSelectedDay(selectedDay.value)
 
     val calendarState = rememberWeekCalendarState(
         startDate = startMonth,

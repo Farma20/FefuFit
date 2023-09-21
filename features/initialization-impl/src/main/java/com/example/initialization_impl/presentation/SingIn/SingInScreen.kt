@@ -79,7 +79,6 @@ fun SingInScreen(
 
 
     Scaffold(
-        modifier = modifier,
         snackbarHost = {SnackbarHost(snackBarHostState)}
     ) {
         Surface(

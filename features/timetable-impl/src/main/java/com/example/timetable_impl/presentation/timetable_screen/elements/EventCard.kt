@@ -44,9 +44,11 @@ import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.example.core.theme.FefuFitTheme
 import com.example.timetable_impl.R
+import com.example.timetable_impl.domain.models.EventDataModelItem
+import java.time.LocalDate
 
 @Composable
-fun EventCard() {
+fun EventCard(eventData: EventDataModelItem) {
     Card(
         modifier = Modifier.padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(
@@ -71,14 +73,14 @@ fun EventCard() {
                         .padding(15.dp)
                 ) {
                     Text(
-                        text = "Настольный теннис",
+                        text = eventData.eventName,
                         fontSize = 18.sp,
                         fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.mainTextColor,
                     )
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = "14:00 - 16:00",
+                        text = "${eventData.beginTime} - ${eventData.endTime}",
                         fontSize = 16.sp,
                         fontWeight = FontWeight(500),
                         color = FefuFitTheme.color.textColor.secondaryTextColor,
@@ -94,7 +96,7 @@ fun EventCard() {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Фитнес-центр ГК11, зал групповых программ",
+                            text = "${eventData.buildingName}, ${eventData.areaName}",
                             fontSize = 14.sp,
                             fontWeight = FontWeight(300),
                             color = FefuFitTheme.color.textColor.mainTextColor,
@@ -111,7 +113,7 @@ fun EventCard() {
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Шукурова Карина Андреевна",
+                            text = eventData.coachName,
                             fontSize = 14.sp,
                             fontWeight = FontWeight(300),
                             color = FefuFitTheme.color.textColor.mainTextColor,
@@ -126,9 +128,9 @@ fun EventCard() {
                             text = buildAnnotatedString {
                                 append("Свободно")
                                 withStyle(style = SpanStyle(color = FefuFitTheme.color.textColor.secondaryTextColor)){
-                                    append(" 13 мест ")
+                                    append(" ${eventData.occupiedSpaces} мест ")
                                 }
-                                append("из 25")
+                                append("из ${eventData.totalSpaces}")
                             },
                             fontSize = 16.sp,
                             fontWeight = FontWeight(400),
@@ -228,5 +230,21 @@ enum class VerticalRotation(val value: Float) {
 @Preview
 @Composable
 private fun PreviewEventCard(){
-    EventCard()
+    val eventData = EventDataModelItem(
+        areaName="Беговая дорожка",
+        day = LocalDate.now(),
+        beginTime = "11:00",
+        buildingName = "корпус S",
+        coachEmail = "test@test.ru",
+        coachName = "Иванов Иван Иванович",
+        coachPhoneNumber = "+71111111111",
+        endTime="13:00",
+        eventName="Групповое занятие по плаванию",
+        id= 1,
+        occupiedSpaces=3,
+        status="booking",
+        totalSpaces=10,
+    )
+
+    EventCard(eventData)
 }
