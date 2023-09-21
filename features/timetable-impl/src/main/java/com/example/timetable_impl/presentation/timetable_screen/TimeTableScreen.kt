@@ -88,9 +88,11 @@ fun TimeTableScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
             ){
-                items(viewModel.eventsState.value.data!!.size){
-                    EventCard()
-                    Spacer(modifier = Modifier.height(8.dp))
+                if(!viewModel.eventsState.value.isLoading){
+                    items(viewModel.eventsState.value.data!!.size){
+                        EventCard()
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
                 }
             }
         }
