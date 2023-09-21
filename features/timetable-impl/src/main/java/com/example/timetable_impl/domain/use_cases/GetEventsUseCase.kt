@@ -2,14 +2,14 @@ package com.example.timetable_impl.domain.use_cases
 
 import com.example.common.Resource
 import com.example.timetable_impl.domain.models.EventDataModel
-import com.example.timetable_impl.domain.repositories.EventsFeatureRepository
+import com.example.timetable_impl.domain.repositories.TimeTableEventsFeatureRepository
 import com.example.timetable_impl.domain.repositories.TimeTableMetaDataRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetEventsUseCase @Inject constructor(
-    private val repository: EventsFeatureRepository,
+    private val repository: TimeTableEventsFeatureRepository,
     private val metaDataRepository: TimeTableMetaDataRepository
 ) {
     operator fun invoke(): Flow<Resource<EventDataModel>> = flow{
