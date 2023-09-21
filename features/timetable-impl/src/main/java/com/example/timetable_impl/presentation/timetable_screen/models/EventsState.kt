@@ -1,10 +1,9 @@
-package com.example.main_impl.presentation.models
+package com.example.timetable_impl.presentation.timetable_screen.models
 
-import com.example.main_impl.domain.models.UserServicesDataModel
+import com.example.timetable_impl.domain.models.EventDataModel
 
-
-data class ActiveServicesState(
+data class EventsState(
     val isLoading:Boolean = false,
-    val data: UserServicesDataModel? = null,
+    val data: EventDataModel? = null,
     val error: String? = null
 )
