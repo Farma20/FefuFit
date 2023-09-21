@@ -38,6 +38,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.core.theme.FefuFitTheme
 import com.example.timetable_impl.R
 import com.example.timetable_impl.presentation.timetable_screen.elements.EventCard
@@ -55,6 +56,7 @@ import java.time.YearMonth
 @Composable
 fun TimeTableScreen(
     modifier: Modifier,
+    viewModel: TimeTableScreenViewModel = hiltViewModel()
 ){
     val firstVisibleDay = remember { mutableStateOf(LocalDate.now()) }
     val lastVisibleDay = remember { mutableStateOf(LocalDate.now()) }
@@ -86,7 +88,7 @@ fun TimeTableScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
             ){
-                items(16){
+                items(viewModel.eventsState.value.data!!.size){
                     EventCard()
                     Spacer(modifier = Modifier.height(8.dp))
                 }
