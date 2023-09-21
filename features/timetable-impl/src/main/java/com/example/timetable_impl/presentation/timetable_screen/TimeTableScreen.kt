@@ -50,7 +50,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun TimeTableScreen(
@@ -82,20 +82,13 @@ fun TimeTableScreen(
             )
             Spacer(modifier = Modifier.height(4.dp))
 
-            val pagerState = rememberPagerState(5)
-
-            HorizontalPager(
-                pageCount = 15,
-                state = pagerState,
-            ) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
-                ){
-                    items(16){
-                        EventCard()
-                        Spacer(modifier = Modifier.height(8.dp))
-                    }
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(top = 16.dp, bottom = 72.dp)
+            ){
+                items(16){
+                    EventCard()
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
         }
