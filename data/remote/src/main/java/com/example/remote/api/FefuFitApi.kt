@@ -35,10 +35,10 @@ interface FefuFitApi {
     suspend fun getEvents(@Header("auth") token: String): DataEventDataModel
 
     @POST("/api2/booking/add/event{event_id}")
-    suspend fun addEvent(@Header("auth") token: String, @Path("event_id") eventsId: Int)
+    suspend fun addEvent(@Header("auth") token: String, @Path("event_id") eventsId: Int): Map<String, String>
 
     @POST("/api2/booking/cancel/event{event_id}")
-    suspend fun cancelEvent(@Header("auth") token: String, @Path("event_id") eventsId: Int)
+    suspend fun cancelEvent(@Header("auth") token: String, @Path("event_id") eventsId: Int): Map<String, String>
 
     //service api
     @POST("/api/plan/view_next")

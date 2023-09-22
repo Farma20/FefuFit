@@ -7,4 +7,5 @@ interface EventsDataRepository {
     suspend fun getAllUserBookings(token:String): DataUserBookingDataModel
 
     suspend fun getEvents(token: String): DataEventDataModel
+
 }
