@@ -12,6 +12,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface FefuFitApi {
     //initialization api
@@ -32,6 +33,12 @@ interface FefuFitApi {
 
     @GET("/api2/event/view")
     suspend fun getEvents(@Header("auth") token: String): DataEventDataModel
+
+    @POST("/api2/booking/add/event{event_id}")
+    suspend fun addEvent(@Header("auth") token: String, @Path("event_id") eventsId: Int)
+
+    @POST("/api2/booking/cancel/event{event_id}")
+    suspend fun cancelEvent(@Header("auth") token: String, @Path("event_id") eventsId: Int)
 
     //service api
     @POST("/api/plan/view_next")
