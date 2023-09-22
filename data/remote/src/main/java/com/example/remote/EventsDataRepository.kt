@@ -8,4 +8,7 @@ interface EventsDataRepository {
 
     suspend fun getEvents(token: String): DataEventDataModel
 
+    suspend fun addEvent(token: String, eventId:Int) :Map<String,String>
+
+    suspend fun cancelEvent(token: String, eventId:Int) :Map<String,String>
 }
