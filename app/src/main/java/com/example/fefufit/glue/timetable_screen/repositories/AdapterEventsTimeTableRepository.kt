@@ -13,4 +13,11 @@ class AdapterEventsTimeTableRepository@Inject constructor(
         val result = eventsDataRepository.getEvents(token)
         return result.toEventDataModel()
     }
+    override suspend fun addEvents(token: String, eventId: Int): Map<String, String> {
+        return eventsDataRepository.addEvent(token, eventId)
+    }
+
+    override suspend fun cancelEvents(token: String, eventId: Int): Map<String, String> {
+        return eventsDataRepository.cancelEvent(token, eventId)
+    }
 }
