@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class AddEventsUseCase @Inject constructor(
+class CancelEventUseCase @Inject constructor(
     private val eventsRepository: TimeTableEventsFeatureRepository,
     private val metaDataRepository: TimeTableMetaDataRepository
 ) {
@@ -16,8 +16,8 @@ class AddEventsUseCase @Inject constructor(
         try {
             emit(Resource.Loading())
             val token = metaDataRepository.getUserTokenMetaData()
-            val result = eventsRepository.addEvents(token, eventId)
-            val eventResponse = EventActionResponse(result["details"]!!)
+            val result = eventsRepository.cancelEvents(token, eventId)
+            val eventResponse = EventActionResponse(result["detail"]!!)
             emit(Resource.Success(eventResponse))
         }
         catch (e:Exception){
