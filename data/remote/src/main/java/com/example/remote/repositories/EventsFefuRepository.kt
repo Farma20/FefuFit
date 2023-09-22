@@ -55,4 +55,47 @@ class EventsFefuRepository @Inject constructor(
         }
     }
 
+    override suspend fun addEvent(token: String, eventId: Int): Map<String, String> {
+        try {
+            return api.addEvent(token, eventId)
+        }
+        catch (cause: Throwable){
+            val errorText: String = when (cause) {
+                is HttpException -> {
+                    val result =
+                        JSONObject(cause.response()?.errorBody()?.string().toString()).toMap()
+                    result["detail"].toString()
+                }
+
+                is NullPointerException -> {
+                    "User token is null"
+                }
+
+                else -> "Unknown error"
+            }
+            throw Exception(errorText)
+        }
+    }
+
+    override suspend fun cancelEvent(token: String, eventId: Int): Map<String, String> {
+        try {
+            return api.cancelEvent(token, eventId)
+        }catch (cause: Throwable){
+            val errorText: String = when (cause) {
+                is HttpException -> {
+                    val result =
+                        JSONObject(cause.response()?.errorBody()?.string().toString()).toMap()
+                    result["detail"].toString()
+                }
+
+                is NullPointerException -> {
+                    "User token is null"
+                }
+
+                else -> "Unknown error"
+            }
+            throw Exception(errorText)
+        }
+    }
+
 }
