@@ -1,6 +1,6 @@
 package com.example.remote.di
 
-import com.example.fefufit.data.remote.api.FefuFitApi
+import com.example.remote.data_source.FefuFitApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,7 +39,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApi(retrofit: Retrofit): FefuFitApi{
+    fun provideApi(retrofit: Retrofit): FefuFitApi {
         return retrofit.create(FefuFitApi::class.java)
     }
 

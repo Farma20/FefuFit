@@ -1,8 +1,8 @@
 package com.example.remote.di
 
-import com.example.fefufit.data.remote.repositories.EventsFefuRepository
-import com.example.fefufit.data.remote.repositories.ServicesFefuRepository
-import com.example.fefufit.data.remote.repositories.UserFefuRepository
+import com.example.remote.repositories.EventsFefuRepository
+import com.example.remote.repositories.ServicesFefuRepository
+import com.example.remote.repositories.UserFefuRepository
 import com.example.remote.EventsDataRepository
 import com.example.remote.InitializationDataRepository
 import com.example.remote.ServicesDataRepository

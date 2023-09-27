@@ -1,4 +1,4 @@
-package com.example.fefufit.data.remote.api
+package com.example.remote.data_source
 
 import com.example.fefufit.data.remote.models.events_data_models.DataUserBookingDataModel
 import com.example.fefufit.data.remote.models.initial_data_models.DataSingInDataModel

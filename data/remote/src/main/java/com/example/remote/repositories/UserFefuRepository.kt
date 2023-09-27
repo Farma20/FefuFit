@@ -1,7 +1,7 @@
-package com.example.fefufit.data.remote.repositories
+package com.example.remote.repositories
 
 
-import com.example.fefufit.data.remote.api.FefuFitApi
+import com.example.remote.data_source.FefuFitApi
 import com.example.fefufit.data.remote.models.user_data_models.DataUserDataModel
 import com.example.remote.UserDataRepository
 import com.example.remote.utils.toMap

@@ -1,6 +1,6 @@
 package com.example.remote.repositories
 
-import com.example.fefufit.data.remote.api.FefuFitApi
+import com.example.remote.data_source.FefuFitApi
 import com.example.fefufit.data.remote.models.initial_data_models.DataSingInDataModel
 import com.example.remote.InitializationDataRepository
 import com.example.remote.models.initial_data_models.DataSingInResponse

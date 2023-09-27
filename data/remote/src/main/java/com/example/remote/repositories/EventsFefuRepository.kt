@@ -1,6 +1,6 @@
-package com.example.fefufit.data.remote.repositories
+package com.example.remote.repositories
 
-import com.example.fefufit.data.remote.api.FefuFitApi
+import com.example.remote.data_source.FefuFitApi
 import com.example.fefufit.data.remote.models.events_data_models.DataUserBookingDataModel
 import com.example.remote.EventsDataRepository
 import com.example.remote.models.events_data_models.DataEventDataModel
