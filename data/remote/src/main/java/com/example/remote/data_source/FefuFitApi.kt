@@ -8,6 +8,7 @@ import com.example.remote.models.events_data_models.DataEventDataModel
 import com.example.remote.models.initial_data_models.DataSingInResponse
 import com.example.remote.models.initial_data_models.DataSingUpDataModel
 import com.example.remote.models.initial_data_models.DataSingUpResponse
+import com.example.remote.models.initial_data_models.RefreshTokenDTO
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -21,6 +22,9 @@ interface FefuFitApi {
 
     @POST("/api2/auth/signup")
     suspend fun singUp(@Body singUpData: DataSingUpDataModel):DataSingUpResponse
+
+    @POST("/api2/auth/refresh")
+    suspend fun refreshToken(@Body refreshToken: RefreshTokenDTO): DataSingInResponse
 
     //userData api
     @POST("/api/user/user/view_self")

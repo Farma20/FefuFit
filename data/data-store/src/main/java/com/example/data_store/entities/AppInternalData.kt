@@ -10,5 +10,7 @@ data class AppInternalData(
 @Serializable
 data class UserMetaData(
     val userToken:String? = null,
-    val userQrToken: String? = null
+    val userQrToken: String? = null,
+    val userRefreshToken: String? = null,
+    val userType: String? = null
 )

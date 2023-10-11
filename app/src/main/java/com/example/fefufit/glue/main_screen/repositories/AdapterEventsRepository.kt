@@ -2,7 +2,6 @@ package com.example.fefufit.glue.main_screen.repositories
 
 import com.example.fefufit.glue.main_screen.mappers.toUserBookingDataModel
 import com.example.main_impl.domain.models.UserBookingDataModel
-import com.example.main_impl.domain.models.UserBookingDataModelItem
 import com.example.main_impl.domain.repositories.EventsFeatureRepository
 import com.example.remote.EventsDataRepository
 import javax.inject.Inject

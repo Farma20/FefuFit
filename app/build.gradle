@@ -90,8 +90,9 @@ dependencies {
     implementation project(':features:initialization-impl')
     implementation project(':features:timetable-impl')
 
-    constraints{
-        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0'
-        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0'
-    }
+// if duplicate methods error
+//    constraints{
+//        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0'
+//        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0'
+//    }
 }
