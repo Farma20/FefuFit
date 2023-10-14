@@ -1,7 +1,8 @@
 package com.example.fefufit.glue.refresh_token.di
 
-import com.example.fefufit.glue.main_screen.repositories.AdapterUserRepository
-import com.example.main_impl.domain.repositories.UserFeatureRepository
+
+import com.example.feature_api.refresh_api.FeatureRefreshTokenApi
+import com.example.fefufit.glue.refresh_token.repositories.AdapterRefreshRepository
 import com.example.remote.RefreshDataRepository
 import com.example.remote.repositories.RefreshFefuRepository
 import dagger.Binds
@@ -13,7 +14,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 interface RefreshTokenModule {
     @Binds
-    fun bindUserRepository(
-        refreshRepository: RefreshFefuRepository
-    ): RefreshDataRepository
+    fun bindRefreshRepository(
+        refreshRepository: AdapterRefreshRepository
+    ): FeatureRefreshTokenApi
 }
