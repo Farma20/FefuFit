@@ -6,6 +6,8 @@ import com.example.initialization_impl.domain.models.FeatureInitUserMetaData
 fun FeatureInitUserMetaData.toDataUserMetaData():UserMetaData{
     return UserMetaData(
         this.userToken,
-        this.userQrToken
+        this.userQrToken,
+        this.refreshToken,
+        this.type
     )
 }

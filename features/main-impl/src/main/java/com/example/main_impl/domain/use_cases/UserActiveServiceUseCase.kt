@@ -1,5 +1,6 @@
 package com.example.main_impl.domain.use_cases
 
+import android.util.Log
 import com.example.common.Resource
 import com.example.feature_api.refresh_api.dto.FeatureRefreshMetaDTO
 import com.example.main_impl.domain.models.UserServicesDataModel
@@ -24,7 +25,7 @@ class UserActiveServiceUseCase @Inject constructor(
                 emit(Resource.Success(null))
         }
         catch (e: Exception){
-            if (e.message.toString() == "invalid token"){
+            if (e.message.toString() == "token is invalid"){
                 refreshUseCase()
                 val userServices = getData()
                 if (userServices.isNotEmpty())

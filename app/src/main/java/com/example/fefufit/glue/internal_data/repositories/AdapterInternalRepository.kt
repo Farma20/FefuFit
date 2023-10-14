@@ -1,5 +1,6 @@
 package com.example.fefufit.glue.internal_data.repositories
 
+import android.util.Log
 import com.example.data_store.DataStoreRepository
 import com.example.feature_api.internal_data_api.FeatureDataStoreApi
 import com.example.feature_api.internal_data_api.data.FeatureUserMetaData
