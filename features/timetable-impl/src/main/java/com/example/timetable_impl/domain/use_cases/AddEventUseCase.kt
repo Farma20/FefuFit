@@ -10,19 +10,31 @@ import javax.inject.Inject
 
 class AddEventUseCase @Inject constructor(
     private val eventsRepository: TimeTableEventsFeatureRepository,
-    private val metaDataRepository: TimeTableMetaDataRepository
+    private val metaDataRepository: TimeTableMetaDataRepository,
+    private val refreshUseCase: RefreshUseCase
 ) {
     operator fun invoke(eventId: Int): Flow<Resource<EventActionResponse>> = flow {
         try {
             emit(Resource.Loading())
-            val token = metaDataRepository.getUserTokenMetaData()
-            val result = eventsRepository.addEvents(token, eventId)
+            val result = getData(eventId)
             val eventResponse = EventActionResponse(result["detail"]!!)
             emit(Resource.Success(eventResponse))
         }
         catch (e:Exception){
-            val eventResponse = EventActionResponse(e.message.toString())
-            emit(Resource.Error("error", eventResponse))
+            if (e.message.toString() == "token is invalid"){
+                refreshUseCase()
+                val result = getData(eventId)
+                val eventResponse = EventActionResponse(result["detail"]!!)
+                emit(Resource.Success(eventResponse))
+            }
+            else{
+                val eventResponse = EventActionResponse(e.message.toString())
+                emit(Resource.Error("error", eventResponse))            }
         }
+    }
+
+    private suspend fun getData(eventId: Int): Map<String, String> {
+        val token = metaDataRepository.getUserTokenMetaData()
+        return eventsRepository.addEvents(token, eventId)
     }
 }

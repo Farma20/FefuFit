@@ -10,19 +10,32 @@ import javax.inject.Inject
 
 class CancelEventUseCase @Inject constructor(
     private val eventsRepository: TimeTableEventsFeatureRepository,
-    private val metaDataRepository: TimeTableMetaDataRepository
+    private val metaDataRepository: TimeTableMetaDataRepository,
+    private val refreshUseCase: RefreshUseCase
 ) {
     operator fun invoke(eventId: Int): Flow<Resource<EventActionResponse>> = flow {
         try {
             emit(Resource.Loading())
-            val token = metaDataRepository.getUserTokenMetaData()
-            val result = eventsRepository.cancelEvents(token, eventId)
-            val eventResponse = EventActionResponse(result["detail"]!!)
+            val eventResponse = getData(eventId)
             emit(Resource.Success(eventResponse))
         }
         catch (e:Exception){
-            val eventResponse = EventActionResponse(e.message.toString())
-            emit(Resource.Error("error", eventResponse))
+
+            if (e.message.toString() == "token is invalid"){
+                refreshUseCase()
+                val eventResponse = getData(eventId)
+                emit(Resource.Success(eventResponse))
+            }
+            else{
+                val eventResponse = EventActionResponse(e.message.toString())
+                emit(Resource.Error("error", eventResponse))
+            }
         }
+    }
+
+    private suspend fun getData(eventId: Int): EventActionResponse {
+        val token = metaDataRepository.getUserTokenMetaData()
+        val result = eventsRepository.cancelEvents(token, eventId)
+        return EventActionResponse(result["detail"]!!)
     }
 }

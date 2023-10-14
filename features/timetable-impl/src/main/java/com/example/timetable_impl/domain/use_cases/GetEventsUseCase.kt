@@ -10,17 +10,29 @@ import javax.inject.Inject
 
 class GetEventsUseCase @Inject constructor(
     private val repository: TimeTableEventsFeatureRepository,
-    private val metaDataRepository: TimeTableMetaDataRepository
+    private val metaDataRepository: TimeTableMetaDataRepository,
+    private val refreshUseCase: RefreshUseCase,
 ) {
     operator fun invoke(): Flow<Resource<EventDataModel>> = flow{
         try {
             emit(Resource.Loading())
-            val userToken = metaDataRepository.getUserTokenMetaData()
-            val events = repository.getEvents(userToken)
+            val events = getData()
             emit(Resource.Success(events))
         }
         catch (e: Exception){
-            emit(Resource.Error(e.message.toString()))
+            if (e.message.toString() == "token is invalid"){
+                refreshUseCase()
+                val events = getData()
+                emit(Resource.Success(events))
+            }
+            else{
+                emit(Resource.Error(e.message.toString()))
+            }
         }
+    }
+
+    private suspend fun getData(): EventDataModel {
+        val userToken = metaDataRepository.getUserTokenMetaData()
+        return repository.getEvents(userToken)
     }
 }
