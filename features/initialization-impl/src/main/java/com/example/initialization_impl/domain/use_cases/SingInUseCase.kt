@@ -3,7 +3,7 @@ package com.example.initialization_impl.domain.use_cases
 import com.example.common.Resource
 import com.example.initialization_impl.domain.models.FeatureSingInDataModel
 import com.example.initialization_impl.domain.models.FeatureSingInResponse
-import com.example.initialization_impl.domain.models.FeatureUserMetaData
+import com.example.initialization_impl.domain.models.FeatureInitUserMetaData
 import com.example.initialization_impl.domain.repositories.SingInFeatureMetaDataRepository
 import com.example.initialization_impl.domain.repositories.InitializationFeatureRepository
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ class SingInUseCase @Inject constructor(
             emit(Resource.Loading())
             val response = singInRepository.singIn(singInData)
             metaDataRepository.saveUserMetaData(
-                FeatureUserMetaData(
+                FeatureInitUserMetaData(
                     userToken = response.data.token,
                     userQrToken = response.data.qrToken,
                     refreshToken = response.data.refreshToken,

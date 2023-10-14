@@ -5,9 +5,11 @@ import com.example.remote.repositories.ServicesFefuRepository
 import com.example.remote.repositories.UserFefuRepository
 import com.example.remote.EventsDataRepository
 import com.example.remote.InitializationDataRepository
+import com.example.remote.RefreshDataRepository
 import com.example.remote.ServicesDataRepository
 import com.example.remote.UserDataRepository
 import com.example.remote.repositories.InitialFefuRepository
+import com.example.remote.repositories.RefreshFefuRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -40,4 +42,10 @@ abstract class RepositoryModule {
     abstract fun bindInitialRepository(
         initialRepository: InitialFefuRepository
     ): InitializationDataRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindRefreshRepository(
+        refreshRepository: RefreshFefuRepository
+    ):RefreshDataRepository
 }
