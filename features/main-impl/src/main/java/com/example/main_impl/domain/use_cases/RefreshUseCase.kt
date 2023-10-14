@@ -11,18 +11,23 @@ class RefreshUseCase @Inject constructor(
     private val metaDataRepository: FeatureDataStoreApi
 ) {
     suspend operator fun invoke(){
-        val refreshToken = metaDataRepository.getUserMetaData().refreshToken
-        val newUserMetaData = refreshTokenRepository
-            .refreshToken(FeatureRefreshTokenDTO(refreshToken!!))
-            .data
+       try {
+           val refreshToken = metaDataRepository.getUserMetaData().refreshToken
+           val newUserMetaData = refreshTokenRepository
+               .refreshToken(FeatureRefreshTokenDTO(refreshToken!!))
+               .data
 
-        metaDataRepository.setUserMetaData(
-            FeatureUserMetaData(
-                userToken = newUserMetaData.token,
-                userQrToken = newUserMetaData.qrToken,
-                refreshToken = newUserMetaData.refreshToken,
-                type = newUserMetaData.type,
-            )
-        )
+           metaDataRepository.setUserMetaData(
+               FeatureUserMetaData(
+                   userToken = newUserMetaData.token,
+                   userQrToken = newUserMetaData.qrToken,
+                   refreshToken = newUserMetaData.refreshToken,
+                   type = newUserMetaData.type,
+               )
+           )
+       }catch (e:Exception){
+           //Exception with non working refreshToken
+           throw Exception(message = "non working Refresh token")
+       }
     }
 }
